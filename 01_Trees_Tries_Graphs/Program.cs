@@ -59,7 +59,7 @@ namespace _01_Trees_Tries_Graphs
             Console.WriteLine (tree.headNode.BreadthFirstToString ());
             Console.WriteLine ();
 
-            tree.AddValue (15);
+            tree.Insert (7);
         }
 
     }
