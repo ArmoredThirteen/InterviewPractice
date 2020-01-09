@@ -9,7 +9,12 @@ namespace _01_Trees_Tries_Graphs
     {
         static void Main(string[] args)
         {
-            //TrieExample ();
+            TrieExample ();
+
+            Console.WriteLine ();
+            Console.WriteLine ("=================================");
+            Console.WriteLine ();
+
             BinaryTreeExample ();
         }
 
@@ -17,13 +22,13 @@ namespace _01_Trees_Tries_Graphs
         static void TrieExample()
         {
             Trie trie = new Trie ();
-            trie.headNode.value = 'X';
+            trie.headNode.value = '-';
 
             trie.AddString ("Blah");
             trie.AddString ("Blue");
             trie.AddString ("Foo");
 
-            Console.WriteLine (trie);
+            Console.WriteLine (trie.headNode.TreeGraphToString ());
 
             Console.WriteLine ();
 
@@ -44,9 +49,19 @@ namespace _01_Trees_Tries_Graphs
         {
             BinaryTree<int> tree = new BinaryTree<int> ();
 
+            // Manually built default starting tree
+            // Once insertion is working do that instead :I
             tree.headNode = tree.NewNode (5);
+            //tree.headNode.nodes.Add (null);
+            //tree.headNode.nodes.Add (null);
+
             tree.headNode.nodes[0] = (tree.NewNode (3));
+            //tree.headNode.nodes[0].nodes.Add (null);
+            //tree.headNode.nodes[0].nodes.Add (null);
             tree.headNode.nodes[1] = (tree.NewNode (10));
+            //tree.headNode.nodes[1].nodes.Add (null);
+            //tree.headNode.nodes[1].nodes.Add (null);
+
             tree.headNode.nodes[0].nodes[0] = (tree.NewNode (1));
             tree.headNode.nodes[0].nodes[1] = (tree.NewNode (4));
             tree.headNode.nodes[1].nodes[0] = (tree.NewNode (7));
@@ -55,8 +70,13 @@ namespace _01_Trees_Tries_Graphs
             Console.WriteLine ("Depth-First");
             Console.WriteLine (tree.headNode.DepthFirstToString ());
             Console.WriteLine ();
+
             Console.WriteLine ("Breadth-First");
             Console.WriteLine (tree.headNode.BreadthFirstToString ());
+            Console.WriteLine ();
+
+            Console.WriteLine ("Visual Tree");
+            Console.WriteLine (tree.headNode.TreeGraphToString ());
             Console.WriteLine ();
 
             tree.Insert (7);

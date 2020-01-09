@@ -30,19 +30,19 @@ namespace _01_Trees_Tries_Graphs
         }
 
 
-        public GraphNode<NodeData> headNode = new GraphNode<NodeData> ();
+        public TreeNode<NodeData> headNode = new TreeNode<NodeData> ();
 
 
         public BinaryTree()
         {
-            headNode = new GraphNode<NodeData> ();
+            headNode = new TreeNode<NodeData> ();
         }
 
 
         public void Insert(T newValue)
         {
             Console.WriteLine ("Attempting to add value: " + newValue);
-            GraphNode<NodeData> newNode = NewNode (newValue);
+            TreeNode<NodeData> newNode = NewNode (newValue);
 
             // First value in empty list
             if (headNode == null)
@@ -51,11 +51,11 @@ namespace _01_Trees_Tries_Graphs
                 return;
             }
 
-            GraphNode<NodeData> currNode = headNode;
+            TreeNode<NodeData> currNode = headNode;
             while (true)
             {
                 // If left is greater, move that direction
-                GraphNode<NodeData> left = Left (currNode);
+                TreeNode<NodeData> left = Left (currNode);
                 if (left != null && left.value.data.CompareTo (newValue) > 0)
                 {
                     Console.WriteLine ("Move left to value: " + left.value.data);
@@ -65,14 +65,13 @@ namespace _01_Trees_Tries_Graphs
                 else if (left != null && left.value.data.CompareTo (newValue) == 0)
                 {
                     left.value.count++;
-                    Console.WriteLine ("Move left");
                     Console.WriteLine ("Move left to duplicate, new count is: " + left.value.count);
                     return;
                 }
                 
                 // If right is less than, move that direction
-                GraphNode<NodeData> right = Right (currNode);
-                if (right != null && right.value.data.CompareTo (newValue) < 0)
+                TreeNode<NodeData> right = Right (currNode);
+                if (right != null && right.value.data.CompareTo (newValue) > 0)
                 {
                     Console.WriteLine ("Move right to value: " + right.value.data);
                     currNode = right;
@@ -105,20 +104,20 @@ namespace _01_Trees_Tries_Graphs
         }*/
 
 
-        public GraphNode<NodeData> Left(GraphNode<NodeData> theNode)
+        public TreeNode<NodeData> Left(TreeNode<NodeData> theNode)
         {
             return theNode.nodes[0];
         }
 
-        public GraphNode<NodeData> Right(GraphNode<NodeData> theNode)
+        public TreeNode<NodeData> Right(TreeNode<NodeData> theNode)
         {
             return theNode.nodes[1];
         }
 
 
-        public GraphNode<NodeData> NewNode(T theValue)
+        public TreeNode<NodeData> NewNode(T theValue)
         {
-            GraphNode<NodeData> newNode = new GraphNode<NodeData> (new NodeData (theValue));
+            TreeNode<NodeData> newNode = new TreeNode<NodeData> (new NodeData (theValue));
             newNode.nodes.Add (null);
             newNode.nodes.Add (null);
             return newNode;
