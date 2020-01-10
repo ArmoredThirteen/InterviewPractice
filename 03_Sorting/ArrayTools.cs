@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Sorting
 {
-    class ArrayTools
+    public class ArrayTools
     {
         public static int[] SequentialInts(int length)
         {

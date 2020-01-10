@@ -25,6 +25,8 @@ namespace _01_Trees_Tries_Graphs
 
             public override string ToString()
             {
+                if (count > 1)
+                    return data.ToString () + ":" + count;
                 return data.ToString ();
             }
         }
