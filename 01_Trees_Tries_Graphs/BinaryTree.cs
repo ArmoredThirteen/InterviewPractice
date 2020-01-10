@@ -30,13 +30,7 @@ namespace _01_Trees_Tries_Graphs
         }
 
 
-        public TreeNode<NodeData> headNode = new TreeNode<NodeData> ();
-
-
-        public BinaryTree()
-        {
-            headNode = new TreeNode<NodeData> ();
-        }
+        public TreeNode<NodeData> headNode = null;
 
 
         public void Insert(T newValue)
@@ -47,49 +41,59 @@ namespace _01_Trees_Tries_Graphs
             // First value in empty list
             if (headNode == null)
             {
+                Console.WriteLine ("List empty, inserting value " + newValue + " as head node");
                 headNode = newNode;
                 return;
             }
 
             TreeNode<NodeData> currNode = headNode;
+            //int compareCurr = newValue.CompareTo (currNode.value.data);
+            
             while (true)
             {
-                // If left is greater, move that direction
+                int compareCurr = newValue.CompareTo (currNode.value.data);
+
+                // Move left
                 TreeNode<NodeData> left = Left (currNode);
-                if (left != null && left.value.data.CompareTo (newValue) > 0)
+                if (left != null && compareCurr < 0)
                 {
                     Console.WriteLine ("Move left to value: " + left.value.data);
                     currNode = left;
                     continue;
                 }
-                else if (left != null && left.value.data.CompareTo (newValue) == 0)
-                {
-                    left.value.count++;
-                    Console.WriteLine ("Move left to duplicate, new count is: " + left.value.count);
-                    return;
-                }
                 
-                // If right is less than, move that direction
+                // Move right
                 TreeNode<NodeData> right = Right (currNode);
-                if (right != null && right.value.data.CompareTo (newValue) > 0)
+                if (right != null && compareCurr > 0)
                 {
                     Console.WriteLine ("Move right to value: " + right.value.data);
                     currNode = right;
                     continue;
                 }
-                else if (right != null && right.value.data.CompareTo (newValue) == 0)
+
+                // Found existing duplicate entry, increment count
+                if (compareCurr == 0)
                 {
-                    right.value.count++;
-                    Console.WriteLine ("Move right to duplicate, new count is: " + right.value.count);
-                    return;
+                    currNode.value.count++;
+                    Console.WriteLine ("Duplicate value, new count is: " + currNode.value.count);
+                }
+                // Insert to left of curr node
+                else if (compareCurr < 0)
+                {
+                    Console.WriteLine ("Inserting to left of node: " + currNode.value.data);
+                    if (left == null)
+                        currNode.nodes[0] = newNode;
+                }
+                // Insert to right of curr node
+                else
+                {
+                    Console.WriteLine ("Inserting to right of node: " + currNode.value.data);
+                    if (right == null)
+                        currNode.nodes[1] = newNode;
                 }
 
-                //TODO: Actually inserting
-                //TODO: Refactor required to make rebalancing a lot easier
                 break;
             }
-
-            Console.WriteLine ("CurrVal: " + currNode.value);
         }
 
 
