@@ -8,18 +8,18 @@ namespace _01_Trees_Tries_Graphs
     class TreeNode<T> where T : IComparable<T>
     {
         public T value;
-        public List<TreeNode<T>> nodes = new List<TreeNode<T>> ();
+        public List<TreeNode<T>> children = new List<TreeNode<T>> ();
 
 
         public TreeNode()
         {
-            nodes = new List<TreeNode<T>> ();
+            children = new List<TreeNode<T>> ();
         }
 
         public TreeNode(T theValue)
         {
             value = theValue;
-            nodes = new List<TreeNode<T>> ();
+            children = new List<TreeNode<T>> ();
         }
 
 
@@ -31,16 +31,16 @@ namespace _01_Trees_Tries_Graphs
         private static String DepthFirstToString(TreeNode<T> theNode)
         {
             // Leaf
-            if (theNode.nodes.Count <= 0)
+            if (theNode.children.Count <= 0)
                 return theNode.value.ToString () + " ";
 
             String returnString = "";
 
-            for (int i = 0; i < theNode.nodes.Count; i++)
+            for (int i = 0; i < theNode.children.Count; i++)
             {
-                if (theNode.nodes[i] == null)
+                if (theNode.children[i] == null)
                     continue;
-                returnString += DepthFirstToString (theNode.nodes[i]);
+                returnString += DepthFirstToString (theNode.children[i]);
             }
 
             return theNode.value.ToString () + " " + returnString;
@@ -65,7 +65,7 @@ namespace _01_Trees_Tries_Graphs
                 if (currNode == null)
                     continue;
                 returnString += currNode.value.ToString () + " ";
-                currNode.nodes.ForEach (n => queue.Enqueue (n));
+                currNode.children.ForEach (n => queue.Enqueue (n));
             }
 
             return returnString;
@@ -92,11 +92,11 @@ namespace _01_Trees_Tries_Graphs
             buffer.Append (theNode.value.ToString ());
             buffer.Append ("\r\n");
 
-            for (int i = 0; i < theNode.nodes.Count; i++)
+            for (int i = 0; i < theNode.children.Count; i++)
             {
-                TreeNode<T> nextNode = theNode.nodes[i];
+                TreeNode<T> nextNode = theNode.children[i];
 
-                if (i != theNode.nodes.Count - 1)
+                if (i != theNode.children.Count - 1)
                     TreeGraphToString (nextNode, buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
                 else
                     TreeGraphToString (nextNode, buffer, childrenPrefix + "└── ", childrenPrefix + "    ");

@@ -19,8 +19,14 @@ namespace _01_Trees_Tries_Graphs
             Console.WriteLine ("=================================");
             Console.WriteLine ();
 
-            BinaryTree<int> tree = BinaryTree_RandomWithDuplicates ();
+            BinaryTree<int> tree = BinaryTree_Control ();
+            //BinaryTree<int> tree = BinaryTree_WorstCaseLeft ();
+            //BinaryTree<int> tree = BinaryTree_WorstCaseRight ();
+            //BinaryTree<int> tree = BinaryTree_RandomWithDuplicates ();
+            //BinaryTree<int> tree = BinaryTree_RandomWithoutDuplicates ();
+
             Console.WriteLine ();
+            Console.WriteLine ("value : weight : count");
             Console.WriteLine (tree.headNode.TreeGraphToString ());
             Console.WriteLine ();
 
@@ -61,8 +67,14 @@ namespace _01_Trees_Tries_Graphs
             // Depth 0
             tree.Insert (5);
 
-            // Depth 1
+            tree.Insert (1);
+            tree.Insert (7);
+            tree.Insert (0);
             tree.Insert (3);
+            tree.Insert (4);
+
+            // Depth 1
+            /*tree.Insert (3);
             tree.Insert (7);
 
             // Depth 2
@@ -74,7 +86,7 @@ namespace _01_Trees_Tries_Graphs
             // Depth 3
             tree.Insert (0);
             tree.Insert (2);
-            tree.Insert (9);
+            tree.Insert (9);*/
 
             return tree;
         }

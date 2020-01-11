@@ -19,13 +19,13 @@ namespace _01_Trees_Tries_Graphs
             for (int i = 0; i < charWord.Length; i++)
             {
                 // Get any existing matching connection
-                TreeNode<char> conNode = currNode.nodes.Find (n => n.value.Equals (charWord[i]));
+                TreeNode<char> conNode = currNode.children.Find (n => n.value.Equals (charWord[i]));
 
                 // Add new connection if needed
                 if (conNode == null)
                 {
                     conNode = new TreeNode<char> (charWord[i]);
-                    currNode.nodes.Add (conNode);
+                    currNode.children.Add (conNode);
                 }
 
                 currNode = conNode;
@@ -41,7 +41,7 @@ namespace _01_Trees_Tries_Graphs
             for (int i = 0; i < charWord.Length; i++)
             {
                 // Get any existing matching connection
-                TreeNode<char> conNode = currNode.nodes.Find (n => n.value.Equals (charWord[i]));
+                TreeNode<char> conNode = currNode.children.Find (n => n.value.Equals (charWord[i]));
 
                 // Letter does not exist
                 if (conNode == null)
