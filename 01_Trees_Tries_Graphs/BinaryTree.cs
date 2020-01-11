@@ -136,17 +136,19 @@ namespace _01_Trees_Tries_Graphs
             }
             else if (currNode.value.weight == -2 && currNode.children[0].value.weight == 1)
             {
-                //TODO: Weights are wrong
-                //TODO: Weights are wrong
-                Right (Left (currNode)).value.weight = -1;
-                RotateLeft (currNode, Left(currNode));
-                Left (currNode).value.weight = -1;
+                TreeNode<NodeData> currLeft = Left (currNode);
+                Right (currLeft).value.weight = -1;
+                RotateLeft (currNode, currLeft);
+                currLeft.value.weight = -1;
                 RotateRight (parentNode, currNode);
             }
             else if (currNode.value.weight == 2 && currNode.children[1].value.weight == -1)
             {
-                //TODO: Weights are wrong
-                //TODO: Weights are wrong
+                TreeNode<NodeData> currRight = Right (currNode);
+                Left (currRight).value.weight = -1;
+                RotateRight (currNode, currRight);
+                currRight.value.weight = -1;
+                RotateLeft (parentNode, currNode);
             }
         }
 
@@ -154,6 +156,7 @@ namespace _01_Trees_Tries_Graphs
         {
             TreeNode<NodeData> currRight = Right (currNode);
 
+            // Set right node to be new root/sub-root
             if (parentNode == null)
                 headNode = currRight;
             else
@@ -175,6 +178,7 @@ namespace _01_Trees_Tries_Graphs
         {
             TreeNode<NodeData> currLeft = Left (currNode);
 
+            // Set left node to be new root/sub-root
             if (parentNode == null)
                 headNode = currLeft;
             else
