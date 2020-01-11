@@ -19,7 +19,7 @@ namespace _01_Trees_Tries_Graphs
             Console.WriteLine ("=================================");
             Console.WriteLine ();
 
-            BinaryTree<int> tree = BinaryTree_Control ();
+            BinaryTree<int> tree = BinaryTree_RandomWithDuplicates ();
             Console.WriteLine ();
             Console.WriteLine (tree.headNode.TreeGraphToString ());
             Console.WriteLine ();
@@ -41,16 +41,16 @@ namespace _01_Trees_Tries_Graphs
             Console.WriteLine (trie.headNode.TreeGraphToString ());
             Console.WriteLine ();
 
-            Console.WriteLine (trie.HasString ("Blah"));
-            Console.WriteLine (trie.HasString ("Blue"));
-            Console.WriteLine (trie.HasString ("Foo"));
-            Console.WriteLine (trie.HasString (""));
+            Console.WriteLine ("Contains Blah: " + trie.HasString ("Blah"));
+            Console.WriteLine ("Contains Blue: " + trie.HasString ("Blue"));
+            Console.WriteLine ("Contains Foo:  " + trie.HasString ("Foo"));
+            Console.WriteLine ("Contains '':   " + trie.HasString (""));
             Console.WriteLine ();
 
-            Console.WriteLine (trie.HasString ("Blam"));
-            Console.WriteLine (trie.HasString ("Toot"));
-            Console.WriteLine (trie.HasString ("Fool"));
-            Console.WriteLine (trie.HasString ("Flue"));
+            Console.WriteLine ("Contains Blam: " + trie.HasString ("Blam"));
+            Console.WriteLine ("Contains Toot: " + trie.HasString ("Toot"));
+            Console.WriteLine ("Contains Fool: " + trie.HasString ("Fool"));
+            Console.WriteLine ("Contains Flue: " + trie.HasString ("Flue"));
         }
 
 

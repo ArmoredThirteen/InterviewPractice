@@ -48,9 +48,6 @@ namespace LinkedLists
             BorderLine ();
             Console.ReadKey (true);
 
-            //WriteWoman ();
-            //Thread.Sleep (1500);
-
             return 0;
         }
 
@@ -119,40 +116,6 @@ namespace LinkedLists
             String endAppend = new string (' ', 39-theLine.Length);
             Console.WriteLine ("|  " + theLine + endAppend + "  |");
         }
-
-
-        /* Kept for historical purposes, added as joke for my spouse
-        static void WriteWoman()
-        {
-            int lineDelay = 50;
-
-            Line ("", lineDelay);
-            Line (" ,_____________________,",   lineDelay);
-            Line (" |   .-.--.-.          |",   lineDelay);
-            Line (" |  { /_)(_\\ }         |",  lineDelay);
-            Line (" | { `}'. ./ `}        |",   lineDelay);
-            Line (" |  {`}\\_c/{`}         |",  lineDelay);
-            Line (" |   `_J  L_`          |",   lineDelay);
-            Line (" | ,'   `' -.\\         |",  lineDelay);
-            Line (" |/ /Y  o)  o)\\        |",  lineDelay);
-            Line (" / / \\`-' `-'} )       |",  lineDelay);
-            Line ("( {   \\    // /        |",  lineDelay);
-            Line (" \\ \\  ;  . Y /         |", lineDelay);
-            Line (" |\\ \\/      Y          |", lineDelay);
-            Line (" | );    \\,/ \\         |", lineDelay);
-            Line (" |  :     \\  |         |",  lineDelay);
-            Line (" |   `.    \\ |         |",  lineDelay);
-            Line (" |     `.   \\|         |",  lineDelay);
-            Line (" |       `.  \\         |",  lineDelay);
-            Line (" |         )  )        |",   lineDelay);
-            Line (" |______  /  /_________|",   lineDelay);
-            Line ("         (  /          ",    lineDelay);
-            Line ("         ) /{          ",    lineDelay);
-            Line ("        / /_`\\_        ",   lineDelay);
-            Line ("       (_ \\_`\"'        ",  lineDelay);
-            Line ("         `\"'           ",   lineDelay);
-            BorderLine (lineDelay);
-        }*/
 
     }
 }
