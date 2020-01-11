@@ -26,7 +26,7 @@ namespace _01_Trees_Tries_Graphs
             //BinaryTree<int> tree = BinaryTree_RandomWithoutDuplicates ();
 
             Console.WriteLine ();
-            Console.WriteLine ("value : weight : count");
+            Console.WriteLine ("value/weight/count");
             Console.WriteLine (tree.headNode.TreeGraphToString ());
             Console.WriteLine ();
 
@@ -64,29 +64,21 @@ namespace _01_Trees_Tries_Graphs
         {
             BinaryTree<int> tree = new BinaryTree<int> ();
 
-            // Depth 0
-            tree.Insert (5);
+            int[] treeVals = new int[] { 5, 1, 7, 0, 3, 4 };
+            //int[] treeVals = ArrayTools.SequentialInts (24);
+            //ArrayTools.ReverseArray<int> (treeVals);
 
-            tree.Insert (1);
-            tree.Insert (7);
-            tree.Insert (0);
-            tree.Insert (3);
-            tree.Insert (4);
-
-            // Depth 1
-            /*tree.Insert (3);
-            tree.Insert (7);
-
-            // Depth 2
-            tree.Insert (1);
-            tree.Insert (4);
-            tree.Insert (6);
-            tree.Insert (8);
-
-            // Depth 3
-            tree.Insert (0);
-            tree.Insert (2);
-            tree.Insert (9);*/
+            
+            for (int i = 0; i < treeVals.Length; i++)
+            {
+                if (i > 0)
+                {
+                    Console.WriteLine ();
+                    Console.WriteLine ("value/weight/count");
+                    Console.WriteLine (tree.headNode.TreeGraphToString ());
+                }
+                tree.Insert (treeVals[i]);
+            }
 
             return tree;
         }

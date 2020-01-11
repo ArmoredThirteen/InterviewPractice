@@ -28,8 +28,8 @@ namespace _01_Trees_Tries_Graphs
             public override string ToString()
             {
                 if (count > 1)
-                    return "v" + data.ToString () + " w" + weight + " c" + count;
-                return "v" + data.ToString () + " w" + weight;
+                    return data.ToString () + "/" + weight + "/" + count;
+                return data.ToString () + "/" + weight;
             }
         }
 
@@ -50,10 +50,10 @@ namespace _01_Trees_Tries_Graphs
                 return;
             }
 
-            RecursiveBalancedInsert (headNode, newNode);
+            RecursiveBalancedInsert (null, headNode, newNode);
         }
 
-        private int RecursiveBalancedInsert(TreeNode<NodeData> currNode, TreeNode<NodeData> newNode)
+        private int RecursiveBalancedInsert(TreeNode<NodeData> parentNode, TreeNode<NodeData> currNode, TreeNode<NodeData> newNode)
         {
             int compareCurr = newNode.value.data.CompareTo (currNode.value.data);
 
@@ -68,15 +68,22 @@ namespace _01_Trees_Tries_Graphs
             TreeNode<NodeData> left = Left (currNode);
             TreeNode<NodeData> right = Right (currNode);
 
-            // Move or insert to left
+            // New value is smaller than current node
             if (compareCurr < 0)
             {
+                // Move to smaller node
                 if (left != null)
                 {
-                    int weightChange = RecursiveBalancedInsert (left, newNode);
+                    int weightChange = RecursiveBalancedInsert (currNode, left, newNode);
                     currNode.value.weight -= weightChange;
+                    if (currNode.value.weight <= -2)
+                    {
+                        Rebalance (parentNode, currNode);
+                        return 0;
+                    }
                     return weightChange;
                 }
+                // Insert leaf node
                 else
                 {
                     Console.WriteLine ("Inserting to left of node: " + currNode.value.data);
@@ -86,15 +93,22 @@ namespace _01_Trees_Tries_Graphs
                         return 1;
                 }
             }
-            // Move or insert right
+            // New value is bigger than current node
             else if (compareCurr > 0)
             {
+                // Move to bigger node
                 if (right != null)
                 {
-                    int weightChange = RecursiveBalancedInsert (right, newNode);
+                    int weightChange = RecursiveBalancedInsert (currNode, right, newNode);
                     currNode.value.weight += weightChange;
+                    if (currNode.value.weight >= 2)
+                    {
+                        Rebalance (parentNode, currNode);
+                        return 0;
+                    }
                     return weightChange;
                 }
+                // Insert leaf node
                 else
                 {
                     Console.WriteLine ("Inserting to right of node: " + currNode.value.data);
@@ -106,6 +120,76 @@ namespace _01_Trees_Tries_Graphs
             }
 
             return 0;
+        }
+
+        private void Rebalance(TreeNode<NodeData> parentNode, TreeNode<NodeData> currNode)
+        {
+            Console.WriteLine ("Rebalancing: " + currNode.value.data + ", weight is: " + currNode.value.weight);
+
+            if (currNode.value.weight == -2 && currNode.children[0].value.weight == -1)
+            {
+                RotateRight (parentNode, currNode);
+            }
+            else if (currNode.value.weight == 2 && currNode.children[1].value.weight == 1)
+            {
+                RotateLeft (parentNode, currNode);
+            }
+            else if (currNode.value.weight == -2 && currNode.children[0].value.weight == 1)
+            {
+                //TODO: Weights are wrong
+                //TODO: Weights are wrong
+                Right (Left (currNode)).value.weight = -1;
+                RotateLeft (currNode, Left(currNode));
+                Left (currNode).value.weight = -1;
+                RotateRight (parentNode, currNode);
+            }
+            else if (currNode.value.weight == 2 && currNode.children[1].value.weight == -1)
+            {
+                //TODO: Weights are wrong
+                //TODO: Weights are wrong
+            }
+        }
+
+        private void RotateLeft(TreeNode<NodeData> parentNode, TreeNode<NodeData> currNode)
+        {
+            TreeNode<NodeData> currRight = Right (currNode);
+
+            if (parentNode == null)
+                headNode = currRight;
+            else
+            {
+                if (Right (parentNode).value.weight >= 2)
+                    parentNode.children[1] = currRight;
+                else
+                    parentNode.children[0] = currRight;
+            }
+
+            currNode.children[1] = Left (currRight);
+            currRight.children[0] = currNode;
+
+            currNode.value.weight = 0;
+            currRight.value.weight = 0;
+        }
+
+        private void RotateRight(TreeNode<NodeData> parentNode, TreeNode<NodeData> currNode)
+        {
+            TreeNode<NodeData> currLeft = Left (currNode);
+
+            if (parentNode == null)
+                headNode = currLeft;
+            else
+            {
+                if (Left (parentNode).value.weight <= -2)
+                    parentNode.children[0] = currLeft;
+                else
+                    parentNode.children[1] = currLeft;
+            }
+            
+            currNode.children[0] = Right(currLeft);
+            currLeft.children[1] = currNode;
+
+            currNode.value.weight = 0;
+            currLeft.value.weight = 0;
         }
 
 

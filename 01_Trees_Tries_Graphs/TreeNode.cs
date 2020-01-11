@@ -94,7 +94,8 @@ namespace _01_Trees_Tries_Graphs
 
             for (int i = 0; i < theNode.children.Count; i++)
             {
-                TreeNode<T> nextNode = theNode.children[i];
+                // Mirror so that it orients more closely to how binary trees in examples are shown, when tilting head to left
+                TreeNode<T> nextNode = theNode.children[(theNode.children.Count - 1) - i];
 
                 if (i != theNode.children.Count - 1)
                     TreeGraphToString (nextNode, buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
