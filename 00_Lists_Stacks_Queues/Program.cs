@@ -48,8 +48,8 @@ namespace LinkedLists
             BorderLine ();
             Console.ReadKey (true);
 
-            WriteWoman ();
-            Thread.Sleep (1500);
+            //WriteWoman ();
+            //Thread.Sleep (1500);
 
             return 0;
         }
@@ -121,6 +121,7 @@ namespace LinkedLists
         }
 
 
+        /* Kept for historical purposes, added as joke for my spouse
         static void WriteWoman()
         {
             int lineDelay = 50;
@@ -151,7 +152,7 @@ namespace LinkedLists
             Line ("       (_ \\_`\"'        ",  lineDelay);
             Line ("         `\"'           ",   lineDelay);
             BorderLine (lineDelay);
-        }
+        }*/
 
     }
 }

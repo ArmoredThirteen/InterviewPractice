@@ -14,12 +14,15 @@ namespace _01_Trees_Tries_Graphs
             Console.WindowHeight = Console.LargestWindowHeight-15;
 
             TrieExample ();
-
             Console.WriteLine ();
+
             Console.WriteLine ("=================================");
             Console.WriteLine ();
 
-            BinaryTreeExample ();
+            BinaryTree<int> tree = BinaryTree_Control ();
+            Console.WriteLine ();
+            Console.WriteLine (tree.headNode.TreeGraphToString ());
+            Console.WriteLine ();
 
             Console.WriteLine ("Press key to exit");
             Console.ReadKey (true);
@@ -50,52 +53,74 @@ namespace _01_Trees_Tries_Graphs
             Console.WriteLine (trie.HasString ("Flue"));
         }
 
-        static void BinaryTreeExample()
+
+        private static BinaryTree<int> BinaryTree_Control()
         {
             BinaryTree<int> tree = new BinaryTree<int> ();
 
-            /*// Manual control tree
+            // Depth 0
             tree.Insert (5);
+
+            // Depth 1
             tree.Insert (3);
-            tree.Insert (10);
+            tree.Insert (7);
+
+            // Depth 2
             tree.Insert (1);
             tree.Insert (4);
-            tree.Insert (7);
-            tree.Insert (12);
-            Console.WriteLine ();
-            Console.WriteLine (tree.headNode.TreeGraphToString ());
-            Console.WriteLine ();*/
+            tree.Insert (6);
+            tree.Insert (8);
 
-            /*// Worst-case right leaning
-            for (int i = 0; i < 10; i++)
-                tree.Insert (i);
-            Console.WriteLine ();
-            Console.WriteLine (tree.headNode.TreeGraphToString());
-            Console.WriteLine ();*/
+            // Depth 3
+            tree.Insert (0);
+            tree.Insert (2);
+            tree.Insert (9);
 
-            /*// Worst-case left leaning
+            return tree;
+        }
+
+        private static BinaryTree<int> BinaryTree_WorstCaseLeft()
+        {
+            BinaryTree<int> tree = new BinaryTree<int> ();
+
             for (int i = 9; i >= 0; i--)
                 tree.Insert (i);
-            Console.WriteLine ();
-            Console.WriteLine (tree.headNode.TreeGraphToString ());
-            Console.WriteLine ();*/
 
-            /*// Random with possible duplicates
-            Random rand = new Random ();
+            return tree;
+        }
+
+        private static BinaryTree<int> BinaryTree_WorstCaseRight()
+        {
+            BinaryTree<int> tree = new BinaryTree<int> ();
+
             for (int i = 0; i < 10; i++)
-                tree.Insert (rand.Next (0, 10));
-            Console.WriteLine ();
-            Console.WriteLine (tree.headNode.TreeGraphToString ());
-            Console.WriteLine ();*/
+                tree.Insert (i);
 
-            // Random with no duplicates
-            int[] randomInts = ArrayTools.SequentialInts(10);
+            return tree;
+        }
+
+        private static BinaryTree<int> BinaryTree_RandomWithDuplicates()
+        {
+            BinaryTree<int> tree = new BinaryTree<int> ();
+            Random rand = new Random ();
+
+            for (int i = 0; i < 15; i++)
+                tree.Insert (rand.Next (0, 10));
+
+            return tree;
+        }
+
+        private static BinaryTree<int> BinaryTree_RandomWithoutDuplicates()
+        {
+            BinaryTree<int> tree = new BinaryTree<int> ();
+
+            int[] randomInts = ArrayTools.SequentialInts (10);
             ArrayTools.ShuffleArray<int> (randomInts);
+
             for (int i = 0; i < randomInts.Length; i++)
                 tree.Insert (randomInts[i]);
-            Console.WriteLine ();
-            Console.WriteLine (tree.headNode.TreeGraphToString ());
-            Console.WriteLine ();
+
+            return tree;
         }
 
     }

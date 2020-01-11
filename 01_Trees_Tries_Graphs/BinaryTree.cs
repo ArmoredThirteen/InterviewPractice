@@ -59,7 +59,7 @@ namespace _01_Trees_Tries_Graphs
                 TreeNode<NodeData> left = Left (currNode);
                 if (left != null && compareCurr < 0)
                 {
-                    Console.WriteLine ("Move left to value: " + left.value.data);
+                    //Console.WriteLine ("Move left to value: " + left.value.data);
                     currNode = left;
                     continue;
                 }
@@ -68,7 +68,7 @@ namespace _01_Trees_Tries_Graphs
                 TreeNode<NodeData> right = Right (currNode);
                 if (right != null && compareCurr > 0)
                 {
-                    Console.WriteLine ("Move right to value: " + right.value.data);
+                    //Console.WriteLine ("Move right to value: " + right.value.data);
                     currNode = right;
                     continue;
                 }
