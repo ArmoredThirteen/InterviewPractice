@@ -51,7 +51,7 @@ namespace _01_Trees_Tries_Graphs
             BinaryTree<int> tree = new BinaryTree<int> ();
 
 
-            tree.head = new Node<int> (5)
+            /*tree.head = new Node<int> (5)
             {
                 left = new Node<int> (3)
                 {
@@ -63,7 +63,17 @@ namespace _01_Trees_Tries_Graphs
                     left = new Node<int> (6),
                     right = new Node<int> (8)
                 }
-            };
+            };*/
+
+
+            //int[] newVals = new int[] { 5, 3, 7, 2, 4, 6, 8 };
+            int[] newVals = ArrayTools.SequentialInts (10);
+            //ArrayTools.ReverseArray<int> (newVals);
+
+            for (int i = 0; i < newVals.Length; i++)
+            {
+                tree.Insert (newVals[i]);
+            }
 
 
             Console.WriteLine (tree);

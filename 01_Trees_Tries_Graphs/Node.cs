@@ -20,6 +20,7 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
         }
 
 
+        #region ToString()
         public override String ToString()
         {
             StringBuilder buffer = new StringBuilder (50);
@@ -45,8 +46,7 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
             BuildString (currNode.right, buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
             BuildString (currNode.left, buffer, childrenPrefix + "└── ", childrenPrefix + "    ");
         }
-
-
+        #endregion
 
         #region Operator Overloads
         // Operator <
