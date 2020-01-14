@@ -8,7 +8,7 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
     public class Node<T> where T : IComparable<T>
     {
         public T value;
-        public int height;
+        public int height = 0;
 
         public Node<T> left  = null;
         public Node<T> right = null;
@@ -47,7 +47,29 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
         }
 
 
-        // Two nodes
+
+        #region Operator Overloads
+        // Operator <
+        public static bool operator <(Node<T> n1, Node<T> n2) { return n1.value.CompareTo (n2.value) < 0; }
+        public static bool operator <(Node<T> n1, T v2) { return n1.value.CompareTo (v2) < 0; }
+        public static bool operator <(T v1, Node<T> n2) { return v1.CompareTo (n2.value) < 0; }
+
+        // Operator >
+        public static bool operator >(Node<T> n1, Node<T> n2) { return n1.value.CompareTo (n2.value) > 0; }
+        public static bool operator >(Node<T> n1, T v2) { return n1.value.CompareTo (v2) > 0; }
+        public static bool operator >(T v1, Node<T> n2) { return v1.CompareTo (n2.value) > 0; }
+        
+        // Operator <=
+        public static bool operator <=(Node<T> n1, Node<T> n2) { return n1.value.CompareTo (n2.value) <= 0; }
+        public static bool operator <=(Node<T> n1, T v2) { return n1.value.CompareTo (v2) <= 0; }
+        public static bool operator <=(T v1, Node<T> n2) { return v1.CompareTo (n2.value) <= 0; }
+        
+        // Operator >=
+        public static bool operator >=(Node<T> n1, Node<T> n2) { return n1.value.CompareTo (n2.value) >= 0; }
+        public static bool operator >=(Node<T> n1, T v2) { return n1.value.CompareTo (v2) >= 0; }
+        public static bool operator >=(T v1, Node<T> n2) { return v1.CompareTo (n2.value) >= 0; }
+        
+        // Operator ==
         public static bool operator ==(Node<T> n1, Node<T> n2)
         {
             if (n1 is null && n2 is null)
@@ -58,6 +80,23 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
             return n1.value.CompareTo (n2.value) == 0;
         }
 
+        public static bool operator ==(Node<T> n1, T v2)
+        {
+            if (n1 is null)
+                return false;
+
+            return n1.value.CompareTo (v2) == 0;
+        }
+
+        public static bool operator ==(T v1, Node<T> n2)
+        {
+            if (n2 is null)
+                return true;
+
+            return v1.CompareTo (n2.value) == 0;
+        }
+        
+        // Operator !=
         public static bool operator !=(Node<T> n1, Node<T> n2)
         {
             if (n1 is null && n2 is null)
@@ -68,72 +107,12 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
             return n1.value.CompareTo (n2.value) != 0;
         }
 
-        public static bool operator <(Node<T> n1, Node<T> n2)
-        {
-            return n1.value.CompareTo (n2.value) < 0;
-        }
-
-        public static bool operator >(Node<T> n1, Node<T> n2)
-        {
-            return n1.value.CompareTo (n2.value) > 0;
-        }
-
-        public static bool operator <=(Node<T> n1, Node<T> n2)
-        {
-            return n1.value.CompareTo (n2.value) <= 0;
-        }
-
-        public static bool operator >=(Node<T> n1, Node<T> n2)
-        {
-            return n1.value.CompareTo (n2.value) >= 0;
-        }
-
-
-        // Left is Node, right is T
-        public static bool operator ==(Node<T> n1, T v2)
-        {
-            if (n1 is null)
-                return false;
-
-            return n1.value.CompareTo (v2) == 0;
-        }
-
         public static bool operator !=(Node<T> n1, T v2)
         {
             if (n1 is null)
                 return true;
 
             return n1.value.CompareTo (v2) != 0;
-        }
-
-        public static bool operator <(Node<T> n1, T v2)
-        {
-            return n1.value.CompareTo (v2) < 0;
-        }
-
-        public static bool operator >(Node<T> n1, T v2)
-        {
-            return n1.value.CompareTo (v2) > 0;
-        }
-
-        public static bool operator <=(Node<T> n1, T v2)
-        {
-            return n1.value.CompareTo (v2) <= 0;
-        }
-
-        public static bool operator >=(Node<T> n1, T v2)
-        {
-            return n1.value.CompareTo (v2) >= 0;
-        }
-
-
-        // Left is T, right is Node
-        public static bool operator ==(T v1, Node<T> n2)
-        {
-            if (n2 is null)
-                return true;
-
-            return v1.CompareTo (n2.value) == 0;
         }
 
         public static bool operator !=(T v1, Node<T> n2)
@@ -143,26 +122,7 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
 
             return v1.CompareTo (n2.value) != 0;
         }
-
-        public static bool operator <(T v1, Node<T> n2)
-        {
-            return v1.CompareTo (n2.value) < 0;
-        }
-
-        public static bool operator >(T v1, Node<T> n2)
-        {
-            return v1.CompareTo (n2.value) > 0;
-        }
-
-        public static bool operator <=(T v1, Node<T> n2)
-        {
-            return v1.CompareTo (n2.value) <= 0;
-        }
-
-        public static bool operator >=(T v1, Node<T> n2)
-        {
-            return v1.CompareTo (n2.value) >= 0;
-        }
+        #endregion
 
     }
 }
