@@ -134,20 +134,28 @@ namespace _01_Trees_Tries_Graphs
             {
                 RotateLeft (parentNode, currNode);
             }
-            else if (currNode.value.weight == -2 && currNode.children[0].value.weight == 1)
+            else if (currNode.value.weight == -2 && Left(currNode).value.weight == 1)
             {
                 TreeNode<NodeData> currLeft = Left (currNode);
-                Right (currLeft).value.weight = -1;
+
+                //Right (currLeft).value.weight = -1;
                 RotateLeft (currNode, currLeft);
-                currLeft.value.weight = -1;
+                Left (currNode).value.weight -= 1;
+
+                // Grab new Left since RotateLeft() breaks currLeft...
+                TreeNode<NodeData> currLeftLeft = Left (Left (currNode));
                 RotateRight (parentNode, currNode);
+                currLeftLeft.value.weight -= 1;
             }
             else if (currNode.value.weight == 2 && currNode.children[1].value.weight == -1)
             {
                 TreeNode<NodeData> currRight = Right (currNode);
-                Left (currRight).value.weight = -1;
+                //Left (currRight).value.weight = 1;
                 RotateRight (currNode, currRight);
-                currRight.value.weight = -1;
+                Right (currNode).value.weight += 1;
+
+                // Grab new Right since RotateRight() breaks currRight...
+                //Right (currNode).value.weight = 1;
                 RotateLeft (parentNode, currNode);
             }
         }
@@ -161,7 +169,9 @@ namespace _01_Trees_Tries_Graphs
                 headNode = currRight;
             else
             {
-                if (Right (parentNode).value.weight >= 2)
+                TreeNode<NodeData> parenRight = Right (parentNode);
+
+                if (parenRight != null && parenRight.value.weight >= 2)
                     parentNode.children[1] = currRight;
                 else
                     parentNode.children[0] = currRight;
@@ -183,7 +193,9 @@ namespace _01_Trees_Tries_Graphs
                 headNode = currLeft;
             else
             {
-                if (Left (parentNode).value.weight <= -2)
+                TreeNode<NodeData> parenLeft = Left (parentNode);
+
+                if (parenLeft != null && parenLeft.value.weight <= -2)
                     parentNode.children[0] = currLeft;
                 else
                     parentNode.children[1] = currLeft;

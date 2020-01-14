@@ -64,12 +64,14 @@ namespace _01_Trees_Tries_Graphs
         {
             BinaryTree<int> tree = new BinaryTree<int> ();
 
-            //int[] treeVals = new int[] { 5, 1, 7, 0, 3, 4 };
+            //int[] treeVals = new int[] { 6, 4, 5 };
+            //int[] treeVals = new int[] { 6, 9, 7 };
+            int[] treeVals = new int[] { 5, 1, 7, 0, 3, 4 };
             //int[] treeVals = new int[] { 5, 4, 8, 7, 9, 6 };
-            int[] treeVals = ArrayTools.SequentialInts (24);
-            ArrayTools.ReverseArray<int> (treeVals);
+            //int[] treeVals = ArrayTools.SequentialInts (24);
+            //ArrayTools.ReverseArray<int> (treeVals);
 
-            
+
             for (int i = 0; i < treeVals.Length; i++)
             {
                 if (i > 0)
