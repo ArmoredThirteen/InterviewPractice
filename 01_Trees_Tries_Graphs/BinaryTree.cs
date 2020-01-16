@@ -3,303 +3,101 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace _01_Trees_Tries_Graphs
+namespace _01_Trees_Tries_Graphs.BinaryTree
 {
     class BinaryTree<T> where T : IComparable<T>
     {
-        public class NodeData : IComparable<NodeData>
-        {
-            public T data;
-            public int count;
-            public int weight;
-
-            public NodeData(T theValue)
-            {
-                data = theValue;
-                count = 1;
-                weight = 0;
-            }
-
-            public int CompareTo(NodeData other)
-            {
-                return this.data.CompareTo (other.data);
-            }
-
-            public override string ToString()
-            {
-                if (count > 1)
-                    return data.ToString () + "/" + weight + "/" + count;
-                return data.ToString () + "/" + weight;
-            }
-        }
-
-
-        public TreeNode<NodeData> headNode = null;
+        private Node<T> head = null;
 
 
         public void Insert(T newValue)
         {
-            Console.WriteLine ("Attempting to add value: " + newValue);
-            TreeNode<NodeData> newNode = NewNode (newValue);
-
-            // First value in empty list
-            if (headNode == null)
+            if (head == null)
             {
-                Console.WriteLine ("List empty, inserting value " + newValue + " as head node");
-                headNode = newNode;
+                head = new Node<T> (newValue);
+                return;
+            }
+            
+            Insert (ref head, newValue);
+        }
+
+
+        private void Insert(ref Node<T> node, T newValue)
+        {
+            // New leaf
+            if (node == null)
+            {
+                node = new Node<T> (newValue);
                 return;
             }
 
-            RecursiveBalancedInsert (null, headNode, newNode);
-        }
-
-        private int RecursiveBalancedInsert(TreeNode<NodeData> parentNode, TreeNode<NodeData> currNode, TreeNode<NodeData> newNode)
-        {
-            int compareCurr = newNode.value.data.CompareTo (currNode.value.data);
-
-            // Duplicate entry, increment count only
-            if (compareCurr == 0)
-            {
-                currNode.value.count++;
-                Console.WriteLine ("Duplicate value, new count is: " + currNode.value.count);
-                return 0;
-            }
-
-            TreeNode<NodeData> left = Left (currNode);
-            TreeNode<NodeData> right = Right (currNode);
-
-            // New value is smaller than current node
-            if (compareCurr < 0)
-            {
-                // Move to smaller node
-                if (left != null)
-                {
-                    int weightChange = RecursiveBalancedInsert (currNode, left, newNode);
-                    currNode.value.weight -= weightChange;
-                    if (currNode.value.weight <= -2)
-                    {
-                        Rebalance (parentNode, currNode);
-                        return 0;
-                    }
-                    return weightChange;
-                }
-                // Insert leaf node
-                else
-                {
-                    Console.WriteLine ("Inserting to left of node: " + currNode.value.data);
-                    currNode.children[0] = newNode;
-                    currNode.value.weight -= 1;
-                    if (right == null)
-                        return 1;
-                }
-            }
-            // New value is bigger than current node
-            else if (compareCurr > 0)
-            {
-                // Move to bigger node
-                if (right != null)
-                {
-                    int weightChange = RecursiveBalancedInsert (currNode, right, newNode);
-                    currNode.value.weight += weightChange;
-                    if (currNode.value.weight >= 2)
-                    {
-                        Rebalance (parentNode, currNode);
-                        return 0;
-                    }
-                    return weightChange;
-                }
-                // Insert leaf node
-                else
-                {
-                    Console.WriteLine ("Inserting to right of node: " + currNode.value.data);
-                    currNode.children[1] = newNode;
-                    currNode.value.weight += 1;
-                    if (left == null)
-                        return 1;
-                }
-            }
-
-            return 0;
-        }
-
-        private void Rebalance(TreeNode<NodeData> parentNode, TreeNode<NodeData> currNode)
-        {
-            Console.WriteLine ("Rebalancing: " + currNode.value.data + ", weight is: " + currNode.value.weight);
-
-            if (currNode.value.weight == -2 && currNode.children[0].value.weight == -1)
-            {
-                RotateRight (parentNode, currNode);
-            }
-            else if (currNode.value.weight == 2 && currNode.children[1].value.weight == 1)
-            {
-                RotateLeft (parentNode, currNode);
-            }
-            else if (currNode.value.weight == -2 && Left(currNode).value.weight == 1)
-            {
-                TreeNode<NodeData> currLeft = Left (currNode);
-
-                //Right (currLeft).value.weight = -1;
-                RotateLeft (currNode, currLeft);
-                Left (currNode).value.weight -= 1;
-
-                // Grab new Left since RotateLeft() breaks currLeft...
-                TreeNode<NodeData> currLeftLeft = Left (Left (currNode));
-                RotateRight (parentNode, currNode);
-                currLeftLeft.value.weight -= 1;
-            }
-            else if (currNode.value.weight == 2 && currNode.children[1].value.weight == -1)
-            {
-                TreeNode<NodeData> currRight = Right (currNode);
-                //Left (currRight).value.weight = 1;
-                RotateRight (currNode, currRight);
-                Right (currNode).value.weight += 1;
-
-                // Grab new Right since RotateRight() breaks currRight...
-                //Right (currNode).value.weight = 1;
-                RotateLeft (parentNode, currNode);
-            }
-        }
-
-        private void RotateLeft(TreeNode<NodeData> parentNode, TreeNode<NodeData> currNode)
-        {
-            TreeNode<NodeData> currRight = Right (currNode);
-
-            // Set right node to be new root/sub-root
-            if (parentNode == null)
-                headNode = currRight;
+            // Attempt go left, go right, return if duplicate
+            if (newValue < node)
+                Insert (ref node.left, newValue);
+            else if (newValue > node)
+                Insert (ref node.right, newValue);
             else
-            {
-                TreeNode<NodeData> parenRight = Right (parentNode);
-
-                if (parenRight != null && parenRight.value.weight >= 2)
-                    parentNode.children[1] = currRight;
-                else
-                    parentNode.children[0] = currRight;
-            }
-
-            currNode.children[1] = Left (currRight);
-            currRight.children[0] = currNode;
-
-            currNode.value.weight = 0;
-            currRight.value.weight = 0;
-        }
-
-        private void RotateRight(TreeNode<NodeData> parentNode, TreeNode<NodeData> currNode)
-        {
-            TreeNode<NodeData> currLeft = Left (currNode);
-
-            // Set left node to be new root/sub-root
-            if (parentNode == null)
-                headNode = currLeft;
-            else
-            {
-                TreeNode<NodeData> parenLeft = Left (parentNode);
-
-                if (parenLeft != null && parenLeft.value.weight <= -2)
-                    parentNode.children[0] = currLeft;
-                else
-                    parentNode.children[1] = currLeft;
-            }
-            
-            currNode.children[0] = Right(currLeft);
-            currLeft.children[1] = currNode;
-
-            currNode.value.weight = 0;
-            currLeft.value.weight = 0;
-        }
-
-
-        public void UnbalancedInsert(T newValue)
-        {
-            Console.WriteLine ("Attempting to add value: " + newValue);
-            TreeNode<NodeData> newNode = NewNode (newValue);
-
-            // First value in empty list
-            if (headNode == null)
-            {
-                Console.WriteLine ("List empty, inserting value " + newValue + " as head node");
-                headNode = newNode;
                 return;
-            }
 
-            TreeNode<NodeData> currNode = headNode;
+            node.ResetHeight ();
+            Balance (ref node, newValue);
+        }
+
+
+        private void Balance(ref Node<T> node, T newValue)
+        {
+            int factor = node.BalanceFactor ();
             
-            while (true)
+            // Height difference not imbalanced enough
+            if (Math.Abs(factor) <= 1)
+                return;
+
+            // Left left
+            if (factor < -1 && newValue < node.left)
+                RotateRight (ref node);
+            // Right right
+            else if (factor > 1 && newValue > node.right)
+                RotateLeft (ref node);
+            // Left right
+            else if (factor < -1 && newValue > node.left)
             {
-                int compareCurr = newValue.CompareTo (currNode.value.data);
-
-                // Move left
-                TreeNode<NodeData> left = Left (currNode);
-                if (left != null && compareCurr < 0)
-                {
-                    //Console.WriteLine ("Move left to value: " + left.value.data);
-                    currNode = left;
-                    continue;
-                }
-                
-                // Move right
-                TreeNode<NodeData> right = Right (currNode);
-                if (right != null && compareCurr > 0)
-                {
-                    //Console.WriteLine ("Move right to value: " + right.value.data);
-                    currNode = right;
-                    continue;
-                }
-
-                // Found existing duplicate entry, increment count
-                if (compareCurr == 0)
-                {
-                    currNode.value.count++;
-                    Console.WriteLine ("Duplicate value, new count is: " + currNode.value.count);
-                }
-                // Insert to left of curr node
-                else if (compareCurr < 0)
-                {
-                    Console.WriteLine ("Inserting to left of node: " + currNode.value.data);
-                    if (left == null)
-                        currNode.children[0] = newNode;
-                }
-                // Insert to right of curr node
-                else
-                {
-                    Console.WriteLine ("Inserting to right of node: " + currNode.value.data);
-                    if (right == null)
-                        currNode.children[1] = newNode;
-                }
-
-                break;
+                RotateLeft (ref node.left);
+                RotateRight (ref node);
+            }
+            // Right left
+            else if (factor > 1 && newValue < node.right)
+            {
+                RotateRight (ref node.right);
+                RotateLeft (ref node);
             }
         }
 
-
-        /*public bool HasValue(T nodeValue)
+        private void RotateLeft(ref Node<T> root)
         {
-            return FindNode (nodeValue) != null;
+            Node<T> pivot = root.right;
+            root.right = root.right.left;
+            pivot.left = root;
+            root = pivot;
+
+            root.left.ResetHeight ();
+            root.ResetHeight ();
         }
 
-        public GraphNode<T> FindNode(T nodeValue)
+        private void RotateRight(ref Node<T> root)
         {
+            Node<T> pivot = root.left;
+            root.left = root.left.right;
+            pivot.right = root;
+            root = pivot;
 
-        }*/
-
-
-        public TreeNode<NodeData> Left(TreeNode<NodeData> theNode)
-        {
-            return theNode.children[0];
+            root.right.ResetHeight ();
+            root.ResetHeight ();
         }
+        
 
-        public TreeNode<NodeData> Right(TreeNode<NodeData> theNode)
+        public override string ToString()
         {
-            return theNode.children[1];
-        }
-
-
-        public TreeNode<NodeData> NewNode(T theValue)
-        {
-            TreeNode<NodeData> newNode = new TreeNode<NodeData> (new NodeData (theValue));
-            newNode.children.Add (null);
-            newNode.children.Add (null);
-            return newNode;
+            return head.ToString ();
         }
 
     }
