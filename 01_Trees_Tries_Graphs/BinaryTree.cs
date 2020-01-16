@@ -22,89 +22,53 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
         }
 
 
-        // Returns true if subtree height increased
-        private bool Insert(ref Node<T> currNode, T newValue)
+        private void Insert(ref Node<T> node, T newValue)
         {
-            // Insert left
-            if (newValue < currNode)
+            // New leaf
+            if (node == null)
             {
-                if (currNode.left == null)
-                {
-                    currNode.left = new Node<T> (newValue);
-                    currNode.weight -= 1;
-                    if (currNode.right == null)
-                    {
-                        return true;
-                    }
-                }
-                else
-                {
-                    bool isHigher = Insert (ref currNode.left, newValue);
-                    currNode.weight -= isHigher ? 1 : 0;
-
-                    if (currNode.weight == -2)
-                    {
-                        Balance (ref currNode);
-                        //return false;
-                    }
-
-                    return isHigher;
-                }
-            }
-            // Insert right
-            else if (newValue > currNode)
-            {
-                if (currNode.right == null)
-                {
-                    currNode.right = new Node<T> (newValue);
-                    currNode.weight += 1;
-                    if (currNode.left == null)
-                    {
-                        return true;
-                    }
-                }
-                else
-                {
-                    bool isHigher = Insert (ref currNode.right, newValue);
-                    currNode.weight += isHigher ? 1 : 0;
-
-                    if (currNode.weight == 2)
-                    {
-                        Balance (ref currNode);
-                        //return false;
-                    }
-
-                    return isHigher;
-                }
+                node = new Node<T> (newValue);
+                return;
             }
 
-            return false;
+            // Attempt go left, go right, return if duplicate
+            if (newValue < node)
+                Insert (ref node.left, newValue);
+            else if (newValue > node)
+                Insert (ref node.right, newValue);
+            else
+                return;
+
+            node.ResetHeight ();
+            Balance (ref node, newValue);
         }
 
 
-        private void Balance(ref Node<T> root)
+        private void Balance(ref Node<T> node, T newValue)
         {
-            if (root.weight == -2 && root.left.weight == -1)
+            int factor = node.BalanceFactor ();
+            
+            // Height difference not imbalanced enough
+            if (Math.Abs(factor) <= 1)
+                return;
+
+            // Left left
+            if (factor < -1 && newValue < node.left)
+                RotateRight (ref node);
+            // Right right
+            else if (factor > 1 && newValue > node.right)
+                RotateLeft (ref node);
+            // Left right
+            else if (factor < -1 && newValue > node.left)
             {
-                RotateRight (ref root);
+                RotateLeft (ref node.left);
+                RotateRight (ref node);
             }
-            else if (root.weight == 2 && root.right.weight == 1)
+            // Right left
+            else if (factor > 1 && newValue < node.right)
             {
-                RotateLeft (ref root);
-            }
-            else if (root.weight == -2 && root.left != null && root.left.weight == 1)
-            {
-                root.left.right.weight = -1;
-                RotateLeft (ref root.left);
-                root.left.weight = -1;
-                RotateRight (ref root);
-            }
-            else if (root.weight == 2 && root.right != null && root.right.weight == -1)
-            {
-                root.right.left.weight = 1;
-                RotateRight (ref root.right);
-                root.right.weight = 1;
-                RotateLeft (ref root);
+                RotateRight (ref node.right);
+                RotateLeft (ref node);
             }
         }
 
@@ -115,8 +79,8 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
             pivot.left = root;
             root = pivot;
 
-            root.weight = 0;
-            root.left.weight = 0;
+            root.left.ResetHeight ();
+            root.ResetHeight ();
         }
 
         private void RotateRight(ref Node<T> root)
@@ -126,10 +90,10 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
             pivot.right = root;
             root = pivot;
 
-            root.weight = 0;
-            root.right.weight = 0;
+            root.right.ResetHeight ();
+            root.ResetHeight ();
         }
-
+        
 
         public override string ToString()
         {

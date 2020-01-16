@@ -8,18 +8,40 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
     public class Node<T> where T : IComparable<T>
     {
         public T value;
-        public int weight = 0;
+        public int height;
 
-        public Node<T> left  = null;
-        public Node<T> right = null;
+        public Node<T> left;
+        public Node<T> right;
 
 
         public Node(T theValue)
         {
             value = theValue;
+            height = 1;
         }
 
 
+        public void ResetHeight()
+        {
+            height = 1 + Math.Max (LeftHeight(), RightHeight());
+        }
+
+        public int BalanceFactor()
+        {
+            return RightHeight () - LeftHeight ();
+        }
+
+        public int LeftHeight()
+        {
+            return left == null ? 0 : left.height;
+        }
+
+        public int RightHeight()
+        {
+            return right == null ? 0 : right.height;
+        }
+
+        
         #region ToString()
         public override String ToString()
         {
@@ -39,7 +61,7 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
                 return;
             }
 
-            buffer.Append (currNode.value.ToString () + ":" + currNode.weight);
+            buffer.Append (currNode.value.ToString () + ":" + currNode.BalanceFactor());
             buffer.Append ("\r\n");
 
             // Right then left subtrees (so placement when tilting head to left matches most tree examples)

@@ -52,10 +52,10 @@ namespace _01_Trees_Tries_Graphs
 
             //int[] newVals = new int[] { 5, 3, 7, 2, 4, 6, 8 };
             //int[] newVals = new int[] { 5, 3, 7, 4, 6 };
-            int[] newVals = ArrayTools.SequentialInts (10);
+            int[] newVals = ArrayTools.SequentialInts (20);
             //int[] newVals = new int[] { 7, 2, 8, 0, 4, 6 };
             //ArrayTools.ReverseArray<int> (newVals);
-            //ArrayTools.ShuffleArray<int> (newVals);
+            ArrayTools.ShuffleArray<int> (newVals);
 
             for (int i = 0; i < newVals.Length; i++)
             {
