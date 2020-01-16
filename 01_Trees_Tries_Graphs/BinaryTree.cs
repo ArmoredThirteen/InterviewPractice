@@ -7,8 +7,7 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
 {
     class BinaryTree<T> where T : IComparable<T>
     {
-        //TODO: should be private
-        public Node<T> head = null;
+        private Node<T> head = null;
 
 
         public void Insert(T newValue)
@@ -22,39 +21,113 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
             Insert (ref head, newValue);
         }
 
-        private void Insert(ref Node<T> currNode, T newValue)
-        {
-            // New leaf node
-            if (currNode == null)
-            {
-                currNode = new Node<T> (newValue);
-                return;
-            }
 
-            // Duplicate
-            if (newValue == currNode)
+        // Returns true if subtree height increased
+        private bool Insert(ref Node<T> currNode, T newValue)
+        {
+            // Insert left
+            if (newValue < currNode)
             {
-                return;
+                if (currNode.left == null)
+                {
+                    currNode.left = new Node<T> (newValue);
+                    currNode.weight -= 1;
+                    if (currNode.right == null)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    bool isHigher = Insert (ref currNode.left, newValue);
+                    currNode.weight -= isHigher ? 1 : 0;
+
+                    if (currNode.weight == -2)
+                    {
+                        Balance (ref currNode);
+                        //return false;
+                    }
+
+                    return isHigher;
+                }
             }
-            else if (newValue < currNode)
-            {
-                Insert (ref currNode.left, newValue);
-            }
+            // Insert right
             else if (newValue > currNode)
             {
-                Insert (ref currNode.right, newValue);
+                if (currNode.right == null)
+                {
+                    currNode.right = new Node<T> (newValue);
+                    currNode.weight += 1;
+                    if (currNode.left == null)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    bool isHigher = Insert (ref currNode.right, newValue);
+                    currNode.weight += isHigher ? 1 : 0;
+
+                    if (currNode.weight == 2)
+                    {
+                        Balance (ref currNode);
+                        //return false;
+                    }
+
+                    return isHigher;
+                }
+            }
+
+            return false;
+        }
+
+
+        private void Balance(ref Node<T> root)
+        {
+            if (root.weight == -2 && root.left.weight == -1)
+            {
+                RotateRight (ref root);
+            }
+            else if (root.weight == 2 && root.right.weight == 1)
+            {
+                RotateLeft (ref root);
+            }
+            else if (root.weight == -2 && root.left != null && root.left.weight == 1)
+            {
+                root.left.right.weight = -1;
+                RotateLeft (ref root.left);
+                root.left.weight = -1;
+                RotateRight (ref root);
+            }
+            else if (root.weight == 2 && root.right != null && root.right.weight == -1)
+            {
+                root.right.left.weight = 1;
+                RotateRight (ref root.right);
+                root.right.weight = 1;
+                RotateLeft (ref root);
             }
         }
 
-
-        private void RotateRight()
+        private void RotateLeft(ref Node<T> root)
         {
+            Node<T> pivot = root.right;
+            root.right = root.right.left;
+            pivot.left = root;
+            root = pivot;
 
+            root.weight = 0;
+            root.left.weight = 0;
         }
 
-        private void RotateLeft()
+        private void RotateRight(ref Node<T> root)
         {
+            Node<T> pivot = root.left;
+            root.left = root.left.right;
+            pivot.right = root;
+            root = pivot;
 
+            root.weight = 0;
+            root.right.weight = 0;
         }
 
 
@@ -62,5 +135,6 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
         {
             return head.ToString ();
         }
+
     }
 }

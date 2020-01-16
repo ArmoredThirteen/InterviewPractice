@@ -8,7 +8,7 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
     public class Node<T> where T : IComparable<T>
     {
         public T value;
-        public int height = 0;
+        public int weight = 0;
 
         public Node<T> left  = null;
         public Node<T> right = null;
@@ -39,7 +39,7 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
                 return;
             }
 
-            buffer.Append (currNode.value.ToString ());
+            buffer.Append (currNode.value.ToString () + ":" + currNode.weight);
             buffer.Append ("\r\n");
 
             // Right then left subtrees (so placement when tilting head to left matches most tree examples)
