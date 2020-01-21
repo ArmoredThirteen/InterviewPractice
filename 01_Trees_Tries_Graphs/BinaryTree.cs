@@ -84,12 +84,16 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
             {
                 minNode = node;
                 node = node.right;
-                return minNode;
+            }
+            else
+                minNode = DeleteMin (ref node.left);
+
+            if (node != null)
+            {
+                Console.WriteLine ("Height and balance: " + node.value);
+                node.ResetHeight ();
             }
 
-            minNode = DeleteMin (ref node.left);
-            node.ResetHeight ();
-            Balance (ref node);
             return minNode;
         }
 
