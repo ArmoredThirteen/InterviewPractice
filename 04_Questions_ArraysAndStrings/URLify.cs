@@ -56,6 +56,14 @@ namespace _04_Questions_ArraysAndStrings
         // Replaces all spaces in charAra with '%20'
         public static int URLifyCharAra(int trimIndex, ref char[] charAra)
         {
+            int currRead = trimIndex - 1;
+            int currWrite = trimIndex - 1;
+
+            // Find new trimIndex: trimIndex + (spacesCount * 2)
+            // Start at currRead, work backward decrementing both currRead and currWrite
+            // Copy charAra[currRead] to charAra[currWrite]
+            //   Spaces are copied manually to be %20, currWrite is decremented an extra 2
+
             return trimIndex;
         }
 
