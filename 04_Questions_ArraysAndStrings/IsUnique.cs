@@ -11,10 +11,16 @@ namespace _04_Questions_ArraysAndStrings
         #region Run Example
         public static void RunExample()
         {
+            Console.WriteLine ("===================================");
+            Console.WriteLine ("==     Check Unique Chars        ==");
+            Console.WriteLine ("===================================");
+
             PrintCheck ("Fu-Bar");
             PrintCheck ("Foo-Bar");
             PrintCheck ("Fu-Barr");
             PrintCheck ("FFu-Barr");
+
+            Console.WriteLine ();
         }
 
         private static void PrintCheck(string theStr)

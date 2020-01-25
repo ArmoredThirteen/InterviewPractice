@@ -9,7 +9,7 @@ namespace _04_Questions_ArraysAndStrings
     {
         static void Main(string[] args)
         {
-            //IsUnique.RunExample ();
+            IsUnique.RunExample ();
             CheckPermutation.RunExample ();
 
             Console.WriteLine ("Press key to exit");
