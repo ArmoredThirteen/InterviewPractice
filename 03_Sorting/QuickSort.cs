@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Sorting
 {
-    static class QuickSort
+    public static class QuickSort
     {
         public static void Sort(int[] unsorted)
         {
