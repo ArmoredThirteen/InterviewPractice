@@ -7,44 +7,106 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
 {
     class BinaryTree<T> where T : IComparable<T>
     {
-        private Node<T> head = null;
+        public Node<T> head = null;
+        
 
+        #region Insertion
 
-        public void Insert(T newValue)
+        public void Insert(T theVal)
         {
             if (head == null)
             {
-                head = new Node<T> (newValue);
+                head = new Node<T> (theVal);
                 return;
             }
             
-            Insert (ref head, newValue);
+            Insert (ref head, theVal);
         }
 
-
-        private void Insert(ref Node<T> node, T newValue)
+        private void Insert(ref Node<T> node, T theVal)
         {
             // New leaf
             if (node == null)
             {
-                node = new Node<T> (newValue);
+                node = new Node<T> (theVal);
                 return;
             }
 
             // Attempt go left, go right, return if duplicate
-            if (newValue < node)
-                Insert (ref node.left, newValue);
-            else if (newValue > node)
-                Insert (ref node.right, newValue);
+            if (theVal < node)
+                Insert (ref node.left, theVal);
+            else if (theVal > node)
+                Insert (ref node.right, theVal);
             else
                 return;
 
             node.ResetHeight ();
-            Balance (ref node, newValue);
+            Balance (ref node);
         }
 
+        #endregion
 
-        private void Balance(ref Node<T> node, T newValue)
+        #region Deletion
+
+        private void Delete(ref Node<T> node, T theVal)
+        {
+            // Value not found
+            if (node == null)
+                return;
+
+            // Attempt go left, go right, or is on node to delete
+            if (theVal < node)
+                Delete (ref node.left, theVal);
+            else if (theVal > node)
+                Delete (ref node.right, theVal);
+            else
+            {
+                int factor = node.BalanceFactor ();
+                if (factor < 0)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+
+            node.ResetHeight ();
+            Balance (ref node);
+        }
+
+        public Node<T> DeleteMin(ref Node<T> node)
+        {
+            Node<T> minNode;
+
+            if (node.left == null)
+            {
+                minNode = node;
+                node = node.right;
+            }
+            else
+                minNode = DeleteMin (ref node.left);
+
+            if (node != null)
+            {
+                Console.WriteLine ("Height and balance: " + node.value);
+                node.ResetHeight ();
+            }
+
+            return minNode;
+        }
+
+        /*private Node<T> DeleteMax(ref Node<T> node)
+        {
+
+        }*/
+
+        #endregion
+
+        #region Balancing
+
+        private void Balance(ref Node<T> node)
         {
             int factor = node.BalanceFactor ();
             
@@ -53,19 +115,23 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
                 return;
 
             // Left left
-            if (factor < -1 && newValue < node.left)
+            //if (factor < -1 && theVal < node.left)
+            if (factor < -1 && node.left.BalanceFactor() < 0)
                 RotateRight (ref node);
             // Right right
-            else if (factor > 1 && newValue > node.right)
+            //else if (factor > 1 && theVal > node.right)
+            else if (factor > 1 && node.right.BalanceFactor() > 0)
                 RotateLeft (ref node);
             // Left right
-            else if (factor < -1 && newValue > node.left)
+            //else if (factor < -1 && theVal > node.left)
+            else if (factor < -1 && node.left.BalanceFactor () > 0)
             {
                 RotateLeft (ref node.left);
                 RotateRight (ref node);
             }
             // Right left
-            else if (factor > 1 && newValue < node.right)
+            //else if (factor > 1 && theVal < node.right)
+            else if (factor > 1 && node.right.BalanceFactor() < 0)
             {
                 RotateRight (ref node.right);
                 RotateLeft (ref node);
@@ -93,7 +159,8 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
             root.right.ResetHeight ();
             root.ResetHeight ();
         }
-        
+
+        #endregion
 
         public override string ToString()
         {

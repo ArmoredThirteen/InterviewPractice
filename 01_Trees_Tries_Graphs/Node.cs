@@ -61,7 +61,8 @@ namespace _01_Trees_Tries_Graphs.BinaryTree
                 return;
             }
 
-            buffer.Append (currNode.value.ToString () + ":" + currNode.BalanceFactor());
+            //buffer.Append (currNode.value.ToString () + ":" + currNode.BalanceFactor());
+            buffer.Append (currNode.value.ToString () + ":" + currNode.height + ":" + currNode.BalanceFactor());
             buffer.Append ("\r\n");
 
             // Right then left subtrees (so placement when tilting head to left matches most tree examples)
