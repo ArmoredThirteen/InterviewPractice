@@ -21,6 +21,7 @@ namespace _04_Questions_ArraysAndStrings
             PrintCheck ("apples", "zapple");
             PrintCheck ("haa", "aha");
             PrintCheck ("haa", "aah");
+
             Console.WriteLine ();
         }
 

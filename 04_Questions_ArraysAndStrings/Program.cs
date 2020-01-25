@@ -9,8 +9,9 @@ namespace _04_Questions_ArraysAndStrings
     {
         static void Main(string[] args)
         {
-            IsUnique.RunExample ();
-            CheckPermutation.RunExample ();
+            //IsUnique.RunExample ();
+            //CheckPermutation.RunExample ();
+            URLify.RunExample ();
 
             Console.WriteLine ("Press key to exit");
             Console.ReadKey (true);
