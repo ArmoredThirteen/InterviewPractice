@@ -14,7 +14,9 @@ namespace _04_Questions_ArraysAndStrings
             Console.WriteLine ("==     URLify Spaces             ==");
             Console.WriteLine ("===================================");
 
-            PrintURLify ("blah blah");
+            PrintURLify ("Hello World");
+            PrintURLify (" HelloWorld ");
+            PrintURLify ("Hello to the entire World");
 
             Console.WriteLine ();
         }
@@ -28,21 +30,22 @@ namespace _04_Questions_ArraysAndStrings
             for (int i = 0; i < theStr.Length; i++)
                 charAra[i] = theStr[i];
 
-            int trimIndex = URLifyCharAra (theStr.Length, ref charAra);
-            Console.WriteLine (string.Concat ("Encoded [", CharAraToString (trimIndex, charAra).TrimEnd (), "]"));
+            int endIndex = URLifyCharAra (theStr.Length - 1, ref charAra);
+            Console.WriteLine (string.Concat ("Encoded [", CharAraToString (endIndex, charAra).TrimEnd (), "]"));
 
             Console.WriteLine ();
         }
 
-        // Appends characters up to trimIndex into string
-        // If trimIndex is < 0, charAra.Length is used as end
-        private static string CharAraToString(int trimIndex, char[] charAra)
+        // Appends characters up to and including endIndex into string
+        // If endIndex is < 0, charAra.Length is used as end
+        private static string CharAraToString(int endIndex, char[] charAra)
         {
             StringBuilder builder = new StringBuilder ();
 
-            int endIndex = trimIndex >= 0 ? trimIndex : charAra.Length;
+            if (endIndex < 0)
+                endIndex = charAra.Length - 1;
 
-            for (int i = 0; i < endIndex; i++)
+            for (int i = 0; i <= endIndex; i++)
                 builder.Append (charAra[i]);
 
             return builder.ToString ();
@@ -50,21 +53,43 @@ namespace _04_Questions_ArraysAndStrings
         #endregion
 
 
-        // As per the question rules, assumes charAra has room at the end to add extra characters
-        // trimIndex indicates the index after the last used character in charAra
-        // Returns new trimIndex value
         // Replaces all spaces in charAra with '%20'
-        public static int URLifyCharAra(int trimIndex, ref char[] charAra)
+        // Returns new endIndex value
+        // As per the question rules, assumes charAra has room at the end to add extra characters
+        // endIndex indicates the index after the last used character in charAra
+        public static int URLifyCharAra(int endIndex, ref char[] charAra)
         {
-            int currRead = trimIndex - 1;
-            int currWrite = trimIndex - 1;
+            int currRead = endIndex;
 
-            // Find new trimIndex: trimIndex + (spacesCount * 2)
-            // Start at currRead, work backward decrementing both currRead and currWrite
-            // Copy charAra[currRead] to charAra[currWrite]
-            //   Spaces are copied manually to be %20, currWrite is decremented an extra 2
+            // Each space increases endIndex by 2 to make room for new characters
+            for (int i = 0; i < endIndex; i++)
+                if (charAra[i].Equals (' '))
+                    endIndex += 2;
 
-            return trimIndex;
+            int currWrite = endIndex;
+
+            for (; currRead >= 0; currRead--, currWrite--)
+            {
+                // Just move the character
+                if (!charAra[currRead].Equals (' '))
+                {
+                    charAra[currWrite] = charAra[currRead];
+                }
+                // Otherwise write out the encoded character
+                else
+                {
+                    charAra[currWrite] = '0';
+                    charAra[currWrite - 1] = '2';
+                    charAra[currWrite - 2] = '%';
+
+                    currWrite -= 2;
+                    // Everything before first space is already in correct location
+                    if (currRead == currWrite)
+                        break;
+                }
+            }
+
+            return endIndex;
         }
 
     }
