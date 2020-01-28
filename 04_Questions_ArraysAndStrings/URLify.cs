@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
@@ -10,9 +11,7 @@ namespace _04_Questions_ArraysAndStrings
         #region Run Example
         public static void RunExample()
         {
-            Console.WriteLine ("===================================");
-            Console.WriteLine ("==     URLify Spaces             ==");
-            Console.WriteLine ("===================================");
+            Console.WriteLine (StringTools.MakeHeader ("URLify Spaces"));
 
             PrintURLify ("Hello World");
             PrintURLify (" HelloWorld ");
@@ -31,24 +30,9 @@ namespace _04_Questions_ArraysAndStrings
                 charAra[i] = theStr[i];
 
             int endIndex = URLifyCharAra (theStr.Length - 1, ref charAra);
-            Console.WriteLine (string.Concat ("Encoded [", CharAraToString (endIndex, charAra).TrimEnd (), "]"));
+            Console.WriteLine (string.Concat ("Encoded [", StringTools.CharAraToString (charAra, endIndex).TrimEnd (), "]"));
 
             Console.WriteLine ();
-        }
-
-        // Appends characters up to and including endIndex into string
-        // If endIndex is < 0, charAra.Length is used as end
-        private static string CharAraToString(int endIndex, char[] charAra)
-        {
-            StringBuilder builder = new StringBuilder ();
-
-            if (endIndex < 0)
-                endIndex = charAra.Length - 1;
-
-            for (int i = 0; i <= endIndex; i++)
-                builder.Append (charAra[i]);
-
-            return builder.ToString ();
         }
         #endregion
 

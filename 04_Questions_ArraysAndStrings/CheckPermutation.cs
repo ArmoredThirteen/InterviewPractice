@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
@@ -10,9 +11,7 @@ namespace _04_Questions_ArraysAndStrings
         #region Run Example
         public static void RunExample()
         {
-            Console.WriteLine ("===================================");
-            Console.WriteLine ("==     Check Permutations        ==");
-            Console.WriteLine ("===================================");
+            Console.WriteLine (StringTools.MakeHeader ("Check Permutations"));
 
             PrintCheck ("", "");
             PrintCheck ("a", "1");
