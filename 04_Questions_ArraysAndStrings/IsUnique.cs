@@ -3,17 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
+    // Implement an algorithm to determine if a string has all unique characters.
+    // What if you cannot use additional data structures?
     static class IsUnique
     {
-        #region Run Example
         public static void RunExample()
         {
-            Console.WriteLine ("===================================");
-            Console.WriteLine ("==     Check Unique Chars        ==");
-            Console.WriteLine ("===================================");
+            Console.WriteLine (StringTools.MakeHeader ("Check Unique Chars"));
+            Console.WriteLine ("Checks if a string's characters are all unique");
+            Console.WriteLine ();
+            Console.WriteLine ();
 
             PrintCheck ("Fu-Bar");
             PrintCheck ("Foo-Bar");
@@ -48,7 +51,6 @@ namespace _04_Questions_ArraysAndStrings
                 builder.Append (i);
             return builder.ToString();
         }
-        #endregion
 
 
         // Time complexity O(n)

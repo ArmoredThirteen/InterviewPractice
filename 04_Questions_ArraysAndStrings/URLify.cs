@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
+    // Write a method to replace all spaces in a string with '%20'. You may assume that
+    // the string has sufficient space at the end to hold the additional characters,
+    // and that you are given the "true" length of the string.
+    // (Use character array to perform in-place)
     class URLify
     {
-        #region Run Example
         public static void RunExample()
         {
-            Console.WriteLine ("===================================");
-            Console.WriteLine ("==     URLify Spaces             ==");
-            Console.WriteLine ("===================================");
+            Console.WriteLine (StringTools.MakeHeader ("URLify"));
+            Console.WriteLine ("Replaces space characters with [%20]");
+            Console.WriteLine ();
+            Console.WriteLine ();
 
             PrintURLify ("Hello World");
             PrintURLify (" HelloWorld ");
@@ -23,7 +28,7 @@ namespace _04_Questions_ArraysAndStrings
 
         private static void PrintURLify(string theStr)
         {
-            Console.WriteLine (string.Concat ("Encoding spaces in string [", theStr, "]"));
+            Console.WriteLine (string.Concat ("Processing string [", theStr, "]"));
 
             // Set up character array with additional space at the end
             char[] charAra = new char[theStr.Length * 2];
@@ -31,26 +36,10 @@ namespace _04_Questions_ArraysAndStrings
                 charAra[i] = theStr[i];
 
             int endIndex = URLifyCharAra (theStr.Length - 1, ref charAra);
-            Console.WriteLine (string.Concat ("Encoded [", CharAraToString (endIndex, charAra).TrimEnd (), "]"));
+            Console.WriteLine (string.Concat ("Encoded [", StringTools.CharAraToString (charAra, endIndex).TrimEnd (), "]"));
 
             Console.WriteLine ();
         }
-
-        // Appends characters up to and including endIndex into string
-        // If endIndex is < 0, charAra.Length is used as end
-        private static string CharAraToString(int endIndex, char[] charAra)
-        {
-            StringBuilder builder = new StringBuilder ();
-
-            if (endIndex < 0)
-                endIndex = charAra.Length - 1;
-
-            for (int i = 0; i <= endIndex; i++)
-                builder.Append (charAra[i]);
-
-            return builder.ToString ();
-        }
-        #endregion
 
 
         // Replaces all spaces in charAra with '%20'
