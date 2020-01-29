@@ -67,33 +67,27 @@ namespace _04_Questions_ArraysAndStrings
             }
 
             bool foundDif = false;
-            int dexOne = 0;
-            int dexTwo = 0;
+            int dexOne = -1;
+            int dexTwo = -1;
 
             //TODO: Feels like there are too many index++ operations
-            while (dexOne < strOne.Length && dexTwo < strTwo.Length)
+            while (dexOne < strOne.Length - 1 && dexTwo < strTwo.Length - 1)
             {
+                dexOne++;
+                dexTwo++;
+
                 if (strOne[dexOne] == strTwo[dexTwo])
-                {
-                    dexOne++;
-                    dexTwo++;
                     continue;
-                }
 
                 // Second dif so there has to be more than one char edit
                 if (foundDif == true)
                     return false;
                 foundDif = true;
 
-                if (strOne.Length == strTwo.Length)
-                {
-                    dexOne++;
-                    dexTwo++;
-                }
-                else if (strOne.Length > strTwo.Length)
-                    dexOne++;
-                else
-                    dexTwo++;
+                if (strOne.Length < strTwo.Length)
+                    dexOne--;
+                else if (strTwo.Length < strOne.Length)
+                    dexTwo--;
             }
 
             return true;
