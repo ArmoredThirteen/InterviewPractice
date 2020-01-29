@@ -60,17 +60,11 @@ namespace _04_Questions_ArraysAndStrings
                 Console.WriteLine ("   String size difference is greater than 1");
                 return false;
             }
-            if (strOne.Length < 2 && strTwo.Length < 2)
-            {
-                Console.WriteLine ("   Both strings are size 0 or 1, impossible to be 2+ edits away from each other");
-                return true;
-            }
 
             bool foundDif = false;
             int dexOne = -1;
             int dexTwo = -1;
 
-            //TODO: Feels like there are too many index++ operations
             while (dexOne < strOne.Length - 1 && dexTwo < strTwo.Length - 1)
             {
                 dexOne++;
