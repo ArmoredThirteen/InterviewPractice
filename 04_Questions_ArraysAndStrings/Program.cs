@@ -9,9 +9,13 @@ namespace _04_Questions_ArraysAndStrings
     {
         static void Main(string[] args)
         {
-            //IsUnique.RunExample ();
-            //CheckPermutation.RunExample ();
+            Console.WindowWidth = Console.LargestWindowWidth-155;
+            Console.WindowHeight = Console.LargestWindowHeight-15;
+
+            IsUnique.RunExample ();
+            CheckPermutation.RunExample ();
             URLify.RunExample ();
+            PalindromePermutation.RunExample ();
 
             Console.WriteLine ("Press key to exit");
             Console.ReadKey (true);

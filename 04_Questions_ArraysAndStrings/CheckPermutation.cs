@@ -8,7 +8,6 @@ namespace _04_Questions_ArraysAndStrings
 {
     class CheckPermutation
     {
-        #region Run Example
         public static void RunExample()
         {
             Console.WriteLine (StringTools.MakeHeader ("Check Permutations"));
@@ -30,7 +29,6 @@ namespace _04_Questions_ArraysAndStrings
             Console.WriteLine (IsPermutation (strOne, strTwo));
             Console.WriteLine ();
         }
-        #endregion
 
 
         // Given two strings, write a method to decide if one is a permutation of the other

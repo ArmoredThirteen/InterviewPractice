@@ -9,7 +9,6 @@ namespace _04_Questions_ArraysAndStrings
 {
     static class IsUnique
     {
-        #region Run Example
         public static void RunExample()
         {
             Console.WriteLine (StringTools.MakeHeader ("Check Unique Chars"));
@@ -47,7 +46,6 @@ namespace _04_Questions_ArraysAndStrings
                 builder.Append (i);
             return builder.ToString();
         }
-        #endregion
 
 
         // Time complexity O(n)

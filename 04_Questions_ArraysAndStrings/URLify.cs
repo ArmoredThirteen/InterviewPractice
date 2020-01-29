@@ -8,7 +8,6 @@ namespace _04_Questions_ArraysAndStrings
 {
     class URLify
     {
-        #region Run Example
         public static void RunExample()
         {
             Console.WriteLine (StringTools.MakeHeader ("URLify Spaces"));
@@ -22,7 +21,7 @@ namespace _04_Questions_ArraysAndStrings
 
         private static void PrintURLify(string theStr)
         {
-            Console.WriteLine (string.Concat ("Encoding spaces in string [", theStr, "]"));
+            Console.WriteLine (string.Concat ("Processing string [", theStr, "]"));
 
             // Set up character array with additional space at the end
             char[] charAra = new char[theStr.Length * 2];
@@ -34,7 +33,6 @@ namespace _04_Questions_ArraysAndStrings
 
             Console.WriteLine ();
         }
-        #endregion
 
 
         // Replaces all spaces in charAra with '%20'
