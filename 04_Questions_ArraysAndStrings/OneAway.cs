@@ -17,45 +17,53 @@ namespace _04_Questions_ArraysAndStrings
             Console.WriteLine ();
             Console.WriteLine ();
             
-            PrintCheck ("".ToCharArray (), "".ToCharArray ());
-            PrintCheck ("a".ToCharArray (), "r".ToCharArray ());
+            PrintVerifiedCheck ("".ToCharArray (),  "".ToCharArray (),  true);
+            PrintVerifiedCheck ("a".ToCharArray (), "".ToCharArray (),  true);
+            PrintVerifiedCheck ("a".ToCharArray (), "r".ToCharArray (), true);
+            Console.WriteLine ();
 
-            PrintCheck ("toot".ToCharArray (), "tooooot".ToCharArray ());
-            PrintCheck ("tooooot".ToCharArray (), "toot".ToCharArray ());
-            PrintCheck ("ReversE".ToCharArray (), "EsreveR".ToCharArray ());
+            PrintVerifiedCheck ("toot".ToCharArray (),    "tooooot".ToCharArray (), false);
+            PrintVerifiedCheck ("tooooot".ToCharArray (), "toot".ToCharArray (),    false);
+            PrintVerifiedCheck ("ReversE".ToCharArray (), "EsreveR".ToCharArray (), false);
+            Console.WriteLine ();
             
-            PrintCheck ("Insert".ToCharArray (), "1Insert".ToCharArray ());
-            PrintCheck ("Insert".ToCharArray (), "Ins2ert".ToCharArray ());
-            PrintCheck ("Insert".ToCharArray (), "Insert3".ToCharArray ());
+            PrintVerifiedCheck ("Insert".ToCharArray (), "1Insert".ToCharArray (), true);
+            PrintVerifiedCheck ("Insert".ToCharArray (), "Ins2ert".ToCharArray (), true);
+            PrintVerifiedCheck ("Insert".ToCharArray (), "Insert3".ToCharArray (), true);
+            Console.WriteLine ();
             
-            PrintCheck ("Remove".ToCharArray (), "emove".ToCharArray ());
-            PrintCheck ("Remove".ToCharArray (), "Remve".ToCharArray ());
-            PrintCheck ("Remove".ToCharArray (), "Remov".ToCharArray ());
+            PrintVerifiedCheck ("Remove".ToCharArray (), "emove".ToCharArray (), true);
+            PrintVerifiedCheck ("Remove".ToCharArray (), "Remve".ToCharArray (), true);
+            PrintVerifiedCheck ("Remove".ToCharArray (), "Remov".ToCharArray (), true);
+            Console.WriteLine ();
             
-            PrintCheck ("Replace".ToCharArray (), "Zeplace".ToCharArray ());
-            PrintCheck ("Replace".ToCharArray (), "Rep ace".ToCharArray ());
-            PrintCheck ("Replace".ToCharArray (), "Replacc".ToCharArray ());
-
+            PrintVerifiedCheck ("Replace".ToCharArray (), "Zeplace".ToCharArray (), true);
+            PrintVerifiedCheck ("Replace".ToCharArray (), "Rep ace".ToCharArray (), true);
+            PrintVerifiedCheck ("Replace".ToCharArray (), "Replacc".ToCharArray (), true);
             Console.WriteLine ();
         }
 
         
-        private static void PrintCheck(char[] strOne, char[] strTwo)
+        private static void PrintVerifiedCheck(char[] strOne, char[] strTwo, bool expectedResult)
         {
-            Console.WriteLine (string.Concat("Are chars of [", StringTools.CharAraToString(strOne), "] one or no edits away from [", StringTools.CharAraToString(strTwo), "]"));
-            
+            Console.WriteLine (string.Concat("Are [", StringTools.CharAraToString(strOne), "] and [", StringTools.CharAraToString(strTwo), "] one or fewer edits different"));
+            bool result = IsOneChangeAway (strOne, strTwo);
+            Console.WriteLine (string.Concat ("   ", result));
+            if (result != expectedResult)
+                Console.WriteLine (string.Concat("   !!! -> Result was [", result, "] but should be [", expectedResult, "]"));
+        }
+
+        private static bool IsOneChangeAway(char[] strOne, char[] strTwo)
+        {
             if (Math.Abs (strOne.Length - strTwo.Length) > 1)
             {
-                Console.WriteLine ("False: String size difference is greater than 1");
-                Console.WriteLine ();
-                return;
+                Console.WriteLine ("   String size difference is greater than 1");
+                return false;
             }
-
             if (strOne.Length < 2 && strTwo.Length < 2)
             {
-                Console.WriteLine ("True: Both strings are size 0 or 1, impossible to be 2+ edits away from each other");
-                Console.WriteLine ();
-                return;
+                Console.WriteLine ("   Both strings are size 0 or 1, impossible to be 2+ edits away from each other");
+                return true;
             }
 
             // Find the character count differences between the two strings
@@ -68,11 +76,8 @@ namespace _04_Questions_ArraysAndStrings
             Array.ForEach(counts, delegate(int i) { difference += Math.Abs(i); });
 
             if (difference > 1)
-                Console.WriteLine ("False");
-            else
-                Console.WriteLine ("True");
-
-            Console.WriteLine ();
+                return false;
+            return true;
         }
 
     }
