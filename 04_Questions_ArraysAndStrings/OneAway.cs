@@ -70,6 +70,7 @@ namespace _04_Questions_ArraysAndStrings
             int dexOne = 0;
             int dexTwo = 0;
 
+            //TODO: Feels like there are too many index++ operations
             while (dexOne < strOne.Length && dexTwo < strTwo.Length)
             {
                 if (strOne[dexOne] == strTwo[dexTwo])
