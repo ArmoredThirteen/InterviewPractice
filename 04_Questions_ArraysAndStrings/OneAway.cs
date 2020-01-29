@@ -17,37 +17,37 @@ namespace _04_Questions_ArraysAndStrings
             Console.WriteLine ();
             Console.WriteLine ();
             
-            PrintVerifiedCheck ("".ToCharArray (),  "".ToCharArray (),  true);
-            PrintVerifiedCheck ("a".ToCharArray (), "".ToCharArray (),  true);
-            PrintVerifiedCheck ("a".ToCharArray (), "r".ToCharArray (), true);
+            PrintVerifiedCheck ("",  "",  true);
+            PrintVerifiedCheck ("a", "",  true);
+            PrintVerifiedCheck ("a", "r", true);
             Console.WriteLine ();
 
-            PrintVerifiedCheck ("toot".ToCharArray (),    "tooooot".ToCharArray (), false);
-            PrintVerifiedCheck ("tooooot".ToCharArray (), "toot".ToCharArray (),    false);
-            PrintVerifiedCheck ("ReversE".ToCharArray (), "EsreveR".ToCharArray (), false);
+            PrintVerifiedCheck ("toot",    "tooooot", false);
+            PrintVerifiedCheck ("tooooot", "toot",    false);
+            PrintVerifiedCheck ("ReversE", "EsreveR", false);
             Console.WriteLine ();
             
-            PrintVerifiedCheck ("Insert".ToCharArray (), "1Insert".ToCharArray (), true);
-            PrintVerifiedCheck ("Insert".ToCharArray (), "Ins2ert".ToCharArray (), true);
-            PrintVerifiedCheck ("Insert".ToCharArray (), "Insert3".ToCharArray (), true);
+            PrintVerifiedCheck ("Insert", "1Insert", true);
+            PrintVerifiedCheck ("Insert", "Ins2ert", true);
+            PrintVerifiedCheck ("Insert", "Insert3", true);
             Console.WriteLine ();
             
-            PrintVerifiedCheck ("Remove".ToCharArray (), "emove".ToCharArray (), true);
-            PrintVerifiedCheck ("Remove".ToCharArray (), "Remve".ToCharArray (), true);
-            PrintVerifiedCheck ("Remove".ToCharArray (), "Remov".ToCharArray (), true);
+            PrintVerifiedCheck ("Remove", "emove", true);
+            PrintVerifiedCheck ("Remove", "Remve", true);
+            PrintVerifiedCheck ("Remove", "Remov", true);
             Console.WriteLine ();
             
-            PrintVerifiedCheck ("Replace".ToCharArray (), "Zeplace".ToCharArray (), true);
-            PrintVerifiedCheck ("Replace".ToCharArray (), "Rep ace".ToCharArray (), true);
-            PrintVerifiedCheck ("Replace".ToCharArray (), "Replacc".ToCharArray (), true);
+            PrintVerifiedCheck ("Replace", "Zeplace", true);
+            PrintVerifiedCheck ("Replace", "Rep ace", true);
+            PrintVerifiedCheck ("Replace", "Replacc", true);
             Console.WriteLine ();
         }
 
         
-        private static void PrintVerifiedCheck(char[] strOne, char[] strTwo, bool expectedResult)
+        private static void PrintVerifiedCheck(string strOne, string strTwo, bool expectedResult)
         {
-            Console.WriteLine (string.Concat("Are [", StringTools.CharAraToString(strOne), "] and [", StringTools.CharAraToString(strTwo), "] one or fewer edits different"));
-            bool result = IsOneChangeAway (strOne, strTwo);
+            Console.WriteLine (string.Concat("Are [", strOne, "] and [", strTwo, "] one or fewer edits different"));
+            bool result = IsOneChangeAway (strOne.ToCharArray (), strTwo.ToCharArray ());
             Console.WriteLine (string.Concat ("   ", result));
             if (result != expectedResult)
                 Console.WriteLine (string.Concat("   !!! -> Result was [", result, "] but should be [", expectedResult, "]"));
@@ -66,17 +66,35 @@ namespace _04_Questions_ArraysAndStrings
                 return true;
             }
 
-            // Find the character count differences between the two strings
-            int[] counts = new int[char.MaxValue];
-            StringTools.CharCountsAdd    (strOne, counts);
-            StringTools.CharCountsRemove (strTwo, counts);
+            bool foundDif = false;
+            int dexOne = 0;
+            int dexTwo = 0;
 
-            // Count how different individual characters are from each other
-            int difference = 0;
-            Array.ForEach(counts, delegate(int i) { difference += Math.Abs(i); });
+            while (dexOne < strOne.Length && dexTwo < strTwo.Length)
+            {
+                if (strOne[dexOne] == strTwo[dexTwo])
+                {
+                    dexOne++;
+                    dexTwo++;
+                    continue;
+                }
 
-            if (difference > 1)
-                return false;
+                // Second dif so there has to be more than one char edit
+                if (foundDif == true)
+                    return false;
+                foundDif = true;
+
+                if (strOne.Length == strTwo.Length)
+                {
+                    dexOne++;
+                    dexTwo++;
+                }
+                else if (strOne.Length > strTwo.Length)
+                    dexOne++;
+                else
+                    dexTwo++;
+            }
+
             return true;
         }
 
