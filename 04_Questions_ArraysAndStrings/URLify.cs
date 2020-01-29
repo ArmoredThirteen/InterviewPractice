@@ -6,11 +6,18 @@ using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
+    // Write a method to replace all spaces in a string with '%20'. You may assume that
+    // the string has sufficient space at the end to hold the additional characters,
+    // and that you are given the "true" length of the string.
+    // (Use character array to perform in-place)
     class URLify
     {
         public static void RunExample()
         {
-            Console.WriteLine (StringTools.MakeHeader ("URLify Spaces"));
+            Console.WriteLine (StringTools.MakeHeader ("URLify"));
+            Console.WriteLine ("Replaces space characters with [%20]");
+            Console.WriteLine ();
+            Console.WriteLine ();
 
             PrintURLify ("Hello World");
             PrintURLify (" HelloWorld ");

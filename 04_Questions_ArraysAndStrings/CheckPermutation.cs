@@ -6,11 +6,15 @@ using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
+    // Given two strings, write a method to decide if one is a permutation of the other
     class CheckPermutation
     {
         public static void RunExample()
         {
-            Console.WriteLine (StringTools.MakeHeader ("Check Permutations"));
+            Console.WriteLine (StringTools.MakeHeader ("Check Permutation"));
+            Console.WriteLine ("Checks if two strings are permutations of each other");
+            Console.WriteLine ();
+            Console.WriteLine ();
 
             PrintCheck ("", "");
             PrintCheck ("a", "1");
@@ -31,7 +35,6 @@ namespace _04_Questions_ArraysAndStrings
         }
 
 
-        // Given two strings, write a method to decide if one is a permutation of the other
         // Time complexity O(n+k) where n is length of strOne and k is length of strTwo
         // Returns true if both strings are null or empty
         // Initializes int array of size equal to number of possible chars

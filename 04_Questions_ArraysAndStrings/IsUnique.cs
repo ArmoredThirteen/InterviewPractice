@@ -7,11 +7,16 @@ using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
+    // Implement an algorithm to determine if a string has all unique characters.
+    // What if you cannot use additional data structures?
     static class IsUnique
     {
         public static void RunExample()
         {
             Console.WriteLine (StringTools.MakeHeader ("Check Unique Chars"));
+            Console.WriteLine ("Checks if a string's characters are all unique");
+            Console.WriteLine ();
+            Console.WriteLine ();
 
             PrintCheck ("Fu-Bar");
             PrintCheck ("Foo-Bar");
