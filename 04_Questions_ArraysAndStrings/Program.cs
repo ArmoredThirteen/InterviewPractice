@@ -11,14 +11,15 @@ namespace _04_Questions_ArraysAndStrings
         {
             Console.WindowTop = 0;
             Console.WindowLeft = 0;
-            Console.WindowWidth = Console.LargestWindowWidth-155;
+            Console.WindowWidth = Console.LargestWindowWidth-130;
             Console.WindowHeight = Console.LargestWindowHeight-15;
 
             //IsUnique.RunExample ();
             //CheckPermutation.RunExample ();
             //URLify.RunExample ();
             //PalindromePermutation.RunExample ();
-            OneAway.RunExample ();
+            //OneAway.RunExample ();
+            StringCompression.RunExample ();
 
             Console.WriteLine ("Press key to exit");
             Console.ReadKey (true);
