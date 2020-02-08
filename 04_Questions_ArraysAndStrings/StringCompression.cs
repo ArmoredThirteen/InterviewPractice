@@ -19,7 +19,11 @@ namespace _04_Questions_ArraysAndStrings
             Console.WriteLine ();
             Console.WriteLine ();
 
+            PrintVerifiedCheck ("", "");
+            PrintVerifiedCheck ("a", "a");
+            PrintVerifiedCheck ("sup", "sup");
             PrintVerifiedCheck ("ssssuup", "s4u2p1");
+            PrintVerifiedCheck ("SsSsSsupppppppppppp", "S1s1S1s1S1s1u1p12");
 
             Console.WriteLine ();
         }
@@ -29,14 +33,40 @@ namespace _04_Questions_ArraysAndStrings
         {
             Console.WriteLine (string.Concat("Processing string [", theStr, "]"));
             string result = GetCompressedString (theStr);
-            Console.WriteLine (string.Concat ("   Result is: ", result));
+            Console.WriteLine (string.Concat ("   Result is [", result, "]"));
             if (!string.Equals(result, expectedResult))
                 Console.WriteLine(string.Concat ("   !!! -> Result was [", result, "] but should be [", expectedResult, "]"));
         }
 
         private static string GetCompressedString(string theStr)
         {
-            return theStr;
+            if (string.IsNullOrEmpty (theStr))
+                return theStr;
+            if (theStr.Length < 3)
+                return theStr;
+
+            StringBuilder result = new StringBuilder ();
+            char currChar = theStr[0];
+            int count = 1;
+
+            // Start at 1 since curr values are already primed with first character
+            for (int i = 1; i < theStr.Length; i++)
+            {
+                if (currChar == theStr[i])
+                    count++;
+                else
+                {
+                    result.Append (currChar);
+                    result.Append (count);
+                    currChar = theStr[i];
+                    count = 1;
+                }
+            }
+
+            result.Append (currChar);
+            result.Append (count);
+
+            return result.Length < theStr.Length ? result.ToString () : theStr;
         }
 
     }
