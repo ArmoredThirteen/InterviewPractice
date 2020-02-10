@@ -6,7 +6,7 @@ using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
-    // Given two strings, write a method to decide if one is a permutation of the other
+    // Check if two strings are a permutation of each other.
     class CheckPermutation
     {
         public static void RunExample()

@@ -6,11 +6,8 @@ using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
-    // Given a string, write a function to check if it is a permutation of a palindrome.
-    // A palindrome is a word or phrase that is the same forwards and backwards.
-    // A permutation is a rearrangement of letters.
-    // The palindrome does not need to be limited to just dictionary words.
-    // * the given example also appears to ignore white-space, which I may not implement here
+    // Check if string is a permutation of a palindrome.
+    // Does not have to create real words.
     class PalindromePermutation
     {
         public static void RunExample()

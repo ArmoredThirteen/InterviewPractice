@@ -6,10 +6,10 @@ using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
-    // Implement a method to perform basic string compression using the counts of repeated characters.
-    // For example, the string aabcccccaaa would become a2b1c5a3.
-    // If the "compressed" string would not become smaller than the original string, your method should return the original string.
-    // You can assume the string has only uppercase and lowercase letters (a-z).
+    // Compress a string by counting repeated characters.
+    // So like [abbccccddd] would become [a1b2c4d3].
+    // If string would not become shorter, return original string.
+    // String can only have characters a-z and A-Z.
     class StringCompression
     {
         public static void RunExample()

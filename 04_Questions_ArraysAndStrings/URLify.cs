@@ -6,10 +6,8 @@ using SimpleHelpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
-    // Write a method to replace all spaces in a string with '%20'. You may assume that
-    // the string has sufficient space at the end to hold the additional characters,
-    // and that you are given the "true" length of the string.
-    // (Use character array to perform in-place)
+    // Replace all spaces in a string with %20.
+    // String is char[] that has enough space at end to hold the final string.
     class URLify
     {
         public static void RunExample()
