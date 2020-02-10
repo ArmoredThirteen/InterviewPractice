@@ -16,8 +16,8 @@ namespace _04_Questions_ArraysAndStrings
             Console.WindowWidth = Console.LargestWindowWidth-130;
             Console.WindowHeight = Console.LargestWindowHeight-15;
 
-            RunAllExamples ();
-            //RunExampleByName ("IsUnique");
+            //RunAllExamples ();
+            RunExampleByName ("RotateMatrix");
 
             Console.WriteLine ("Press key to exit");
             Console.ReadKey (true);
@@ -32,8 +32,11 @@ namespace _04_Questions_ArraysAndStrings
             RunExampleByName ("PalindromePermutation");
             RunExampleByName ("OneAway");
             RunExampleByName ("StringCompression");
+            RunExampleByName ("RotateMatrix");
         }
 
+        // Uses reflection to iterate over subclasses of Example class to find one matching given class name.
+        // Attempts to invoke a RunExample() method. Writes header and description data found within class.
         static void RunExampleByName(string className)
         {
             System.Type theClass = (typeof(Example).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Example)) && type.Name == className)).First ();
