@@ -8,7 +8,7 @@ using SimpleHelpers;
 namespace _04_Questions_ArraysAndStrings
 {
     // Check if string or char[] has only unique characters.
-    static class IsUnique
+    class IsUnique : Example
     {
         public static void RunExample()
         {
