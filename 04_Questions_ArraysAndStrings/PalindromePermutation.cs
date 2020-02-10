@@ -10,13 +10,11 @@ namespace _04_Questions_ArraysAndStrings
     // Does not have to create real words.
     class PalindromePermutation : Example
     {
+        public static string header = "Palindrome Permutation";
+        public static string description = "Checks if a string is a permutation of a palindrome";
+
         public static void RunExample()
         {
-            Console.WriteLine (StringTools.MakeHeader ("Palindrome Permutation"));
-            Console.WriteLine ("Checks if a string is a permutation of a palindrome");
-            Console.WriteLine ();
-            Console.WriteLine ();
-
             PrintCheck ("hello".ToCharArray ());
             PrintCheck ("aabbcd".ToCharArray ());
             PrintCheck ("abc".ToCharArray ());
@@ -25,8 +23,6 @@ namespace _04_Questions_ArraysAndStrings
             PrintCheck ("$$##@@@@@".ToCharArray ());
             PrintCheck ("$$####@@@@@".ToCharArray ());
             PrintCheck ("$$#####@@@@@".ToCharArray ());
-
-            Console.WriteLine ();
         }
 
         // A palindrome can only happen when the pattern in the middle is a single char or two of the same char

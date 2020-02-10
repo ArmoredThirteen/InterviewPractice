@@ -12,20 +12,16 @@ namespace _04_Questions_ArraysAndStrings
     // String can only have characters a-z and A-Z.
     class StringCompression : Example
     {
+        public static string header = "String Compression";
+        public static string description = "Replaces chars with 'char'+'charCount', compressing strings with enough repeating characters";
+
         public static void RunExample()
         {
-            Console.WriteLine (StringTools.MakeHeader ("String Compression"));
-            Console.WriteLine ("Replaces chars with 'char'+'charCount', compressing strings with enough repeating characters");
-            Console.WriteLine ();
-            Console.WriteLine ();
-
             PrintVerifiedCheck ("", "");
             PrintVerifiedCheck ("a", "a");
             PrintVerifiedCheck ("sup", "sup");
             PrintVerifiedCheck ("ssssuup", "s4u2p1");
             PrintVerifiedCheck ("SsSsSsupppppppppppp", "S1s1S1s1S1s1u1p12");
-
-            Console.WriteLine ();
         }
 
         

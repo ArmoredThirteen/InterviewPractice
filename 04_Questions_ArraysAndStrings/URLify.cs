@@ -10,18 +10,14 @@ namespace _04_Questions_ArraysAndStrings
     // String is char[] that has enough space at end to hold the final string.
     class URLify : Example
     {
+        public static string header = "URLify";
+        public static string description = "Replaces space characters with [%20]";
+
         public static void RunExample()
         {
-            Console.WriteLine (StringTools.MakeHeader ("URLify"));
-            Console.WriteLine ("Replaces space characters with [%20]");
-            Console.WriteLine ();
-            Console.WriteLine ();
-
             PrintURLify ("Hello World");
             PrintURLify (" HelloWorld ");
             PrintURLify ("Hello to the entire World");
-
-            Console.WriteLine ();
         }
 
         private static void PrintURLify(string theStr)

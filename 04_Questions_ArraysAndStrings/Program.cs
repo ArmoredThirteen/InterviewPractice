@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleHelpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -33,31 +34,40 @@ namespace _04_Questions_ArraysAndStrings
             RunExampleByName ("StringCompression");
         }
 
-        static void RunExampleByName(string theName, string methodName = "RunExample")
+        static void RunExampleByName(string className)
         {
-            IEnumerable<System.Type> classes = typeof(Example).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Example)) && type.Name == theName);
-            RunMethodsInClasses (classes, methodName);
-        }
-
-        // Probably don't need, consider deleting
-        /*static void RunAllExamplesNoOrder(string methodName = "RunExample")
-        {
-            IEnumerable<System.Type> classes = typeof(Example).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Example)));
-            RunMethodsInClasses (classes, methodName);
-        }*/
-
-        static void RunMethodsInClasses(IEnumerable<System.Type> classes, string methodName)
-        {
-            foreach (System.Type item in classes)
+            System.Type theClass = (typeof(Example).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Example)) && type.Name == className)).First ();
+            if (theClass == null)
             {
-                MethodInfo theMethod = item.GetMethod (methodName);
-                if (theMethod == null)
-                {
-                    Console.WriteLine ("!!!!! -> Method '" + methodName + "()' not found in class '" + item.Name + "'");
-                    continue;
-                }
-                theMethod.Invoke (null, null);
+                Console.WriteLine ("!!!!! -> Class '" + theClass.Name + "' not found as an Example subclass");
+                return;
             }
+
+            MethodInfo theMethod = theClass.GetMethod ("RunExample");
+            if (theMethod == null)
+            {
+                Console.WriteLine ("!!!!! -> Method 'RunExample()' not found in class '" + theClass.Name + "'");
+                return;
+            }
+
+            FieldInfo headerField = theClass.GetField ("header", BindingFlags.Public | BindingFlags.Static);
+            if (headerField == null)
+                Console.WriteLine ("!!!!! -> Field 'header' not found in class '" + theClass.Name + "', using default value");
+
+            FieldInfo descriptionField = theClass.GetField ("description", BindingFlags.Public | BindingFlags.Static);
+            if (descriptionField == null)
+                Console.WriteLine ("!!!!! -> Field 'description' not found in class '" + theClass.Name + "', using default value");
+
+            string header = headerField == null ? theClass.Name : (string)headerField.GetValue (null);
+            string description = descriptionField == null ? "No description" : (string)descriptionField.GetValue (null);
+
+            Console.WriteLine (StringTools.MakeHeader (header));
+            Console.WriteLine (description);
+            Console.WriteLine ();
+            Console.WriteLine ();
+
+            theMethod.Invoke (null, null);
+            Console.WriteLine ();
         }
 
     }

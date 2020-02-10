@@ -10,13 +10,11 @@ namespace _04_Questions_ArraysAndStrings
     // An edit is taking a character and inserting, removing, or replacing it.
     class OneAway : Example
     {
+        public static string header = "One Away";
+        public static string description = "Checks if two strings are one or no character modifications apart from each other";
+
         public static void RunExample()
         {
-            Console.WriteLine (StringTools.MakeHeader ("One Away"));
-            Console.WriteLine ("Checks if two strings are one or no character modifications apart from each other");
-            Console.WriteLine ();
-            Console.WriteLine ();
-            
             PrintVerifiedCheck ("",  "",  true);
             PrintVerifiedCheck ("a", "",  true);
             PrintVerifiedCheck ("a", "r", true);
@@ -40,7 +38,6 @@ namespace _04_Questions_ArraysAndStrings
             PrintVerifiedCheck ("Replace", "Zeplace", true);
             PrintVerifiedCheck ("Replace", "Rep ace", true);
             PrintVerifiedCheck ("Replace", "Replacc", true);
-            Console.WriteLine ();
         }
 
         

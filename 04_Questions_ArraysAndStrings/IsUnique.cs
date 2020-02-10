@@ -10,19 +10,22 @@ namespace _04_Questions_ArraysAndStrings
     // Check if string or char[] has only unique characters.
     class IsUnique : Example
     {
+        public static string header = "Is Unique";
+        public static string description = "Checks if a string's characters are all unique";
+
         public static void RunExample()
         {
-            Console.WriteLine (StringTools.MakeHeader ("Is Unique"));
+            /*Console.WriteLine (StringTools.MakeHeader ("Is Unique"));
             Console.WriteLine ("Checks if a string's characters are all unique");
             Console.WriteLine ();
-            Console.WriteLine ();
+            Console.WriteLine ();*/
 
             PrintCheck ("Fu-Bar");
             PrintCheck ("Foo-Bar");
             PrintCheck ("Fu-Barr");
             PrintCheck ("FFu-Barr");
 
-            Console.WriteLine ();
+            //Console.WriteLine ();
         }
 
         private static void PrintCheck(string theStr)

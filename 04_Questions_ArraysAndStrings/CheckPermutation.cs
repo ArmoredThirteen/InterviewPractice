@@ -9,13 +9,11 @@ namespace _04_Questions_ArraysAndStrings
     // Check if two strings are a permutation of each other.
     class CheckPermutation : Example
     {
+        public static string header = "Check Permutation";
+        public static string description = "Checks if two strings are permutations of each other";
+
         public static void RunExample()
         {
-            Console.WriteLine (StringTools.MakeHeader ("Check Permutation"));
-            Console.WriteLine ("Checks if two strings are permutations of each other");
-            Console.WriteLine ();
-            Console.WriteLine ();
-
             PrintCheck ("", "");
             PrintCheck ("a", "1");
             PrintCheck ("apple", "apple");
@@ -23,8 +21,6 @@ namespace _04_Questions_ArraysAndStrings
             PrintCheck ("apples", "zapple");
             PrintCheck ("haa", "aha");
             PrintCheck ("haa", "aah");
-
-            Console.WriteLine ();
         }
 
         private static void PrintCheck(string strOne, string strTwo)
