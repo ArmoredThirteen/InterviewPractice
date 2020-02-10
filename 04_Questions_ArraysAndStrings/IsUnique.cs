@@ -12,7 +12,7 @@ namespace _04_Questions_ArraysAndStrings
     {
         public static void RunExample()
         {
-            Console.WriteLine (StringTools.MakeHeader ("Check Unique Chars"));
+            Console.WriteLine (StringTools.MakeHeader ("Is Unique"));
             Console.WriteLine ("Checks if a string's characters are all unique");
             Console.WriteLine ();
             Console.WriteLine ();
