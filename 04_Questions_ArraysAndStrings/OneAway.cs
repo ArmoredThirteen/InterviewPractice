@@ -6,8 +6,8 @@ using System.Text;
 
 namespace _04_Questions_ArraysAndStrings
 {
-    // There are three types of edits that can be performed on strings: insert a character, remove a character, or replace a character.
-    // Given two strings, write a function to check if they are one edit (or zero edits) away.
+    // Check if between two strings there is only one or zero edits.
+    // An edit is taking a character and inserting, removing, or replacing it.
     class OneAway
     {
         public static void RunExample()
