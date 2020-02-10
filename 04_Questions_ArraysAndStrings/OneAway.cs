@@ -8,7 +8,7 @@ namespace _04_Questions_ArraysAndStrings
 {
     // Check if between two strings there is only one or zero edits.
     // An edit is taking a character and inserting, removing, or replacing it.
-    class OneAway
+    class OneAway : Example
     {
         public static void RunExample()
         {

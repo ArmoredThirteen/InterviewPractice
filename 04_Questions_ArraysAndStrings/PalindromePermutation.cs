@@ -8,7 +8,7 @@ namespace _04_Questions_ArraysAndStrings
 {
     // Check if string is a permutation of a palindrome.
     // Does not have to create real words.
-    class PalindromePermutation
+    class PalindromePermutation : Example
     {
         public static void RunExample()
         {

@@ -8,11 +8,11 @@ using SimpleHelpers;
 namespace _04_Questions_ArraysAndStrings
 {
     // Check if string or char[] has only unique characters.
-    static class IsUnique
+    class IsUnique : Example
     {
         public static void RunExample()
         {
-            Console.WriteLine (StringTools.MakeHeader ("Check Unique Chars"));
+            Console.WriteLine (StringTools.MakeHeader ("Is Unique"));
             Console.WriteLine ("Checks if a string's characters are all unique");
             Console.WriteLine ();
             Console.WriteLine ();

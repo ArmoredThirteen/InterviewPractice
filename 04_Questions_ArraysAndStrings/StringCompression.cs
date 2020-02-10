@@ -10,7 +10,7 @@ namespace _04_Questions_ArraysAndStrings
     // So like [abbccccddd] would become [a1b2c4d3].
     // If string would not become shorter, return original string.
     // String can only have characters a-z and A-Z.
-    class StringCompression
+    class StringCompression : Example
     {
         public static void RunExample()
         {

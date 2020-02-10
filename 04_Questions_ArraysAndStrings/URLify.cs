@@ -8,7 +8,7 @@ namespace _04_Questions_ArraysAndStrings
 {
     // Replace all spaces in a string with %20.
     // String is char[] that has enough space at end to hold the final string.
-    class URLify
+    class URLify : Example
     {
         public static void RunExample()
         {
