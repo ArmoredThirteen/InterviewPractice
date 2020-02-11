@@ -88,7 +88,9 @@ namespace Sorting
                     builder.Append (theStr);
                     builder.Append (' ', spaceBuffer - theStr.Length);
                 }
-                builder.Append (Environment.NewLine);
+
+                if (y != theMatrix.Length - 1)
+                    builder.Append (Environment.NewLine);
             }
 
             return builder.ToString ();
