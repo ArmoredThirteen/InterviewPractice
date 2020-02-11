@@ -80,11 +80,11 @@ namespace Sorting
         {
             StringBuilder builder = new StringBuilder ();
 
-            for (int x = 0; x < theMatrix.Length; x++)
+            for (int y = 0; y < theMatrix.Length; y++)
             {
-                for (int y = 0; y < theMatrix[x].Length; y++)
+                for (int x = 0; x < theMatrix[y].Length; x++)
                 {
-                    String theStr = theMatrix[x][y].ToString ();
+                    String theStr = theMatrix[y][x].ToString ();
                     builder.Append (theStr);
                     builder.Append (' ', spaceBuffer - theStr.Length);
                 }
@@ -106,9 +106,9 @@ namespace Sorting
             if (matrixOne[0].Length == 0)
                 return true;
 
-            for (int x = 0; x < matrixOne.Length; x++)
-                for (int y = 0; y < matrixOne[x].Length; y++)
-                    if (matrixOne[x][y] != matrixTwo[x][y])
+            for (int y = 0; y < matrixOne.Length; y++)
+                for (int x = 0; x < matrixOne[y].Length; x++)
+                    if (matrixOne[y][x] != matrixTwo[y][x])
                         return false;
 
             return true;

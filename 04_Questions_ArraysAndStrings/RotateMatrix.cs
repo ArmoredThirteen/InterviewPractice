@@ -45,11 +45,12 @@ namespace _04_Questions_ArraysAndStrings
             // The +1 is to ensure the quandrant's chosen cells are biased to one side
             // If both had +1 than the iterated quadrant would have more than 1/4 the cells
             // If neither had +1 than the iterated quadrant would have less than 1/4 the cells
-            for (int x = 0; x < theMatrix.Length / 2; x++)
+            for (int y = 0; y < theMatrix.Length / 2; y++)
             {
-                for (int y = 0; y < (theMatrix[x].Length + 1) / 2; y++)
+                for (int x = 0; x < (theMatrix[y].Length + 1) / 2; x++)
                 {
-                    Console.Write (theMatrix[x][y].ToString () + new string (' ', 5 - theMatrix[x][y].ToString ().Length));
+                    //Console.Write (theMatrix[y][x].ToString () + new string (' ', 5 - theMatrix[y][x].ToString ().Length));
+                    Console.Write ("(" + x + "," + y + ") ");
                 }
                 Console.WriteLine ();
             }
