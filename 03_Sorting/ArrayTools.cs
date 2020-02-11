@@ -76,7 +76,7 @@ namespace Sorting
             return builder.ToString ();
         }
 
-        public static String GetContentsAsString<T>(T[][] theMatrix, string separator = "  ")
+        public static String GetContentsAsString<T>(T[][] theMatrix, int spaceBuffer = 5)
         {
             StringBuilder builder = new StringBuilder ();
 
@@ -84,8 +84,9 @@ namespace Sorting
             {
                 for (int y = 0; y < theMatrix[x].Length; y++)
                 {
-                    builder.Append (theMatrix[x][y].ToString ());
-                    builder.Append (separator);
+                    String theStr = theMatrix[x][y].ToString ();
+                    builder.Append (theStr);
+                    builder.Append (' ', spaceBuffer - theStr.Length);
                 }
                 builder.Append (Environment.NewLine);
             }
