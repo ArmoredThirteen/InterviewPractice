@@ -17,7 +17,8 @@ namespace _04_Questions_ArraysAndStrings
             Console.WindowHeight = Console.LargestWindowHeight-15;
 
             //RunAllExamples ();
-            RunExampleByName ("RotateMatrix");
+            RunExampleByName ("ZeroMatrix");
+            //RunExampleByName ("StringRotation");
 
             Console.WriteLine ("Press key to exit");
             Console.ReadKey (true);
@@ -33,6 +34,8 @@ namespace _04_Questions_ArraysAndStrings
             RunExampleByName ("OneAway");
             RunExampleByName ("StringCompression");
             RunExampleByName ("RotateMatrix");
+            RunExampleByName ("ZeroMatrix");
+            RunExampleByName ("StringRotation");
         }
 
         // Uses reflection to iterate over subclasses of Example class to find one matching given class name.
