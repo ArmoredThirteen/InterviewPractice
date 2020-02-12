@@ -59,9 +59,24 @@ namespace _04_Questions_ArraysAndStrings
                     }
 
             // Convert to 0 when matching with a zeroIndex
-            for (int y = 0; y < theMatrix.Length; y++)
+            // The larger the matrix and the fewer 0 values, the less ideal this becomes
+            /*for (int y = 0; y < theMatrix.Length; y++)
                 for (int x = 0; x < theMatrix[y].Length; x++)
                     if (xZeroIndex[x] || yZeroIndex[y])
+                        theMatrix[y][x] = 0;*/
+            
+            // More code, a little harder to read, but only digs into main matrix when necessary
+            // Time complexity is still O(xy) but on average will be linearly less depending on number of 0s
+            // For x index zeros
+            for (int x = 0; x < xZeroIndex.Length; x++)
+                if (xZeroIndex[x])
+                    for (int y = 0; y < theMatrix.Length; y++)
+                        theMatrix[y][x] = 0;
+
+            // For y index zeros
+            for (int y = 0; y < yZeroIndex.Length; y++)
+                if (yZeroIndex[y])
+                    for (int x = 0; x < theMatrix[y].Length; x++)
                         theMatrix[y][x] = 0;
         }
 
