@@ -38,7 +38,16 @@ namespace _04_Questions_ArraysAndStrings
             if (charaOne.Length != charaTwo.Length)
                 return false;
 
-            return true;
+            for (int i = 0; i < charaOne.Length; i++)
+            {
+                for (int k = 0; k < charaTwo.Length && charaOne[(i + k) % charaOne.Length] == charaTwo[k]; k++)
+                {
+                    if (k == charaTwo.Length - 1)
+                        return true;
+                }
+            }
+
+            return false;
         }
         
     }
