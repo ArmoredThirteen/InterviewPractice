@@ -66,14 +66,53 @@ namespace Sorting
 
         public static String GetContentsAsString<T>(T[] theArray)
         {
-            String returnStr = "";
+            StringBuilder builder = new StringBuilder ();
 
             for (int i = 0; i < theArray.Length; i++)
             {
-                returnStr += theArray[i].ToString ();
+                builder.Append (theArray[i].ToString ());
             }
 
-            return returnStr;
+            return builder.ToString ();
+        }
+
+        public static String GetContentsAsString<T>(T[][] theMatrix, int spaceBuffer = 5)
+        {
+            StringBuilder builder = new StringBuilder ();
+
+            for (int y = 0; y < theMatrix.Length; y++)
+            {
+                for (int x = 0; x < theMatrix[y].Length; x++)
+                {
+                    String theStr = theMatrix[y][x].ToString ();
+                    builder.Append (theStr);
+                    builder.Append (' ', spaceBuffer - theStr.Length);
+                }
+
+                builder.Append (Environment.NewLine);
+            }
+
+            return builder.ToString ();
+        }
+
+        public static bool AreMatricesEqual(int[][] matrixOne, int[][] matrixTwo)
+        {
+            if (matrixOne.Length != matrixTwo.Length)
+                return false;
+            if (matrixOne.Length == 0)
+                return true;
+
+            if (matrixOne[0].Length != matrixTwo[0].Length)
+                return false;
+            if (matrixOne[0].Length == 0)
+                return true;
+
+            for (int y = 0; y < matrixOne.Length; y++)
+                for (int x = 0; x < matrixOne[y].Length; x++)
+                    if (matrixOne[y][x] != matrixTwo[y][x])
+                        return false;
+
+            return true;
         }
 
     }
