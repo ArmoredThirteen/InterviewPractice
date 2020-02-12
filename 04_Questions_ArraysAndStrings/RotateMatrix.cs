@@ -24,13 +24,12 @@ namespace _04_Questions_ArraysAndStrings
         {
             Console.WriteLine ("Processing matrix:");
             Console.Write (ArrayTools.GetContentsAsString<int> (theMatrix));
-            //Console.WriteLine ();
+            Console.WriteLine ();
 
-            RotateRight (theMatrix);
+            Rotate (theMatrix, true);
 
             Console.WriteLine ("Result is:");
             Console.WriteLine (ArrayTools.GetContentsAsString<int> (theMatrix));
-            Console.WriteLine ();
 
             if (!ArrayTools.AreMatricesEqual (theMatrix, expectedResult))
             {
@@ -42,7 +41,7 @@ namespace _04_Questions_ArraysAndStrings
         }
 
 
-        private static void RotateRight(int[][] theMatrix)
+        private static void Rotate(int[][] theMatrix, bool toRight)
         {
             // The +1 is to ensure the quandrant's chosen cells are biased to one side
             // If both had +1 than the iterated quadrant would have more than 1/4 the cells
@@ -51,30 +50,29 @@ namespace _04_Questions_ArraysAndStrings
             int quadXLen = (theMatrix[0].Length + 1) / 2;
 
             for (int y = 0; y < quadYLen; y++)
-            {
                 for (int x = 0; x < quadXLen; x++)
-                {
-                    // Write quadrant values or coordinates for debug
-                    //Console.Write (theMatrix[y][x].ToString () + new string (' ', 5 - theMatrix[y][x].ToString ().Length));
-                    //Console.Write ("(" + x + "," + y + ") ");
-
-                    RotateValueRight (theMatrix, x, y);
-                }
-
-                Console.WriteLine ();
-            }
+                    RotateValue (theMatrix, toRight, x, y);
         }
 
-        private static void RotateValueRight(int[][] theMatrix, int currX, int currY)
+        private static void RotateValue(int[][] theMatrix, bool toRight, int currX, int currY)
         {
             int firstVal = theMatrix[currY][currX];
+            int newX;
+            int newY;
 
             // Move left to find values to bring back to location to the right
             for (int i = 0; i < 3; i++)
             {
-                // ONLY difference between rotate left and right is these two lines
-                int newX = currY;
-                int newY = (theMatrix.Length - 1) - currX;
+                if (toRight)
+                {
+                    newX = currY;
+                    newY = (theMatrix.Length - 1) - currX;
+                }
+                else
+                {
+                    newX = (theMatrix.Length - 1) - currY;
+                    newY = currX;
+                }
 
                 theMatrix[currY][currX] = theMatrix[newY][newX];
 
