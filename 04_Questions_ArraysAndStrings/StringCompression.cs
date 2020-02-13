@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SimpleHelpers;
+using Helpers;
 
 namespace _04_Questions_ArraysAndStrings
 {
