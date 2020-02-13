@@ -17,17 +17,10 @@ namespace _04_Questions_ArraysAndStrings
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            runDatas.Add ("Fu-Bar".ToCharArray ());
-            resultDatas.Add (true);
-
-            runDatas.Add ("Foo-Bar".ToCharArray ());
-            resultDatas.Add (false);
-
-            runDatas.Add ("Fu-Barr".ToCharArray ());
-            resultDatas.Add (false);
-
-            runDatas.Add ("FFu-Barr".ToCharArray ());
-            resultDatas.Add (false);
+            AddDataPair ("Fu-Bar".ToCharArray (),   true);
+            AddDataPair ("Foo-Bar".ToCharArray (),  false);
+            AddDataPair ("Fu-Barr".ToCharArray (),  false);
+            AddDataPair ("FFu-Barr".ToCharArray (), false);
         }
 
 
@@ -41,7 +34,7 @@ namespace _04_Questions_ArraysAndStrings
             builder.Append ("]");
 
             Console.WriteLine (builder);
-            Console.WriteLine ("Are chars unique in string [" + ArrayTools.GetContentsAsString<char> (runData) + "]");
+            Console.WriteLine ("- Are chars unique in string [" + ArrayTools.GetContentsAsString<char> (runData) + "]");
         }
 
         // Use runData to perform desired operation and return the result.
@@ -62,14 +55,14 @@ namespace _04_Questions_ArraysAndStrings
         // Write the resulting data.
         protected override void StateResult(bool result)
         {
-            Console.WriteLine (result);
+            Console.WriteLine ("  " + result);
         }
 
 
         // Write warning of algorithm failure, result was not as expected.
         protected override void AdmitFailure(bool expectedResult)
         {
-            Console.WriteLine ("!!! -> Result should have been " + expectedResult);
+            Console.WriteLine (" !!! -> Result should have been " + expectedResult);
         }
 
 
@@ -90,7 +83,7 @@ namespace _04_Questions_ArraysAndStrings
                 char currChar = chara[i];
                 if (charFound[currChar])
                 {
-                    Console.WriteLine ("Duplicate char '" + currChar + "' at index " + i);
+                    Console.WriteLine ("  Duplicate char '" + currChar + "' at index " + i);
                     return false;
                 }
                 charFound[currChar] = true;
@@ -114,7 +107,7 @@ namespace _04_Questions_ArraysAndStrings
             {
                 if (chara[i] == chara[i + 1])
                 {
-                    Console.WriteLine ("Duplicate char '" + chara[i] + "'");
+                    Console.WriteLine ("  Duplicate char '" + chara[i] + "'");
                     return false;
                 }
             }
@@ -138,7 +131,7 @@ namespace _04_Questions_ArraysAndStrings
                 for (int k = i + 1; k < chara.Length; k++)
                     if (chara[i] == chara[k])
                     {
-                        Console.WriteLine ("Duplicate char '" + chara[k] + "'at index " + k);
+                        Console.WriteLine ("  Duplicate char '" + chara[k] + "'at index " + k);
                         return false;
                     }
 

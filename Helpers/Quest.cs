@@ -15,6 +15,11 @@ namespace Helpers
 
 
         protected abstract void BuildDatas();
+        protected void AddDataPair(RunData runData, ResultData expectedResult)
+        {
+            runDatas.Add (runData);
+            resultDatas.Add (expectedResult);
+        }
 
         protected abstract void       StateGoals(RunData runData);
         protected abstract ResultData RunStep   (RunData runData);

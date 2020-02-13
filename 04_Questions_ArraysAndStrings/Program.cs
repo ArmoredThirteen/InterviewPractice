@@ -13,8 +13,8 @@ namespace _04_Questions_ArraysAndStrings
         {
             ProgramTools.SizeConsoleWindow ();
 
-            //RunAllExamples ();
-            new IsUnique ().RunQuest ();
+            //new IsUnique ().RunQuest ();
+            new CheckPermutation ().RunQuest ();
 
             ProgramTools.PauseForAnyKey ("Press any key to exit");
         }
@@ -22,8 +22,6 @@ namespace _04_Questions_ArraysAndStrings
 
         static void RunAllExamples()
         {
-            RunExampleByName ("IsUnique");
-            RunExampleByName ("CheckPermutation");
             RunExampleByName ("URLify");
             RunExampleByName ("PalindromePermutation");
             RunExampleByName ("OneAway");

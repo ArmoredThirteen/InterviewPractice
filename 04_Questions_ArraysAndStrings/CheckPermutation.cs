@@ -7,27 +7,55 @@ using Helpers;
 namespace _04_Questions_ArraysAndStrings
 {
     // Check if two strings are a permutation of each other.
-    class CheckPermutation : Example
+    class CheckPermutation : Quest<string[], bool>
     {
-        public static string header = "Check Permutation";
-        public static string description = "Checks if two strings are permutations of each other";
+        public override string Header => "Header";
+        public override string Description => "Description";
 
-        public static void RunExample()
+
+        // Build lists that determine RunStep() data and each of their expected results.
+        protected override void BuildDatas()
         {
-            PrintCheck ("", "");
-            PrintCheck ("a", "1");
-            PrintCheck ("apple", "apple");
-            PrintCheck ("apple", "zapple");
-            PrintCheck ("apples", "zapple");
-            PrintCheck ("haa", "aha");
-            PrintCheck ("haa", "aah");
+            AddDataPair (new string[] { "",       "" },       true);
+            AddDataPair (new string[] { "a",      "1" },      false);
+            AddDataPair (new string[] { "apple",  "apple" },  true);
+            AddDataPair (new string[] { "apple",  "zapple" }, false);
+            AddDataPair (new string[] { "apples", "zapple" }, false);
+            AddDataPair (new string[] { "haa",    "aha" },    true);
+            AddDataPair (new string[] { "haa",    "aah" },    true);
         }
 
-        private static void PrintCheck(string strOne, string strTwo)
+
+        // Write description of this particular RunStep(), namely to identify the current runData.
+        protected override void StateGoals(string[] runData)
         {
-            Console.WriteLine (string.Concat ("-Are chars of [", strOne, "] a permutation of [", strTwo, "]"));
-            Console.WriteLine (IsPermutation (strOne, strTwo));
-            Console.WriteLine ();
+            Console.WriteLine ("- Are chars of [" + runData[0] + "] a permutation of [" + runData[1] + "]");
+        }
+
+        // Use runData to perform desired operation and return the result.
+        protected override bool RunStep(string[] runData)
+        {
+            return IsPermutation (runData[0], runData[1]);
+        }
+
+
+        // True if result matches expectedResult.
+        protected override bool CompareResult(bool result, bool expectedResult)
+        {
+            return result == expectedResult;
+        }
+
+        // Write the resulting data.
+        protected override void StateResult(bool result)
+        {
+            Console.WriteLine ("  " + result);
+        }
+
+
+        // Write warning of algorithm failure, result was not as expected.
+        protected override void AdmitFailure(bool expectedResult)
+        {
+            Console.WriteLine (" !!! -> Result should have been " + expectedResult);
         }
 
 
