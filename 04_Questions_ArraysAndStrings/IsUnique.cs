@@ -28,7 +28,7 @@ namespace _04_Questions_ArraysAndStrings
         protected override void StateGoals(char[] runData)
         {
             StringBuilder builder = new StringBuilder ();
-            builder.Append ("                           [");
+            builder.Append ("                             [");
             for (int i = 0; i < runData.Length; i++)
                 builder.Append (i);
             builder.Append ("]");
@@ -43,26 +43,6 @@ namespace _04_Questions_ArraysAndStrings
             return IsStrUnique (runData);
             //return IsCharAraUniqueUsingSort (runData);
             //return IsStringUniqueUsingNaive (runData);
-        }
-
-
-        // True if result matches expectedResult.
-        protected override bool CompareResult(bool result, bool expectedResult)
-        {
-            return result == expectedResult;
-        }
-
-        // Write the resulting data.
-        protected override void StateResult(bool result)
-        {
-            Console.WriteLine ("  " + result);
-        }
-
-
-        // Write warning of algorithm failure, result was not as expected.
-        protected override void AdmitFailure(bool expectedResult)
-        {
-            Console.WriteLine (" !!! -> Result should have been " + expectedResult);
         }
 
 

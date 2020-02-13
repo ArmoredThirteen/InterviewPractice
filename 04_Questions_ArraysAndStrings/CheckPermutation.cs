@@ -9,8 +9,8 @@ namespace _04_Questions_ArraysAndStrings
     // Check if two strings are a permutation of each other.
     class CheckPermutation : Quest<string[], bool>
     {
-        public override string Header => "Header";
-        public override string Description => "Description";
+        public override string Header => "Check Permutation";
+        public override string Description => "Checks if two strings are permutations of each other";
 
 
         // Build lists that determine RunStep() data and each of their expected results.
@@ -36,26 +36,6 @@ namespace _04_Questions_ArraysAndStrings
         protected override bool RunStep(string[] runData)
         {
             return IsPermutation (runData[0], runData[1]);
-        }
-
-
-        // True if result matches expectedResult.
-        protected override bool CompareResult(bool result, bool expectedResult)
-        {
-            return result == expectedResult;
-        }
-
-        // Write the resulting data.
-        protected override void StateResult(bool result)
-        {
-            Console.WriteLine ("  " + result);
-        }
-
-
-        // Write warning of algorithm failure, result was not as expected.
-        protected override void AdmitFailure(bool expectedResult)
-        {
-            Console.WriteLine (" !!! -> Result should have been " + expectedResult);
         }
 
 
