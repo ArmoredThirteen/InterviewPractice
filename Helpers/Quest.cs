@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SimpleHelpers
+namespace Helpers
 {
     abstract class Quest
     {
