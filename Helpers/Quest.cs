@@ -14,11 +14,15 @@ namespace Helpers
         protected List<ResultData> resultDatas = new List<ResultData> ();
 
 
-        protected abstract void       StateGoals    (RunData runData);
-        protected abstract ResultData RunStep       (RunData runData);
-        protected abstract void       StateResult   (ResultData result);
-        protected abstract bool       CompareResult (ResultData result, ResultData expectedResult);
-        protected abstract void       AdmitFailure  (ResultData expectedResult);
+        protected abstract void BuildDatas();
+
+        protected abstract void       StateGoals(RunData runData);
+        protected abstract ResultData RunStep   (RunData runData);
+
+        protected abstract bool CompareResult(ResultData result, ResultData expectedResult);
+        protected abstract void StateResult  (ResultData result);
+
+        protected abstract void AdmitFailure(ResultData expectedResult);
 
 
         public void RunQuest()
@@ -35,6 +39,8 @@ namespace Helpers
                 return;
             }
 
+            BuildDatas ();
+
             for (int i = 0; i < runDatas.Count; i++)
             {
                 StateGoals (runDatas[i]);
@@ -44,6 +50,8 @@ namespace Helpers
 
                 if (CompareResult (result, resultDatas[i]))
                     AdmitFailure (resultDatas[i]);
+
+                Console.WriteLine ();
             }
             
             Console.WriteLine ();
