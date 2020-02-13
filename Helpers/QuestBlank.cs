@@ -14,8 +14,7 @@ namespace Helpers
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            runDatas.Add (null);
-            resultDatas.Add (null);
+            AddDataPair (null, null);
         }
 
 
@@ -28,7 +27,7 @@ namespace Helpers
         // Use runData to perform desired operation and return the result.
         protected override object RunStep(object runData)
         {
-            return true;
+            return null;
         }
 
 

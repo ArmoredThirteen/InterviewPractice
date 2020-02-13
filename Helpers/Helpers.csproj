@@ -45,6 +45,7 @@
     <Compile Include="ProgramTools.cs" />
     <Compile Include="Quest.cs" />
     <Compile Include="QuestBlank.cs" />
+    <Compile Include="QuestBlankSmall.cs" />
     <Compile Include="StringTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
