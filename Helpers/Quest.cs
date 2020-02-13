@@ -5,20 +5,20 @@ using System.Text;
 
 namespace Helpers
 {
-    abstract class Quest
+    public abstract class Quest<RunData, ResultData>
     {
         public abstract string Header { get; }
         public abstract string Description { get; }
 
-        protected abstract object[] RunDatas { get; }
-        protected abstract object[] ExpectedResults { get; }
+        protected List<RunData>    runDatas    = new List<RunData> ();
+        protected List<ResultData> resultDatas = new List<ResultData> ();
 
 
-        protected abstract void StateGoals(object runData);
-        protected abstract object RunStep(object runData);
-        protected abstract void StateResult(object result);
-        protected abstract bool CompareResult(object result, object expectedResult);
-        protected abstract void AdmitFailure(object expectedResult);
+        protected abstract void       StateGoals    (RunData runData);
+        protected abstract ResultData RunStep       (RunData runData);
+        protected abstract void       StateResult   (ResultData result);
+        protected abstract bool       CompareResult (ResultData result, ResultData expectedResult);
+        protected abstract void       AdmitFailure  (ResultData expectedResult);
 
 
         public void RunQuest()
@@ -28,15 +28,22 @@ namespace Helpers
             Console.WriteLine ();
             Console.WriteLine ();
 
-            for (int i = 0; i < RunDatas.Length; i++)
+            if (runDatas.Count != resultDatas.Count)
             {
-                StateGoals (RunDatas[i]);
+                Console.WriteLine ("!!!!! -> Failure: runDatas and resultDatas are not the same Length.");
+                Console.WriteLine ();
+                return;
+            }
 
-                object result = RunStep (RunDatas[i]);
+            for (int i = 0; i < runDatas.Count; i++)
+            {
+                StateGoals (runDatas[i]);
+
+                ResultData result = RunStep (runDatas[i]);
                 StateResult (result);
 
-                if (CompareResult (result, ExpectedResults[i]))
-                    AdmitFailure (ExpectedResults[i]);
+                if (CompareResult (result, resultDatas[i]))
+                    AdmitFailure (resultDatas[i]);
             }
             
             Console.WriteLine ();
