@@ -24,18 +24,18 @@ namespace _04_Questions_ArraysAndStrings
         private static void PrintVerifiedCheck(int[][] theMatrix, int[][] expectedResult)
         {
             Console.WriteLine ("Processing matrix:");
-            Console.Write (ArrayTools.GetContentsAsString<int> (theMatrix));
+            Console.Write (ArrayTools.GetContentsAsString<int> (theMatrix, 3));
             Console.WriteLine ();
 
             Zeroify (theMatrix);
 
             Console.WriteLine ("Result is:");
-            Console.WriteLine (ArrayTools.GetContentsAsString<int> (theMatrix));
+            Console.WriteLine (ArrayTools.GetContentsAsString<int> (theMatrix, 3));
 
             if (!ArrayTools.AreMatricesEqual (theMatrix, expectedResult))
             {
                 Console.WriteLine ("Result was not expected result of:");
-                Console.WriteLine (ArrayTools.GetContentsAsString<int> (expectedResult));
+                Console.WriteLine (ArrayTools.GetContentsAsString<int> (expectedResult, 3));
             }
 
             Console.WriteLine ();

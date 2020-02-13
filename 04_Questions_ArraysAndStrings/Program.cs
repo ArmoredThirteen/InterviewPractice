@@ -16,8 +16,7 @@ namespace _04_Questions_ArraysAndStrings
             Console.WindowWidth = Console.LargestWindowWidth-130;
             Console.WindowHeight = Console.LargestWindowHeight-15;
 
-            //RunAllExamples ();
-            RunExampleByName ("StringRotation");
+            RunAllExamples ();
 
             Console.WriteLine ("Press key to exit");
             Console.ReadKey (true);

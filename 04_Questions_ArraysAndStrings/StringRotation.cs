@@ -16,14 +16,24 @@ namespace _04_Questions_ArraysAndStrings
 
         public static void RunExample()
         {
+            PrintVerifiedCheck ("", "", true);
+            PrintVerifiedCheck ("HelloWorld", "lloWorldHe", true);
+            PrintVerifiedCheck ("hahahaha", "hahahaha", true);
             PrintVerifiedCheck ("Blah", "ahBl", true);
+            Console.WriteLine ();
+
+            PrintVerifiedCheck ("", "a", false);
+            PrintVerifiedCheck ("a", "", false);
+            PrintVerifiedCheck ("hahaha", "hahaah", false);
+            PrintVerifiedCheck ("HelloWorlds", "SHelloWorld", false);
         }
 
         private static void PrintVerifiedCheck(string strOne, string strTwo, bool expectedResult)
         {
-            Console.WriteLine (string.Concat ("Checking if string [", strOne, "] is a rotation of [", strTwo, "]"));
+            Console.WriteLine (string.Concat ("Checking if string [", strOne, "] is a possible rotation of [", strTwo, "]"));
 
-            bool result = IsRotationWithContains (strOne, strTwo);
+            bool result = IsRotation (strOne, strTwo);
+            //bool result = IsRotationWithContains (strOne, strTwo);
 
             Console.WriteLine (string.Concat ("   Result is [", result, "]"));
             if (result != expectedResult)
@@ -41,7 +51,9 @@ namespace _04_Questions_ArraysAndStrings
         {
             if (strOne.Length != strTwo.Length)
                 return false;
-            
+            if (strOne.Length == 0)
+                return true;
+
             // Iterate through both charaOne and charaTwo checking for equality
             // Rolling the (i+k) index makes comparison happen as if string were circular
             for (int i = 0; i < strOne.Length; i++)
