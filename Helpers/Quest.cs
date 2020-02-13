@@ -48,7 +48,7 @@ namespace Helpers
                 ResultData result = RunStep (runDatas[i]);
                 StateResult (result);
 
-                if (CompareResult (result, resultDatas[i]))
+                if (!CompareResult (result, resultDatas[i]))
                     AdmitFailure (resultDatas[i]);
 
                 Console.WriteLine ();
