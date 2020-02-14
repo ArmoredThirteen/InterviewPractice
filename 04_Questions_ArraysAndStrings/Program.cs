@@ -13,9 +13,7 @@ namespace _04_Questions_ArraysAndStrings
         {
             ProgramTools.SizeConsoleWindow ();
 
-            //RunAllExamples ();
-
-            new StringRotation ().RunQuest ();
+            RunAllExamples ();
 
             ProgramTools.PauseForAnyKey ("Press any key to exit");
         }

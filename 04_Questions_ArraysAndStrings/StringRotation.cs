@@ -1,4 +1,4 @@
-﻿using Sorting;
+﻿using Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,35 +9,36 @@ namespace _04_Questions_ArraysAndStrings
     // Check if two strings are a rotation of one another.
     // For example these sets are rotations of each other: ToadFish/oadFishT, SplatterScatter/atterScatterSpl
     // Assume a Contains() method exits but only one call to it is allowed.
-    class StringRotation : Example
+    class StringRotation : Quest<string[], bool>
     {
-        public static string header = "String Rotation";
-        public static string description = "Check if two strings are a rotation of one another";
+        public override string Header => "String Rotation";
+        public override string Description => "Check if two strings are a rotation of one another";
 
-        public static void RunExample()
+
+        // Build lists that determine RunStep() data and each of their expected results.
+        protected override void BuildDatas()
         {
-            PrintVerifiedCheck ("", "", true);
-            PrintVerifiedCheck ("HelloWorld", "lloWorldHe", true);
-            PrintVerifiedCheck ("hahahaha", "hahahaha", true);
-            PrintVerifiedCheck ("Blah", "ahBl", true);
-            Console.WriteLine ();
+            AddDataPair (new string[] { "", "" }, true);
+            AddDataPair (new string[] { "HelloWorld", "lloWorldHe" }, true);
+            AddDataPair (new string[] { "hahahaha",   "hahahaha" },   true);
+            AddDataPair (new string[] { "Blah",       "ahBl" },       true);
 
-            PrintVerifiedCheck ("", "a", false);
-            PrintVerifiedCheck ("a", "", false);
-            PrintVerifiedCheck ("hahaha", "hahaah", false);
-            PrintVerifiedCheck ("HelloWorlds", "SHelloWorld", false);
+            AddDataPair (new string[] { "",  "a" }, false);
+            AddDataPair (new string[] { "a", "" },  false);
+            AddDataPair (new string[] { "hahaha",      "hahaah" },      false);
+            AddDataPair (new string[] { "HelloWorlds", "SHelloWorld" }, false);
         }
 
-        private static void PrintVerifiedCheck(string strOne, string strTwo, bool expectedResult)
+        // Write description of this particular RunStep(), namely to identify the current runData.
+        protected override void StateGoals(string[] runData)
         {
-            Console.WriteLine (string.Concat ("Checking if string [", strOne, "] is a possible rotation of [", strTwo, "]"));
+            Console.WriteLine ("- Are [" + runData[0] + "] and [" + runData[1] + "] single rotations of each other");
+        }
 
-            bool result = IsRotation (strOne, strTwo);
-            //bool result = IsRotationWithContains (strOne, strTwo);
-
-            Console.WriteLine (string.Concat ("   Result is [", result, "]"));
-            if (result != expectedResult)
-                Console.WriteLine(string.Concat ("   !!! -> Result was [", result, "] but should be [", expectedResult, "]"));
+        // Use runData to perform desired operation and return the result.
+        protected override bool RunStep(string[] runData)
+        {
+            return IsRotation (runData[0], runData[1]);
         }
 
 
