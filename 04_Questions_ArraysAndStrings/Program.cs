@@ -15,7 +15,6 @@ namespace _04_Questions_ArraysAndStrings
 
             RunAllExamples ();
             
-            //new OneAway ().RunQuest ();
             //new StringCompression ().RunQuest ();
             //new RotateMatrix ().RunQuest ();
             //new ZeroMatrix ().RunQuest ();
@@ -31,7 +30,7 @@ namespace _04_Questions_ArraysAndStrings
             new CheckPermutation ().RunQuest ();
             new URLify ().RunQuest ();
             new PalindromePermutation ().RunQuest ();
-            RunExampleByName ("OneAway");
+            new OneAway ().RunQuest ();
             RunExampleByName ("StringCompression");
             RunExampleByName ("RotateMatrix");
             RunExampleByName ("ZeroMatrix");
