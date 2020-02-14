@@ -17,6 +17,12 @@ namespace Helpers
             AddDataPair (null, null);
         }
 
+        // Write description of this particular RunStep(), namely to identify the current runData.
+        protected override void StateGoals(object runData)
+        {
+            Console.WriteLine ("- Processing: [" + runData + "]");
+        }
+
         // Use runData to perform desired operation and return the result.
         protected override object RunStep(object runData)
         {

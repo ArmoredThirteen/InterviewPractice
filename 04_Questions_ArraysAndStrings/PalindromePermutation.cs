@@ -8,32 +8,39 @@ namespace _04_Questions_ArraysAndStrings
 {
     // Check if string is a permutation of a palindrome.
     // Does not have to create real words.
-    class PalindromePermutation : Example
+    class PalindromePermutation : Quest<string, bool>
     {
-        public static string header = "Palindrome Permutation";
-        public static string description = "Checks if a string is a permutation of a palindrome";
+        public override string Header => "Palindrome Permutation";
+        public override string Description => "Checks if a string is a permutation of a palindrome";
 
-        public static void RunExample()
+
+        // Build lists that determine RunStep() data and each of their expected results.
+        protected override void BuildDatas()
         {
-            PrintCheck ("hello".ToCharArray ());
-            PrintCheck ("aabbcd".ToCharArray ());
-            PrintCheck ("abc".ToCharArray ());
-            PrintCheck ("l".ToCharArray ());
-            PrintCheck ("tacocat".ToCharArray ());
-            PrintCheck ("$$##@@@@@".ToCharArray ());
-            PrintCheck ("$$####@@@@@".ToCharArray ());
-            PrintCheck ("$$#####@@@@@".ToCharArray ());
+            AddDataPair ("hello",  false);
+            AddDataPair ("aabbcd", false);
+            AddDataPair ("abc",    false);
+            AddDataPair ("l",      true);
+            AddDataPair ("tacocat",      true);
+            AddDataPair ("$$##@@@@@",    true);
+            AddDataPair ("$$####@@@@@",  true);
+            AddDataPair ("$$#####@@@@@", false);
         }
+
+        // Use runData to perform desired operation and return the result.
+        protected override bool RunStep(string runData)
+        {
+            return IsPalindromePermutation (runData.ToCharArray ());
+        }
+
 
         // A palindrome can only happen when the pattern in the middle is a single char or two of the same char
         // Individual char occurrences are counted. A char with an even number of characters can always form a pair in the mirrored pattern.
         // A char with an odd number means the one char has to be the middle in the palindrome to maintain symetry.
         // If there is more than one char with an odd number of occurences, then no mirror pattern can be formed.
         // Time complexity is O(n) where n is Max(charAra.Length, char.MaxValue)
-        private static void PrintCheck(char[] charAra)
+        private static bool IsPalindromePermutation(char[] charAra)
         {
-            Console.WriteLine (string.Concat ("Processing string [", StringTools.CharAraToString (charAra), "]"));
-
             // Index of a specific char is found by casting char to int
             int[] odds = new int[char.MaxValue];
 
@@ -51,16 +58,13 @@ namespace _04_Questions_ArraysAndStrings
                 {
                     if (oddFound)
                     {
-                        Console.WriteLine ("False: More than one character had odd count");
-                        Console.WriteLine ();
-                        return;
+                        return false;
                     }
                     oddFound = true;
                 }
             }
 
-            Console.WriteLine ("True");
-            Console.WriteLine ();
+            return true;
         }
 
     }
