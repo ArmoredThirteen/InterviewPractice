@@ -8,36 +8,54 @@ namespace _04_Questions_ArraysAndStrings
 {
     // Rotate an NxN matrix 90 degrees left or right.
     // Perform rotation in place to ensure overhead is minimal.
-    class RotateMatrix : Example
+    class RotateMatrix : Quest<int[][], int[][]>
     {
-        public static string header = "Rotate Matrix";
-        public static string description = "Rotate given NxN matrix 90 degrees";
+        public override string Header => "Rotate Matrix";
+        public override string Description => "Rotate given NxN matrix 90 degrees";
 
-        public static void RunExample()
+
+        // Build lists that determine RunStep() data and each of their expected results.
+        protected override void BuildDatas()
         {
-            PrintVerifiedCheck (MakeThreeMatrix (), MakeThreeMatrixResult ());
-            PrintVerifiedCheck (MakeFourMatrix (), MakeFourMatrixResult ());
-            PrintVerifiedCheck (MakeFiveMatrix (), MakeFiveMatrixResult ());
+            AddDataPair (MakeThreeMatrix (), MakeThreeMatrixResult ());
+            AddDataPair (MakeFourMatrix (), MakeFourMatrixResult ());
+            AddDataPair (MakeFiveMatrix (), MakeFiveMatrixResult ());
         }
 
-        private static void PrintVerifiedCheck(int[][] theMatrix, int[][] expectedResult)
+        // Write description of this particular RunStep(), namely to identify the current runData.
+        protected override void StateGoals(int[][] runData)
         {
-            Console.WriteLine ("Processing matrix:");
-            Console.Write (ArrayTools.GetContentsAsString<int> (theMatrix));
+            Console.WriteLine ("- Processing matrix:");
+            Console.Write (ArrayTools.GetContentsAsString<int> (runData));
             Console.WriteLine ();
+        }
 
-            Rotate (theMatrix, true);
+        // Use runData to perform desired operation and return the result.
+        protected override int[][] RunStep(int[][] runData)
+        {
+            Rotate (runData, true);
+            return runData;
+        }
 
-            Console.WriteLine ("Result is:");
-            Console.WriteLine (ArrayTools.GetContentsAsString<int> (theMatrix));
 
-            if (!ArrayTools.AreMatricesEqual (theMatrix, expectedResult))
-            {
-                Console.WriteLine ("Result was not expected result of:");
-                Console.WriteLine (ArrayTools.GetContentsAsString<int> (expectedResult));
-            }
+        // True if result matches expectedResult.
+        protected override bool CompareResult(int[][] result, int[][] expectedResult)
+        {
+            return ArrayTools.AreMatricesEqual (result, expectedResult);
+        }
 
-            Console.WriteLine ();
+        // Write the resulting data.
+        protected override void StateResult(int[][] result)
+        {
+            Console.WriteLine ("  Result is:");
+            Console.WriteLine (ArrayTools.GetContentsAsString<int> (result));
+        }
+
+        // Write warning of algorithm failure, result was not as expected.
+        protected override void AdmitFailure(int[][] expectedResult)
+        {
+            Console.WriteLine (" !!! -> Result was not expected result of:");
+            Console.WriteLine (ArrayTools.GetContentsAsString<int> (expectedResult));
         }
 
 
