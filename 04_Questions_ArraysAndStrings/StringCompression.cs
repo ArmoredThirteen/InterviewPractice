@@ -10,29 +10,28 @@ namespace _04_Questions_ArraysAndStrings
     // So like [abbccccddd] would become [a1b2c4d3].
     // If string would not become shorter, return original string.
     // String can only have characters a-z and A-Z.
-    class StringCompression : Example
+    class StringCompression : Quest<string, string>
     {
-        public static string header = "String Compression";
-        public static string description = "Replaces chars with 'char'+'charCount', compressing strings with enough repeating characters";
+        public override string Header => "String Compression";
+        public override string Description => "Replaces chars with 'char'+'charCount', compressing strings with enough repeating characters";
 
-        public static void RunExample()
+
+        // Build lists that determine RunStep() data and each of their expected results.
+        protected override void BuildDatas()
         {
-            PrintVerifiedCheck ("", "");
-            PrintVerifiedCheck ("a", "a");
-            PrintVerifiedCheck ("sup", "sup");
-            PrintVerifiedCheck ("ssssuup", "s4u2p1");
-            PrintVerifiedCheck ("SsSsSsupppppppppppp", "S1s1S1s1S1s1u1p12");
+            AddDataPair ("",    "");
+            AddDataPair ("a",   "a");
+            AddDataPair ("sup", "sup");
+            AddDataPair ("ssssuup", "s4u2p1");
+            AddDataPair ("SsSsSsupppppppppppp", "S1s1S1s1S1s1u1p12");
         }
 
+        // Use runData to perform desired operation and return the result.
+        protected override string RunStep(string runData)
+        {
+            return GetCompressedString (runData);
+        }
         
-        private static void PrintVerifiedCheck(string theStr, string expectedResult)
-        {
-            Console.WriteLine (string.Concat("Processing string [", theStr, "]"));
-            string result = GetCompressedString (theStr);
-            Console.WriteLine (string.Concat ("   Result is [", result, "]"));
-            if (!string.Equals(result, expectedResult))
-                Console.WriteLine(string.Concat ("   !!! -> Result was [", result, "] but should be [", expectedResult, "]"));
-        }
 
         private static string GetCompressedString(string theStr)
         {
