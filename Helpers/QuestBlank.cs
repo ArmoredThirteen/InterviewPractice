@@ -40,14 +40,14 @@ namespace Helpers
         // Write the resulting data.
         protected override void StateResult(object result)
         {
-            Console.WriteLine ("  " + result);
+            Console.WriteLine ("  [" + result + "]");
         }
 
 
         // Write warning of algorithm failure, result was not as expected.
         protected override void AdmitFailure(object expectedResult)
         {
-            Console.WriteLine (" !!! -> Result should have been " + expectedResult);
+            Console.WriteLine (" !!! -> Result should have been [" + expectedResult + "]");
         }
 
     }

@@ -15,13 +15,12 @@ namespace _04_Questions_ArraysAndStrings
 
             RunAllExamples ();
             
-            //new URLify.RunQuest ();
-            //new PalindromePermutation.RunQuest ();
-            //new OneAway.RunQuest ();
-            //new StringCompression.RunQuest ();
-            //new RotateMatrix.RunQuest ();
-            //new ZeroMatrix.RunQuest ();
-            //new StringRotation.RunQuest ();
+            //new PalindromePermutation ().RunQuest ();
+            //new OneAway ().RunQuest ();
+            //new StringCompression ().RunQuest ();
+            //new RotateMatrix ().RunQuest ();
+            //new ZeroMatrix ().RunQuest ();
+            //new StringRotation ().RunQuest ();
 
             ProgramTools.PauseForAnyKey ("Press any key to exit");
         }
@@ -31,8 +30,7 @@ namespace _04_Questions_ArraysAndStrings
         {
             new IsUnique ().RunQuest ();
             new CheckPermutation ().RunQuest ();
-
-            RunExampleByName ("URLify");
+            new URLify ().RunQuest ();
             RunExampleByName ("PalindromePermutation");
             RunExampleByName ("OneAway");
             RunExampleByName ("StringCompression");

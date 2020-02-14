@@ -23,7 +23,6 @@ namespace _04_Questions_ArraysAndStrings
             AddDataPair ("FFu-Barr".ToCharArray (), false);
         }
 
-
         // Write description of this particular RunStep(), namely to identify the current runData.
         protected override void StateGoals(char[] runData)
         {
@@ -34,7 +33,7 @@ namespace _04_Questions_ArraysAndStrings
             builder.Append ("]");
 
             Console.WriteLine (builder);
-            Console.WriteLine ("- Are chars unique in string [" + ArrayTools.GetContentsAsString<char> (runData) + "]");
+            Console.WriteLine ("- Are chars unique in string [" + new string (runData) + "]");
         }
 
         // Use runData to perform desired operation and return the result.

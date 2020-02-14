@@ -44,13 +44,13 @@ namespace Helpers
         // Write the resulting data.
         protected virtual void StateResult(ResultData result)
         {
-            Console.WriteLine ("  " + result);
+            Console.WriteLine ("  [" + result + "]");
         }
 
         // Write warning of algorithm failure, result was not as expected.
         protected virtual void AdmitFailure(ResultData expectedResult)
         {
-            Console.WriteLine (" !!! -> Result should have been " + expectedResult);
+            Console.WriteLine (" !!! -> Result should have been [" + expectedResult + "]");
         }
 
 

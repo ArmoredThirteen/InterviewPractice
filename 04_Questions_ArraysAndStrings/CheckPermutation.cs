@@ -25,7 +25,6 @@ namespace _04_Questions_ArraysAndStrings
             AddDataPair (new string[] { "haa",    "aah" },    true);
         }
 
-
         // Write description of this particular RunStep(), namely to identify the current runData.
         protected override void StateGoals(string[] runData)
         {
