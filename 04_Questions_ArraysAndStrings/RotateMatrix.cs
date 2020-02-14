@@ -18,15 +18,15 @@ namespace _04_Questions_ArraysAndStrings
         protected override void BuildDatas()
         {
             AddDataPair (MakeThreeMatrix (), MakeThreeMatrixResult ());
-            AddDataPair (MakeFourMatrix (), MakeFourMatrixResult ());
-            AddDataPair (MakeFiveMatrix (), MakeFiveMatrixResult ());
+            AddDataPair (MakeFourMatrix (),  MakeFourMatrixResult ());
+            AddDataPair (MakeFiveMatrix (),  MakeFiveMatrixResult ());
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
         protected override void StateGoals(int[][] runData)
         {
             Console.WriteLine ("- Processing matrix:");
-            Console.Write (ArrayTools.GetContentsAsString<int> (runData));
+            Console.Write (ArrayTools.GetContentsAsString<int> (runData, "  "));
             Console.WriteLine ();
         }
 
@@ -48,14 +48,14 @@ namespace _04_Questions_ArraysAndStrings
         protected override void StateResult(int[][] result)
         {
             Console.WriteLine ("  Result is:");
-            Console.WriteLine (ArrayTools.GetContentsAsString<int> (result));
+            Console.WriteLine (ArrayTools.GetContentsAsString<int> (result, "  "));
         }
 
         // Write warning of algorithm failure, result was not as expected.
         protected override void AdmitFailure(int[][] expectedResult)
         {
             Console.WriteLine (" !!! -> Result was not expected result of:");
-            Console.WriteLine (ArrayTools.GetContentsAsString<int> (expectedResult));
+            Console.WriteLine (ArrayTools.GetContentsAsString<int> (expectedResult, "  "));
         }
 
 

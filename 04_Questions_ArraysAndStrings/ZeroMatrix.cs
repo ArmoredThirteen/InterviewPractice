@@ -8,37 +8,55 @@ using System.Text;
 namespace _04_Questions_ArraysAndStrings
 {
     // Given an MxN matrix, find all 0 values and set values in col/row to all 0 as well.f
-    class ZeroMatrix : Example
+    class ZeroMatrix : Quest<int[][], int[][]>
     {
-        public static string header = "Zero Matrix";
-        public static string description = "Convert aligned rows/cols to 0 if a 0 value is found";
+        public override string Header => "Zero Matrix";
+        public override string Description => "Convert aligned rows/cols to 0 if a 0 value is found";
 
-        public static void RunExample()
+
+        // Build lists that determine RunStep() data and each of their expected results.
+        protected override void BuildDatas()
         {
-            PrintVerifiedCheck (MakeExampleOne (), MakeExampleOneResult ());
-            PrintVerifiedCheck (MakeExampleTwo (), MakeExampleTwoResult ());
-            PrintVerifiedCheck (MakeExampleThree (), MakeExampleThreeResult ());
-            PrintVerifiedCheck (MakeExampleFour (), MakeExampleFourResult ());
+            AddDataPair (MakeExampleOne (),   MakeExampleOneResult ());
+            AddDataPair (MakeExampleTwo (),   MakeExampleTwoResult ());
+            AddDataPair (MakeExampleThree (), MakeExampleThreeResult ());
+            AddDataPair (MakeExampleFour (),  MakeExampleFourResult ());
         }
 
-        private static void PrintVerifiedCheck(int[][] theMatrix, int[][] expectedResult)
+        // Write description of this particular RunStep(), namely to identify the current runData.
+        protected override void StateGoals(int[][] runData)
         {
-            Console.WriteLine ("Processing matrix:");
-            Console.Write (ArrayTools.GetContentsAsString<int> (theMatrix, 3));
+            Console.WriteLine ("- Processing matrix:");
+            Console.Write (ArrayTools.GetContentsAsString<int> (runData, "  "));
             Console.WriteLine ();
+        }
 
-            Zeroify (theMatrix);
+        // Use runData to perform desired operation and return the result.
+        protected override int[][] RunStep(int[][] runData)
+        {
+            Zeroify (runData);
+            return runData;
+        }
 
-            Console.WriteLine ("Result is:");
-            Console.WriteLine (ArrayTools.GetContentsAsString<int> (theMatrix, 3));
 
-            if (!ArrayTools.AreMatricesEqual (theMatrix, expectedResult))
-            {
-                Console.WriteLine ("Result was not expected result of:");
-                Console.WriteLine (ArrayTools.GetContentsAsString<int> (expectedResult, 3));
-            }
+        // True if result matches expectedResult.
+        protected override bool CompareResult(int[][] result, int[][] expectedResult)
+        {
+            return ArrayTools.AreMatricesEqual (result, expectedResult);
+        }
 
-            Console.WriteLine ();
+        // Write the resulting data.
+        protected override void StateResult(int[][] result)
+        {
+            Console.WriteLine ("  Result is:");
+            Console.WriteLine (ArrayTools.GetContentsAsString<int> (result, "  "));
+        }
+
+        // Write warning of algorithm failure, result was not as expected.
+        protected override void AdmitFailure(int[][] expectedResult)
+        {
+            Console.WriteLine (" !!! -> Result was not expected result of:");
+            Console.WriteLine (ArrayTools.GetContentsAsString<int> (expectedResult, "  "));
         }
 
 

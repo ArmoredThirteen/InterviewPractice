@@ -14,10 +14,8 @@ namespace _04_Questions_ArraysAndStrings
             ProgramTools.SizeConsoleWindow ();
 
             //RunAllExamples ();
-            
-            new RotateMatrix ().RunQuest ();
-            //new ZeroMatrix ().RunQuest ();
-            //new StringRotation ().RunQuest ();
+
+            new StringRotation ().RunQuest ();
 
             ProgramTools.PauseForAnyKey ("Press any key to exit");
         }
@@ -32,8 +30,8 @@ namespace _04_Questions_ArraysAndStrings
             new OneAway ().RunQuest ();
             new StringCompression ().RunQuest ();
             new RotateMatrix ().RunQuest ();
-            RunExampleByName ("ZeroMatrix");
-            RunExampleByName ("StringRotation");
+            new ZeroMatrix ().RunQuest ();
+            new StringRotation ().RunQuest ();
         }
 
         // Uses reflection to iterate over subclasses of Example class to find one matching given class name.
