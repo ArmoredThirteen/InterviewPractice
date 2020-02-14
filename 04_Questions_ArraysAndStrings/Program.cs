@@ -11,25 +11,26 @@ namespace _04_Questions_ArraysAndStrings
     {
         static void Main(string[] args)
         {
-            Console.WindowTop = 0;
-            Console.WindowLeft = 0;
-            Console.WindowWidth = Console.LargestWindowWidth-130;
-            Console.WindowHeight = Console.LargestWindowHeight-15;
+            ProgramTools.SizeConsoleWindow ();
 
             RunAllExamples ();
+            
+            //new StringCompression ().RunQuest ();
+            //new RotateMatrix ().RunQuest ();
+            //new ZeroMatrix ().RunQuest ();
+            //new StringRotation ().RunQuest ();
 
-            Console.WriteLine ("Press key to exit");
-            Console.ReadKey (true);
+            ProgramTools.PauseForAnyKey ("Press any key to exit");
         }
 
 
         static void RunAllExamples()
         {
-            RunExampleByName ("IsUnique");
-            RunExampleByName ("CheckPermutation");
-            RunExampleByName ("URLify");
-            RunExampleByName ("PalindromePermutation");
-            RunExampleByName ("OneAway");
+            new IsUnique ().RunQuest ();
+            new CheckPermutation ().RunQuest ();
+            new URLify ().RunQuest ();
+            new PalindromePermutation ().RunQuest ();
+            new OneAway ().RunQuest ();
             RunExampleByName ("StringCompression");
             RunExampleByName ("RotateMatrix");
             RunExampleByName ("ZeroMatrix");

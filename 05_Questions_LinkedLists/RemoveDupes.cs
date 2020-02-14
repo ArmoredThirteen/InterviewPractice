@@ -14,11 +14,8 @@ namespace _05_Questions_LinkedLists
 
         protected override void BuildDatas()
         {
-            runDatas.Add (1);
-            resultDatas.Add (true);
-
-            runDatas.Add (2);
-            resultDatas.Add (false);
+            AddDataPair (1, true);
+            AddDataPair (2, false);
         }
 
 

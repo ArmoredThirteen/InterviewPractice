@@ -14,22 +14,53 @@ namespace Helpers
         protected List<ResultData> resultDatas = new List<ResultData> ();
 
 
+        // Add values to runDatas and resultDatas for use in RunQuest().
         protected abstract void BuildDatas();
-
-        protected abstract void       StateGoals(RunData runData);
-        protected abstract ResultData RunStep   (RunData runData);
-
-        protected abstract bool CompareResult(ResultData result, ResultData expectedResult);
-        protected abstract void StateResult  (ResultData result);
-
-        protected abstract void AdmitFailure(ResultData expectedResult);
+        
+        // Use runData to perform desired operation and return the result.
+        protected abstract ResultData RunStep (RunData runData);
 
 
+        // Add values to runDatas and resultDatas at same time, since that's how it has to be anyway.
+        protected void AddDataPair(RunData runData, ResultData expectedResult)
+        {
+            runDatas.Add (runData);
+            resultDatas.Add (expectedResult);
+        }
+
+
+        // Write description of this particular RunStep(), namely to identify the current runData.
+        protected virtual void StateGoals(RunData runData)
+        {
+            Console.WriteLine ("- Processing: [" + runData + "]");
+        }
+
+        // True if result matches expectedResult.
+        protected virtual bool CompareResult(ResultData result, ResultData expectedResult)
+        {
+            return result.Equals(expectedResult);
+        }
+
+        // Write the resulting data.
+        protected virtual void StateResult(ResultData result)
+        {
+            Console.WriteLine ("  [" + result + "]");
+        }
+
+        // Write warning of algorithm failure, result was not as expected.
+        protected virtual void AdmitFailure(ResultData expectedResult)
+        {
+            Console.WriteLine (" !!! -> Result should have been [" + expectedResult + "]");
+        }
+
+
+        // Main method that controls the when and why of each question's process.
+        // Iterate through all the runDatas to put them through RunStep.
+        // Verifies results are as expected and runs AdmitFailure() when they don't.
         public void RunQuest()
         {
             Console.WriteLine (StringTools.MakeHeader (Header));
             Console.WriteLine (Description);
-            Console.WriteLine ();
             Console.WriteLine ();
 
             if (runDatas.Count != resultDatas.Count)

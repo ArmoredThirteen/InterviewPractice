@@ -8,53 +8,54 @@ namespace _04_Questions_ArraysAndStrings
 {
     // Check if between two strings there is only one or zero edits.
     // An edit is taking a character and inserting, removing, or replacing it.
-    class OneAway : Example
+    class OneAway : Quest<string[], bool>
     {
-        public static string header = "One Away";
-        public static string description = "Checks if two strings are one or no character modifications apart from each other";
+        public override string Header => "One Away";
+        public override string Description => "Checks if two strings are one or no character modifications apart from each other";
 
-        public static void RunExample()
+
+        // Build lists that determine RunStep() data and each of their expected results.
+        protected override void BuildDatas()
         {
-            PrintVerifiedCheck ("",  "",  true);
-            PrintVerifiedCheck ("a", "",  true);
-            PrintVerifiedCheck ("a", "r", true);
-            Console.WriteLine ();
+            AddDataPair (new string[] { "",  "" },  true);
+            AddDataPair (new string[] { "a", "" },  true);
+            AddDataPair (new string[] { "a", "r" }, true);
 
-            PrintVerifiedCheck ("toot",    "tooooot", false);
-            PrintVerifiedCheck ("tooooot", "toot",    false);
-            PrintVerifiedCheck ("ReversE", "EsreveR", false);
-            Console.WriteLine ();
-            
-            PrintVerifiedCheck ("Insert", "1Insert", true);
-            PrintVerifiedCheck ("Insert", "Ins2ert", true);
-            PrintVerifiedCheck ("Insert", "Insert3", true);
-            Console.WriteLine ();
-            
-            PrintVerifiedCheck ("Remove", "emove", true);
-            PrintVerifiedCheck ("Remove", "Remve", true);
-            PrintVerifiedCheck ("Remove", "Remov", true);
-            Console.WriteLine ();
-            
-            PrintVerifiedCheck ("Replace", "Zeplace", true);
-            PrintVerifiedCheck ("Replace", "Rep ace", true);
-            PrintVerifiedCheck ("Replace", "Replacc", true);
+            AddDataPair (new string[] { "toot",    "tooooot" }, false);
+            AddDataPair (new string[] { "tooooot", "toot" },    false);
+            AddDataPair (new string[] { "ReversE", "EsreveR" }, false);
+
+            AddDataPair (new string[] { "Insert", "1Insert" }, true);
+            AddDataPair (new string[] { "Insert", "Ins2ert" }, true);
+            AddDataPair (new string[] { "Insert", "Insert3" }, true);
+
+            AddDataPair (new string[] { "Remove", "emove" }, true);
+            AddDataPair (new string[] { "Remove", "Remve" }, true);
+            AddDataPair (new string[] { "Remove", "Remov" }, true);
+
+            AddDataPair (new string[] { "Replace", "Zeplace" }, true);
+            AddDataPair (new string[] { "Replace", "Rep ace" }, true);
+            AddDataPair (new string[] { "Replace", "Replacc" }, true);
         }
 
-        
-        private static void PrintVerifiedCheck(string strOne, string strTwo, bool expectedResult)
+        // Write description of this particular RunStep(), namely to identify the current runData.
+        protected override void StateGoals(string[] runData)
         {
-            Console.WriteLine (string.Concat("Are [", strOne, "] and [", strTwo, "] one or fewer edits different"));
-            bool result = IsOneChangeAway (strOne.ToCharArray (), strTwo.ToCharArray ());
-            Console.WriteLine (string.Concat ("   ", result));
-            if (result != expectedResult)
-                Console.WriteLine (string.Concat("   !!! -> Result was [", result, "] but should be [", expectedResult, "]"));
+            Console.WriteLine ("- Are [" + runData[0] + "] and [" + runData[1] + "] one or fewer edits different");
         }
+
+        // Use runData to perform desired operation and return the result.
+        protected override bool RunStep(string[] runData)
+        {
+            return IsOneChangeAway (runData[0].ToCharArray (), runData[1].ToCharArray ());
+        }
+
 
         private static bool IsOneChangeAway(char[] strOne, char[] strTwo)
         {
             if (Math.Abs (strOne.Length - strTwo.Length) > 1)
             {
-                Console.WriteLine ("   String size difference is greater than 1");
+                Console.WriteLine ("  String size difference is greater than 1");
                 return false;
             }
 
