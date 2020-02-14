@@ -76,12 +76,14 @@ namespace Helpers
             return builder.ToString ();
         }
 
-        public static String GetContentsAsString<T>(T[][] theMatrix, int spaceBuffer = 5)
+        public static String GetContentsAsString<T>(T[][] theMatrix, string linePrefix = "", int spaceBuffer = 5)
         {
             StringBuilder builder = new StringBuilder ();
 
             for (int y = 0; y < theMatrix.Length; y++)
             {
+                builder.Append (linePrefix);
+
                 for (int x = 0; x < theMatrix[y].Length; x++)
                 {
                     String theStr = theMatrix[y][x].ToString ();
