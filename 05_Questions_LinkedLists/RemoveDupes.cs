@@ -6,44 +6,39 @@ using System.Text;
 
 namespace _05_Questions_LinkedLists
 {
-    class RemoveDupes : Quest<int, bool>
+    // Remove duplicate values from an unordered linked list.
+    // If possible, perform with no additional temporary buffer.
+    class RemoveDupes : Quest<SingleLL, SingleLL>
     {
         public override string Header => "RemoveDupes";
         public override string Description => "Removes duplicate values from unsorted list";
 
 
+        // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            AddDataPair (1, true);
-            AddDataPair (2, false);
+            AddDataPair (new SingleLL (1, 2, 3, 4, 5), new SingleLL (1, 2, 3, 4, 5));
+            AddDataPair (new SingleLL (1, 2, 1, 4, 5), new SingleLL (1, 2, 4, 5));
+            AddDataPair (new SingleLL (1, 1, 1), new SingleLL (1));
+        }
+
+        // Write description of this particular RunStep(), namely to identify the current runData.
+        protected override void StateGoals(SingleLL runData)
+        {
+            Console.WriteLine ("- Removing duplicate values from: [" + runData + "]");
+        }
+
+        // Use runData to perform desired operation and return the result.
+        protected override SingleLL RunStep(SingleLL runData)
+        {
+            RemoveDuplicates (runData);
+            return runData;
         }
 
 
-        protected override void StateGoals(int runData)
+        private static void RemoveDuplicates(SingleLL theList)
         {
-            Console.WriteLine ("Check if " + runData + " equals 1");
-        }
 
-        protected override bool RunStep(int runData)
-        {
-            return runData == 1;
-        }
-
-
-        protected override bool CompareResult(bool result, bool expectedResult)
-        {
-            return result == expectedResult;
-        }
-
-        protected override void StateResult(bool result)
-        {
-            Console.WriteLine (result);
-        }
-
-
-        protected override void AdmitFailure(bool expectedResult)
-        {
-            Console.WriteLine ("!!! -> Result should have been " + expectedResult);
         }
 
     }
