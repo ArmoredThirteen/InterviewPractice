@@ -13,14 +13,6 @@ namespace _04_Questions_ArraysAndStrings
         {
             ProgramTools.SizeConsoleWindow ();
 
-            RunAllExamples ();
-
-            ProgramTools.PauseForAnyKey ("Press any key to exit");
-        }
-
-
-        static void RunAllExamples()
-        {
             new IsUnique ().RunQuest ();
             new CheckPermutation ().RunQuest ();
             new URLify ().RunQuest ();
@@ -30,44 +22,8 @@ namespace _04_Questions_ArraysAndStrings
             new RotateMatrix ().RunQuest ();
             new ZeroMatrix ().RunQuest ();
             new StringRotation ().RunQuest ();
-        }
 
-        // Uses reflection to iterate over subclasses of Example class to find one matching given class name.
-        // Attempts to invoke a RunExample() method. Writes header and description data found within class.
-        static void RunExampleByName(string className)
-        {
-            System.Type theClass = (typeof(Example).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Example)) && type.Name == className)).First ();
-            if (theClass == null)
-            {
-                Console.WriteLine ("!!!!! -> Class '" + theClass.Name + "' not found as an Example subclass");
-                return;
-            }
-
-            MethodInfo theMethod = theClass.GetMethod ("RunExample");
-            if (theMethod == null)
-            {
-                Console.WriteLine ("!!!!! -> Method 'RunExample()' not found in class '" + theClass.Name + "'");
-                return;
-            }
-
-            FieldInfo headerField = theClass.GetField ("header", BindingFlags.Public | BindingFlags.Static);
-            if (headerField == null)
-                Console.WriteLine ("!!!!! -> Field 'header' not found in class '" + theClass.Name + "', using default value");
-
-            FieldInfo descriptionField = theClass.GetField ("description", BindingFlags.Public | BindingFlags.Static);
-            if (descriptionField == null)
-                Console.WriteLine ("!!!!! -> Field 'description' not found in class '" + theClass.Name + "', using default value");
-
-            string header = headerField == null ? theClass.Name : (string)headerField.GetValue (null);
-            string description = descriptionField == null ? "No description" : (string)descriptionField.GetValue (null);
-
-            Console.WriteLine (StringTools.MakeHeader (header));
-            Console.WriteLine (description);
-            Console.WriteLine ();
-            Console.WriteLine ();
-
-            theMethod.Invoke (null, null);
-            Console.WriteLine ();
+            ProgramTools.PauseForAnyKey ("Press any key to exit");
         }
 
     }
