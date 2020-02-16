@@ -3,47 +3,62 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static _05_Questions_LinkedLists.SingleLL;
 
 namespace _05_Questions_LinkedLists
 {
-    class RemoveDupes : Quest<int, bool>
+    // Remove duplicate values from an unordered linked list.
+    // If possible, perform with no additional temporary buffer.
+    class RemoveDupes : Quest<SingleLL, SingleLL>
     {
         public override string Header => "RemoveDupes";
         public override string Description => "Removes duplicate values from unsorted list";
 
 
+        // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            AddDataPair (1, true);
-            AddDataPair (2, false);
+            AddDataPair (new SingleLL (), new SingleLL ());
+            AddDataPair (new SingleLL (1, 2, 3, 4, 5), new SingleLL (1, 2, 3, 4, 5));
+            AddDataPair (new SingleLL (1, 2, 1, 4, 5), new SingleLL (1, 2, 4, 5));
+            AddDataPair (new SingleLL (1, 1, 1, 1), new SingleLL (1));
+            AddDataPair (new SingleLL (1, 2, 3, 1, 2, 3), new SingleLL (1, 2, 3));
+            AddDataPair (new SingleLL (5, 4, 3, 3, 3, 1, 2, 5, 5), new SingleLL (5, 4, 3, 1, 2));
+        }
+
+        // Write description of this particular RunStep(), namely to identify the current runData.
+        protected override void StateGoals(SingleLL runData)
+        {
+            Console.WriteLine ("- Removing duplicate values from: [" + runData + "]");
+        }
+
+        // Use runData to perform desired operation and return the result.
+        protected override SingleLL RunStep(SingleLL runData)
+        {
+            RemoveDuplicatesWithBuffer (runData);
+            return runData;
         }
 
 
-        protected override void StateGoals(int runData)
+        private static void RemoveDuplicatesWithBuffer(SingleLL theList)
         {
-            Console.WriteLine ("Check if " + runData + " equals 1");
-        }
+            Node prev = null;
+            Node curr = theList.root;
 
-        protected override bool RunStep(int runData)
-        {
-            return runData == 1;
-        }
+            HashSet<int> foundInts = new HashSet<int> ();
 
-
-        protected override bool CompareResult(bool result, bool expectedResult)
-        {
-            return result == expectedResult;
-        }
-
-        protected override void StateResult(bool result)
-        {
-            Console.WriteLine (result);
-        }
-
-
-        protected override void AdmitFailure(bool expectedResult)
-        {
-            Console.WriteLine ("!!! -> Result should have been " + expectedResult);
+            while (curr != null)
+            {
+                if (foundInts.Contains (curr.val))
+                    prev.next = curr.next;
+                else
+                {
+                    foundInts.Add (curr.val);
+                    prev = curr;
+                }
+                
+                curr = curr.next;
+            }
         }
 
     }

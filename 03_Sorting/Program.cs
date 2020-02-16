@@ -23,7 +23,7 @@ namespace Sorting
 
         private static void Print(int[] theArray)
         {
-            Console.WriteLine (ArrayTools.GetContentsAsString<int> (theArray));
+            Console.WriteLine (ArrayTools.Stringify<int> (theArray));
         }
     }
 }

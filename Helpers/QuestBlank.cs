@@ -17,7 +17,6 @@ namespace Helpers
             AddDataPair (null, null);
         }
 
-
         // Write description of this particular RunStep(), namely to identify the current runData.
         protected override void StateGoals(object runData)
         {
@@ -34,7 +33,7 @@ namespace Helpers
         // True if result matches expectedResult.
         protected override bool CompareResult(object result, object expectedResult)
         {
-            return result == expectedResult;
+            return result.Equals(expectedResult);
         }
 
         // Write the resulting data.
@@ -42,7 +41,6 @@ namespace Helpers
         {
             Console.WriteLine ("  [" + result + "]");
         }
-
 
         // Write warning of algorithm failure, result was not as expected.
         protected override void AdmitFailure(object expectedResult)

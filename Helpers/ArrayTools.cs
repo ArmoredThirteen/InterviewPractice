@@ -64,7 +64,7 @@ namespace Helpers
         }
 
 
-        public static String GetContentsAsString<T>(T[] theArray)
+        public static String Stringify<T>(T[] theArray)
         {
             StringBuilder builder = new StringBuilder ();
 
@@ -76,7 +76,7 @@ namespace Helpers
             return builder.ToString ();
         }
 
-        public static String GetContentsAsString<T>(T[][] theMatrix, string linePrefix = "", int spaceBuffer = 5)
+        public static String Stringify<T>(T[][] theMatrix, string linePrefix = "", int spaceBuffer = 5)
         {
             StringBuilder builder = new StringBuilder ();
 
