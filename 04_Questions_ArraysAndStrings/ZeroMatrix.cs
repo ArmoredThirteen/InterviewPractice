@@ -40,7 +40,7 @@ namespace _04_Questions_ArraysAndStrings
 
 
         // True if result matches expectedResult.
-        protected override bool CompareResult(int[][] result, int[][] expectedResult)
+        protected override bool VerifyResult(int[][] result, int[][] expectedResult)
         {
             return ArrayTools.AreMatricesEqual (result, expectedResult);
         }

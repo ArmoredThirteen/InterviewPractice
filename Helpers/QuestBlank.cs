@@ -31,7 +31,7 @@ namespace Helpers
 
 
         // True if result matches expectedResult.
-        protected override bool CompareResult(object result, object expectedResult)
+        protected override bool VerifyResult(object result, object expectedResult)
         {
             return result.Equals(expectedResult);
         }

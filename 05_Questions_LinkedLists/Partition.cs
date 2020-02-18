@@ -46,7 +46,7 @@ namespace _05_Questions_LinkedLists
         }
 
         // True if result matches expectedResult.
-        protected override bool CompareResult(SingleLL result, SingleLL expectedResult)
+        protected override bool VerifyResult(SingleLL result, SingleLL expectedResult)
         {
             return true;
         }

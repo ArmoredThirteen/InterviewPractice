@@ -36,7 +36,7 @@ namespace Helpers
         }
 
         // True if result matches expectedResult.
-        protected virtual bool CompareResult(ResultData result, ResultData expectedResult)
+        protected virtual bool VerifyResult(ResultData result, ResultData expectedResult)
         {
             return result.Equals(expectedResult);
         }
@@ -79,7 +79,7 @@ namespace Helpers
                 ResultData result = RunStep (runDatas[i]);
                 StateResult (result);
 
-                if (!CompareResult (result, resultDatas[i]))
+                if (!VerifyResult (result, resultDatas[i]))
                     AdmitFailure (resultDatas[i]);
 
                 Console.WriteLine ();
