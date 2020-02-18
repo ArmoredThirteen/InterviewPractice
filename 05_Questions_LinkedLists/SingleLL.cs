@@ -28,6 +28,21 @@ namespace _05_Questions_LinkedLists
                 AddLast (theVals[i]);
         }
 
+
+        public int GetLength()
+        {
+            int length = 0;
+
+            Node currNode = root;
+            while (currNode != null)
+            {
+                length++;
+                currNode = currNode.next;
+            }
+
+            return length;
+        }
+
         
         public void AddFirst(int theVal)
         {
