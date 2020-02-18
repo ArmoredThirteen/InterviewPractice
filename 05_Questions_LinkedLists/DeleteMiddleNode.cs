@@ -26,7 +26,7 @@ namespace _05_Questions_LinkedLists
         // Write description of this particular RunStep(), namely to identify the current runData.
         protected override void StateGoals(SingleLL runData)
         {
-            Console.WriteLine ("- Removing duplicate values from: [" + runData + "]");
+            Console.WriteLine ("- Delete middle node from: [" + runData + "]");
         }
 
         // Use runData to perform desired operation and return the result.
