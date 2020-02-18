@@ -16,21 +16,29 @@ namespace _05_Questions_LinkedLists
             partValue = thePartValue;
             list = theList;
         }
+
+        public override string ToString()
+        {
+            return list.ToString ();
+        }
     }
+
 
     // Given value x, put all values greater or equal to on the right side of the list
     // Put all values less than to the left side of the list
     // If x exists within list it does not need to be in between the two sides
-    class Partition : Quest<PartitionData, SingleLL>
+    class Partition : Quest<PartitionData, PartitionData>
     {
-        public override string Header => "DeleteMiddleNode";
-        public override string Description => "Remove middle node from singly linked list given only reference to node";
+        public override string Header => "Partition";
+        public override string Description => "Split list so left half is lower than given value and right half is greater than or equal to";
 
 
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            AddDataPair (new PartitionData (5, new SingleLL (ArrayTools.RandomInt (15, 0, 10))), null);
+            PartitionData partDataOne = new PartitionData (5, new SingleLL (ArrayTools.RandomInt (10, 0, 10)));
+
+            AddDataPair (partDataOne, null);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
@@ -40,21 +48,43 @@ namespace _05_Questions_LinkedLists
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override SingleLL RunStep(PartitionData runData)
+        protected override PartitionData RunStep(PartitionData runData)
         {
-            return PartitionList (runData.partValue, runData.list);
+            SingleLL partitionedList = PartitionList (runData.partValue, runData.list);
+            return new PartitionData (runData.partValue, partitionedList);
         }
 
-        // True if result matches expectedResult.
-        protected override bool VerifyResult(SingleLL result, SingleLL expectedResult)
+        // True if result matches expectedResult or passes some other verification.
+        protected override bool VerifyResult(PartitionData result, PartitionData expectedResult)
         {
+            bool foundPart = false;
+
+            SingleLL.Node currNode = result.list.root;
+            while (currNode != null)
+            {
+                // If first part has just been found then toggle foundPart
+                if (!foundPart && currNode.val >= result.partValue)
+                    foundPart = true;
+                // If part was already found and any value that should be to the left is found, fail
+                else if (foundPart && currNode.val < result.partValue)
+                    return false;
+
+                currNode = currNode.next;
+            }
+
             return true;
+        }
+
+        // Write warning of algorithm failure, result was not as expected.
+        protected override void AdmitFailure(PartitionData expectedResult)
+        {
+            Console.WriteLine (" !!! -> Result was not partitioned correctly, values not fully split left/right");
         }
 
 
         public static SingleLL PartitionList(int partVal, SingleLL list)
         {
-            SingleLL result = null;
+            SingleLL result = new SingleLL(new int[] {1, 3, 2, 1, 1, 11, 5, 5 });
 
             return result;
         }

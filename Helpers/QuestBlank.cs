@@ -30,7 +30,7 @@ namespace Helpers
         }
 
 
-        // True if result matches expectedResult.
+        // True if result matches expectedResult or passes some other verification.
         protected override bool VerifyResult(object result, object expectedResult)
         {
             return result.Equals(expectedResult);

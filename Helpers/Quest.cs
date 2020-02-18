@@ -35,7 +35,7 @@ namespace Helpers
             Console.WriteLine ("- Processing: [" + runData + "]");
         }
 
-        // True if result matches expectedResult.
+        // True if result matches expectedResult or passes some other verification.
         protected virtual bool VerifyResult(ResultData result, ResultData expectedResult)
         {
             return result.Equals(expectedResult);
