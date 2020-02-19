@@ -36,9 +36,17 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            PartitionData partDataOne = new PartitionData (5, new SingleLL (ArrayTools.RandomInt (10, 0, 10)));
+            PartitionData baseData      = new PartitionData (5, new SingleLL (ArrayTools.RandomInt (10, 0, 10)));
+            PartitionData noLowsData    = new PartitionData (5, new SingleLL (ArrayTools.RandomInt (10, 5, 10)));
+            PartitionData noHighsData   = new PartitionData (5, new SingleLL (ArrayTools.RandomInt (10, 0, 4)));
+            PartitionData smallListData = new PartitionData (2, new SingleLL (new int[] { 2, 1 }));
+            PartitionData blankListData = new PartitionData (5, new SingleLL ());
 
-            AddDataPair (partDataOne, null);
+            AddDataPair (baseData,      null);
+            AddDataPair (noLowsData,    null);
+            AddDataPair (noHighsData,   null);
+            AddDataPair (smallListData, null);
+            AddDataPair (blankListData, null);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
@@ -50,8 +58,8 @@ namespace _05_Questions_LinkedLists
         // Use runData to perform desired operation and return the result.
         protected override PartitionData RunStep(PartitionData runData)
         {
-            SingleLL partitionedList = PartitionList (runData.partValue, runData.list);
-            return new PartitionData (runData.partValue, partitionedList);
+            PartitionList (runData.partValue, runData.list);
+            return new PartitionData (runData.partValue, runData.list);
         }
 
         // True if result matches expectedResult or passes some other verification.
@@ -82,11 +90,42 @@ namespace _05_Questions_LinkedLists
         }
 
 
-        public static SingleLL PartitionList(int partVal, SingleLL list)
+        public static void PartitionList(int partVal, SingleLL list)
         {
-            SingleLL result = new SingleLL(new int[] {1, 3, 2, 1, 1, 11, 5, 5 });
+            SingleLL.Node lowLead = null;
+            SingleLL.Node highRoot = null;
+            SingleLL.Node currNode = list.root;
 
-            return result;
+            while (currNode != null)
+            {
+                // Store for later because the if statement damages currNode.next connection
+                SingleLL.Node nextNode = currNode.next;
+                
+                // High value, add currNode after highRoot
+                if (currNode.val >= partVal)
+                {
+                    currNode.next = highRoot;
+                    highRoot = currNode;
+                }
+                // Low value, add currNode after lowLead
+                else
+                {
+                    if (lowLead == null)
+                        list.root = currNode;
+                    else
+                        lowLead.next = currNode;
+
+                    lowLead = currNode;
+                }
+
+                currNode = nextNode;
+            }
+
+            // Link low and high sublists, or if no low values were found set root to be high sublist's root
+            if (lowLead != null)
+                lowLead.next = highRoot;
+            else
+                list.root = highRoot;
         }
 
     }
