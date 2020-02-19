@@ -16,7 +16,9 @@ namespace _05_Questions_LinkedLists
             //new ReturnKthToLast ().RunQuest ();
             //new DeleteMiddleNode ().RunQuest ();
             //new Partition ().RunQuest ();
-            new SumLists ().RunQuest ();
+            //new SumListsReverse ().RunQuest ();
+            //new SumLists ().RunQuest ();
+            new Palindrome ().RunQuest ();
 
             ProgramTools.PauseForAnyKey ("Press any key to exit");
         }
