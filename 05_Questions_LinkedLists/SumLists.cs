@@ -18,7 +18,10 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            AddDataPair (new SingleLL[] { MakeNum (503), MakeNum (25) }, MakeNum (528));
+            ConciseAddDataPair (0,   0);
+            ConciseAddDataPair (10,  0);
+            ConciseAddDataPair (9,   9);
+            ConciseAddDataPair (503, 29);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
@@ -36,12 +39,47 @@ namespace _05_Questions_LinkedLists
 
         private static SingleLL Sum(SingleLL numOne, SingleLL numTwo)
         {
-            return MakeNum (528);
+            SingleLL result = new SingleLL ();
+
+            SingleLL.Node currOne = numOne.root;
+            SingleLL.Node currTwo = numTwo.root;
+
+            bool remainder = false;
+
+            while (currOne != null || currTwo != null)
+            {
+                // Add digits together, plus remainder if necessary
+                int digitOne = currOne == null ? 0 : currOne.val;
+                int digitTwo = currTwo == null ? 0 : currTwo.val;
+                int sum = digitOne + digitTwo + (remainder ? 1 : 0);
+
+                // Only add ones place, tens place turns into remainder
+                result.AddLast (sum % 10);
+                remainder = sum > 9;
+
+                currOne = currOne?.next;
+                currTwo = currTwo?.next;
+            }
+
+            // Has one more digit if a remainder still exists
+            if (remainder)
+                result.AddLast (1);
+
+            return result;
         }
 
 
+        // Shorthand for the verbose AddDataPair()
+        private void ConciseAddDataPair(int numOne, int numTwo)
+        {
+            AddDataPair (new SingleLL[] { MakeNum (numOne), MakeNum (numTwo) }, MakeNum (numOne + numTwo));
+        }
+
         private static SingleLL MakeNum(int number)
         {
+            if (number == 0)
+                return new SingleLL (0);
+
             SingleLL digitList = new SingleLL ();
 
             while (number > 0)

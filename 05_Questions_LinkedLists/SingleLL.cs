@@ -81,8 +81,10 @@ namespace _05_Questions_LinkedLists
             Node currThis = root;
             Node currThat = that.root;
 
-            while (currThis != null)
+            while (currThis != null || currThat != null)
             {
+                if (currThis == null)
+                    return false;
                 if (currThat == null)
                     return false;
 
