@@ -13,7 +13,9 @@ namespace _05_Questions_LinkedLists
             ProgramTools.SizeConsoleWindow ();
 
             //new RemoveDupes ().RunQuest ();
-            new ReturnKthToLast ().RunQuest ();
+            //new ReturnKthToLast ().RunQuest ();
+            //new DeleteMiddleNode ().RunQuest ();
+            new Partition ().RunQuest ();
 
             ProgramTools.PauseForAnyKey ("Press any key to exit");
         }
