@@ -18,7 +18,7 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            AddDataPair (new SingleLL[] { new SingleLL (), new SingleLL ()}, null);
+            ConciseAddDataPair ();
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
@@ -37,6 +37,13 @@ namespace _05_Questions_LinkedLists
         public static SingleLL.Node FindIntersection(SingleLL listOne, SingleLL listTwo)
         {
             return null;
+        }
+
+
+        // Shorthand for the verbose AddDataPair()
+        private void ConciseAddDataPair()
+        {
+            AddDataPair (null, null);
         }
 
     }

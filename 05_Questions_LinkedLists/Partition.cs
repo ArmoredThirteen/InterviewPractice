@@ -36,17 +36,11 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            PartitionData baseData      = new PartitionData (5, new SingleLL (ArrayTools.RandomInt (10, 0, 10)));
-            PartitionData noLowsData    = new PartitionData (5, new SingleLL (ArrayTools.RandomInt (10, 5, 10)));
-            PartitionData noHighsData   = new PartitionData (5, new SingleLL (ArrayTools.RandomInt (10, 0, 4)));
-            PartitionData smallListData = new PartitionData (2, new SingleLL (new int[] { 2, 1 }));
-            PartitionData blankListData = new PartitionData (5, new SingleLL ());
-
-            AddDataPair (baseData,      null);
-            AddDataPair (noLowsData,    null);
-            AddDataPair (noHighsData,   null);
-            AddDataPair (smallListData, null);
-            AddDataPair (blankListData, null);
+            ConciseAddDataPair (5, ArrayTools.RandomInt (10, 0, 10));
+            ConciseAddDataPair (5, ArrayTools.RandomInt (10, 5, 10));
+            ConciseAddDataPair (5, ArrayTools.RandomInt (10, 0, 4));
+            ConciseAddDataPair (2, 1, 2);
+            ConciseAddDataPair (5);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
@@ -126,6 +120,13 @@ namespace _05_Questions_LinkedLists
                 lowLead.next = highRoot;
             else
                 list.root = highRoot;
+        }
+
+
+        // Shorthand for the verbose AddDataPair()
+        private void ConciseAddDataPair(int partVal, params int[] theVals)
+        {
+            AddDataPair (new PartitionData (partVal, new SingleLL (theVals)), null);
         }
 
     }
