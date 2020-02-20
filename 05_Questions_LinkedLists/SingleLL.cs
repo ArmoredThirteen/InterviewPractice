@@ -29,6 +29,11 @@ namespace _05_Questions_LinkedLists
         }
 
 
+        public bool IsEmpty()
+        {
+            return root == null;
+        }
+
         public int GetLength()
         {
             int length = 0;
@@ -63,7 +68,7 @@ namespace _05_Questions_LinkedLists
 
         public void AddLast(Node newNode)
         {
-            if (root == null)
+            if (IsEmpty ())
             {
                 root = newNode;
                 return;
@@ -81,8 +86,10 @@ namespace _05_Questions_LinkedLists
         {
             if (toStitch == null)
                 return;
+            if (toStitch.IsEmpty ())
+                return;
 
-            if (root == null)
+            if (IsEmpty ())
             {
                 root = toStitch.root;
                 return;
@@ -100,9 +107,9 @@ namespace _05_Questions_LinkedLists
         {
             SingleLL that = (SingleLL)obj;
 
-            if (this.root == null && that.root == null)
+            if (IsEmpty () && that.IsEmpty ())
                 return true;
-            if (this.root == null || that.root == null)
+            if (IsEmpty () || that.IsEmpty ())
                 return false;
 
             Node currThis = root;
@@ -127,7 +134,7 @@ namespace _05_Questions_LinkedLists
 
         public override string ToString()
         {
-            if (root == null)
+            if (IsEmpty ())
                 return "empty";
 
             StringBuilder builder = new StringBuilder ();

@@ -45,7 +45,7 @@ namespace _05_Questions_LinkedLists
         {
             if (list == null)
                 return false;
-            if (list.root == null)
+            if (list.IsEmpty ())
                 return false;
 
             // Find halfway mark
