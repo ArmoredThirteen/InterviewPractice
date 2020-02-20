@@ -34,6 +34,11 @@ namespace _05_Questions_LinkedLists
             return root == null;
         }
 
+        public static bool IsNullOrEmpty(SingleLL theList)
+        {
+            return theList == null || theList.IsEmpty ();
+        }
+
         public int GetLength()
         {
             int length = 0;
@@ -54,8 +59,20 @@ namespace _05_Questions_LinkedLists
             AddFirst (new Node (theVal));
         }
 
+        public void AddFirst(SingleLL theList)
+        {
+            if (theList == null)
+                return;
+
+            theList.AddLast (this);
+            root = theList.root;
+        }
+
         public void AddFirst(Node newNode)
         {
+            if (newNode == null)
+                return;
+
             newNode.next = root;
             root = newNode;
         }
@@ -66,8 +83,19 @@ namespace _05_Questions_LinkedLists
             AddLast (new Node (theVal));
         }
 
+        public void AddLast(SingleLL theList)
+        {
+            if (IsNullOrEmpty (theList))
+                return;
+
+            AddLast (theList.root);
+        }
+
         public void AddLast(Node newNode)
         {
+            if (newNode == null)
+                return;
+
             if (IsEmpty ())
             {
                 root = newNode;
@@ -79,27 +107,6 @@ namespace _05_Questions_LinkedLists
                 currNode = currNode.next;
 
             currNode.next = newNode;
-        }
-
-
-        public void StitchToEnd(SingleLL toStitch)
-        {
-            if (toStitch == null)
-                return;
-            if (toStitch.IsEmpty ())
-                return;
-
-            if (IsEmpty ())
-            {
-                root = toStitch.root;
-                return;
-            }
-
-            Node currNode = root;
-            while (currNode != null)
-                currNode = currNode.next;
-
-            currNode.next = toStitch.root;
         }
 
 
