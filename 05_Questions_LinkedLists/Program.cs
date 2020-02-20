@@ -20,7 +20,7 @@ namespace _05_Questions_LinkedLists
             //new SumLists ().RunQuest ();
             //new Palindrome ().RunQuest ();
             new Intersection ().RunQuest ();
-            new LoopDetection ().RunQuest ();
+            //new LoopDetection ().RunQuest ();
 
             ProgramTools.PauseForAnyKey ("Press any key to exit");
         }

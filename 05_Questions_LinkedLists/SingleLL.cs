@@ -46,15 +46,23 @@ namespace _05_Questions_LinkedLists
         
         public void AddFirst(int theVal)
         {
-            Node newNode = new Node (theVal);
+            AddFirst (new Node (theVal));
+        }
+
+        public void AddFirst(Node newNode)
+        {
             newNode.next = root;
             root = newNode;
         }
 
+
         public void AddLast(int theVal)
         {
-            Node newNode = new Node (theVal);
+            AddLast (new Node (theVal));
+        }
 
+        public void AddLast(Node newNode)
+        {
             if (root == null)
             {
                 root = newNode;
@@ -66,6 +74,25 @@ namespace _05_Questions_LinkedLists
                 currNode = currNode.next;
 
             currNode.next = newNode;
+        }
+
+
+        public void StitchToEnd(SingleLL toStitch)
+        {
+            if (toStitch == null)
+                return;
+
+            if (root == null)
+            {
+                root = toStitch.root;
+                return;
+            }
+
+            Node currNode = root;
+            while (currNode != null)
+                currNode = currNode.next;
+
+            currNode.next = toStitch.root;
         }
 
 
