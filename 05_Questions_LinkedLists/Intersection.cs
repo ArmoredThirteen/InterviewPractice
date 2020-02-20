@@ -18,7 +18,7 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            ConciseAddDataPair ();
+            ConciseAddDataPair (new int[] { 1 }, new int[] { 10 }, new int[] { 2, 3 });
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
@@ -33,17 +33,28 @@ namespace _05_Questions_LinkedLists
             return FindIntersection (runData[0], runData[1]);
         }
 
+        // True if result matches expectedResult or passes some other verification.
+        protected override bool VerifyResult(SingleLL.Node result, SingleLL.Node expectedResult)
+        {
+            return Object.ReferenceEquals (result, expectedResult);
+        }
+
 
         public static SingleLL.Node FindIntersection(SingleLL listOne, SingleLL listTwo)
         {
-            return null;
+            //return null;
+            return listOne.root;
         }
 
 
         // Shorthand for the verbose AddDataPair()
-        private void ConciseAddDataPair()
+        private void ConciseAddDataPair(int[] valsOne, int[] valsTwo, int[] endVals)
         {
-            AddDataPair (null, null);
+            SingleLL endList = new SingleLL (endVals);
+            SingleLL listOne = new SingleLL (valsOne).AddLast (endList);
+            SingleLL listTwo = new SingleLL (valsTwo).AddLast (endList);
+
+            AddDataPair (new SingleLL[] { listOne, listTwo }, endList.root);
         }
 
     }

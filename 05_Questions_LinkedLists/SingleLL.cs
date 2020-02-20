@@ -16,6 +16,11 @@ namespace _05_Questions_LinkedLists
             {
                 val = theVal;
             }
+
+            public override string ToString()
+            {
+                return val.ToString ();
+            }
         }
 
 
@@ -54,52 +59,57 @@ namespace _05_Questions_LinkedLists
         }
 
         
-        public void AddFirst(int theVal)
+        public SingleLL AddFirst(int theVal)
         {
             AddFirst (new Node (theVal));
+            return this;
         }
 
-        public void AddFirst(SingleLL theList)
+        public SingleLL AddFirst(SingleLL theList)
         {
             if (theList == null)
-                return;
+                return this;
 
             theList.AddLast (this);
             root = theList.root;
+            return this;
         }
 
-        public void AddFirst(Node newNode)
+        public SingleLL AddFirst(Node newNode)
         {
             if (newNode == null)
-                return;
+                return this;
 
             newNode.next = root;
             root = newNode;
+            return this;
         }
 
 
-        public void AddLast(int theVal)
+        public SingleLL AddLast(int theVal)
         {
             AddLast (new Node (theVal));
+            return this;
         }
 
-        public void AddLast(SingleLL theList)
+        public SingleLL AddLast(SingleLL theList)
         {
             if (IsNullOrEmpty (theList))
-                return;
+                return this;
 
             AddLast (theList.root);
+            return this;
         }
 
-        public void AddLast(Node newNode)
+        public SingleLL AddLast(Node newNode)
         {
             if (newNode == null)
-                return;
+                return this;
 
             if (IsEmpty ())
             {
                 root = newNode;
-                return;
+                return this;
             }
 
             Node currNode = root;
@@ -107,6 +117,7 @@ namespace _05_Questions_LinkedLists
                 currNode = currNode.next;
 
             currNode.next = newNode;
+            return this;
         }
 
 
