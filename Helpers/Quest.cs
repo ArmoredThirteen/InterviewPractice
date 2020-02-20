@@ -38,7 +38,13 @@ namespace Helpers
         // True if result matches expectedResult or passes some other verification.
         protected virtual bool VerifyResult(ResultData result, ResultData expectedResult)
         {
-            return result.Equals(expectedResult);
+            if (result != null && expectedResult != null)
+                return result.Equals (expectedResult);
+
+            if (result == null && expectedResult == null)
+                return true;
+
+            return false;
         }
 
         // Write the resulting data.
