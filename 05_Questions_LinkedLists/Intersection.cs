@@ -18,7 +18,12 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildDatas()
         {
-            ConciseAddDataPair (new int[] { 1 }, new int[] { 10 }, new int[] { 2, 3 });
+            ConciseAddDataPair (new int[] { },         new int[] { },            new int[] { });
+            ConciseAddDataPair (new int[] { 1 },       new int[] { 10 },         new int[] { });
+            ConciseAddDataPair (new int[] { 1 },       new int[] { 10 },         new int[] { 50, 60 });
+            ConciseAddDataPair (new int[] { },         new int[] { 10 },         new int[] { 50, 60 });
+            ConciseAddDataPair (new int[] { 1, 2, 3 }, new int[] { 10 },         new int[] { 50, 60 });
+            ConciseAddDataPair (new int[] { 1, 2 },    new int[] { 10, 11, 12 }, new int[] { 50 });
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
@@ -42,8 +47,35 @@ namespace _05_Questions_LinkedLists
 
         public static SingleLL.Node FindIntersection(SingleLL listOne, SingleLL listTwo)
         {
-            //return null;
-            return listOne.root;
+            if (SingleLL.IsNullOrEmpty (listOne) || SingleLL.IsNullOrEmpty (listTwo))
+                return null;
+
+            int lenOne = listOne.GetLength ();
+            int lenTwo = listTwo.GetLength ();
+            int lenDif = Math.Abs (lenOne - lenTwo);
+
+            SingleLL.Node currNodeOne = listOne.root;
+            SingleLL.Node currNodeTwo = listTwo.root;
+
+            for (int i = 0; i < lenDif; i++)
+            {
+                if (lenOne > lenTwo)
+                    currNodeOne = currNodeOne.next;
+                else
+                    currNodeTwo = currNodeTwo.next;
+            }
+
+            while (currNodeOne != null)
+            {
+                if (Object.ReferenceEquals (currNodeOne, currNodeTwo))
+                    return currNodeOne;
+
+                currNodeOne = currNodeOne.next;
+                currNodeTwo = currNodeTwo.next;
+            }
+
+            // No intersection found
+            return null;
         }
 
 
