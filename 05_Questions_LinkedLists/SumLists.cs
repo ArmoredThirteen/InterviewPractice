@@ -18,14 +18,14 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildTestRuns()
         {
-            ConciseAddDataPair (0,   0);
-            ConciseAddDataPair (10,  0);
-            ConciseAddDataPair (9,   9);
-            ConciseAddDataPair (503, 29);
+            NewTestRun (0,   0);
+            NewTestRun (10,  0);
+            NewTestRun (9,   9);
+            NewTestRun (503, 29);
         }
 
-        // Shorthand for the verbose AddDataPair()
-        private void ConciseAddDataPair(int numOne, int numTwo)
+        // Shorthand for more complex uses of AddTestRun()
+        private void NewTestRun(int numOne, int numTwo)
         {
             AddTestRun (new SingleLL[] { MakeNum (numOne), MakeNum (numTwo) }, MakeNum (numOne + numTwo));
         }

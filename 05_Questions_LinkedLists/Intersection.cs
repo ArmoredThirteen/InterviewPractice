@@ -18,16 +18,16 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildTestRuns()
         {
-            ConciseAddDataPair (new int[] { },         new int[] { },            new int[] { });
-            ConciseAddDataPair (new int[] { 1 },       new int[] { 10 },         new int[] { });
-            ConciseAddDataPair (new int[] { 1 },       new int[] { 10 },         new int[] { 50, 60 });
-            ConciseAddDataPair (new int[] { },         new int[] { 10 },         new int[] { 50, 60 });
-            ConciseAddDataPair (new int[] { 1, 2, 3 }, new int[] { 10 },         new int[] { 50, 60 });
-            ConciseAddDataPair (new int[] { 1, 2 },    new int[] { 10, 11, 12 }, new int[] { 50 });
+            NewTestRun (new int[] { },         new int[] { },            new int[] { });
+            NewTestRun (new int[] { 1 },       new int[] { 10 },         new int[] { });
+            NewTestRun (new int[] { 1 },       new int[] { 10 },         new int[] { 50, 60 });
+            NewTestRun (new int[] { },         new int[] { 10 },         new int[] { 50, 60 });
+            NewTestRun (new int[] { 1, 2, 3 }, new int[] { 10 },         new int[] { 50, 60 });
+            NewTestRun (new int[] { 1, 2 },    new int[] { 10, 11, 12 }, new int[] { 50 });
         }
 
-        // Shorthand for the verbose AddDataPair()
-        private void ConciseAddDataPair(int[] valsOne, int[] valsTwo, int[] endVals)
+        // Shorthand for more complex uses of AddTestRun()
+        private void NewTestRun(int[] valsOne, int[] valsTwo, int[] endVals)
         {
             // Add the endVals list to the end of both valsOne and valsTwo
             SingleLL endList = new SingleLL (endVals);

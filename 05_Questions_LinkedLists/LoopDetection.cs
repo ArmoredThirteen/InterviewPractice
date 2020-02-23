@@ -20,8 +20,8 @@ namespace _05_Questions_LinkedLists
             AddTestRun (new SingleLL (), false);
         }
         
-        // Shorthand for the verbose AddDataPair()
-        private void ConciseAddDataPair(int[] valsStart, int[] valsLoop, bool expectedResult)
+        // Shorthand for more complex uses of AddTestRun()
+        private void NewTestRun(int[] valsStart, int[] valsLoop, bool expectedResult)
         {
             
         }
