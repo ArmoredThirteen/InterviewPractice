@@ -17,17 +17,17 @@ namespace _04_Questions_ArraysAndStrings
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair ("",    "");
-            AddDataPair ("a",   "a");
-            AddDataPair ("sup", "sup");
-            AddDataPair ("ssssuup", "s4u2p1");
-            AddDataPair ("SsSsSsupppppppppppp", "S1s1S1s1S1s1u1p12");
+            AddTestRun ("",    "");
+            AddTestRun ("a",   "a");
+            AddTestRun ("sup", "sup");
+            AddTestRun ("ssssuup", "s4u2p1");
+            AddTestRun ("SsSsSsupppppppppppp", "S1s1S1s1S1s1u1p12");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override string RunStep(string runData)
+        protected override string RunTest(string runData)
         {
             return GetCompressedString (runData);
         }

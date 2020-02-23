@@ -15,37 +15,37 @@ namespace _04_Questions_ArraysAndStrings
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair (new string[] { "",  "" },  true);
-            AddDataPair (new string[] { "a", "" },  true);
-            AddDataPair (new string[] { "a", "r" }, true);
+            AddTestRun (new string[] { "",  "" },  true);
+            AddTestRun (new string[] { "a", "" },  true);
+            AddTestRun (new string[] { "a", "r" }, true);
 
-            AddDataPair (new string[] { "toot",    "tooooot" }, false);
-            AddDataPair (new string[] { "tooooot", "toot" },    false);
-            AddDataPair (new string[] { "ReversE", "EsreveR" }, false);
+            AddTestRun (new string[] { "toot",    "tooooot" }, false);
+            AddTestRun (new string[] { "tooooot", "toot" },    false);
+            AddTestRun (new string[] { "ReversE", "EsreveR" }, false);
 
-            AddDataPair (new string[] { "Insert", "1Insert" }, true);
-            AddDataPair (new string[] { "Insert", "Ins2ert" }, true);
-            AddDataPair (new string[] { "Insert", "Insert3" }, true);
+            AddTestRun (new string[] { "Insert", "1Insert" }, true);
+            AddTestRun (new string[] { "Insert", "Ins2ert" }, true);
+            AddTestRun (new string[] { "Insert", "Insert3" }, true);
 
-            AddDataPair (new string[] { "Remove", "emove" }, true);
-            AddDataPair (new string[] { "Remove", "Remve" }, true);
-            AddDataPair (new string[] { "Remove", "Remov" }, true);
+            AddTestRun (new string[] { "Remove", "emove" }, true);
+            AddTestRun (new string[] { "Remove", "Remve" }, true);
+            AddTestRun (new string[] { "Remove", "Remov" }, true);
 
-            AddDataPair (new string[] { "Replace", "Zeplace" }, true);
-            AddDataPair (new string[] { "Replace", "Rep ace" }, true);
-            AddDataPair (new string[] { "Replace", "Replacc" }, true);
+            AddTestRun (new string[] { "Replace", "Zeplace" }, true);
+            AddTestRun (new string[] { "Replace", "Rep ace" }, true);
+            AddTestRun (new string[] { "Replace", "Replacc" }, true);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(string[] runData)
+        protected override void StateTest(string[] runData)
         {
             Console.WriteLine ("- Are [" + runData[0] + "] and [" + runData[1] + "] one or fewer edits different");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override bool RunStep(string[] runData)
+        protected override bool RunTest(string[] runData)
         {
             return IsOneChangeAway (runData[0].ToCharArray (), runData[1].ToCharArray ());
         }

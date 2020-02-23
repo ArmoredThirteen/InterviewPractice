@@ -16,7 +16,7 @@ namespace _05_Questions_LinkedLists
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
             ConciseAddDataPair (0,   0);
             ConciseAddDataPair (10,  0);
@@ -24,14 +24,21 @@ namespace _05_Questions_LinkedLists
             ConciseAddDataPair (503, 29);
         }
 
+        // Shorthand for the verbose AddDataPair()
+        private void ConciseAddDataPair(int numOne, int numTwo)
+        {
+            AddTestRun (new SingleLL[] { MakeNum (numOne), MakeNum (numTwo) }, MakeNum (numOne + numTwo));
+        }
+
+
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(SingleLL[] runData)
+        protected override void StateTest(SingleLL[] runData)
         {
             Console.WriteLine ("- Adding: [" + runData[0] + "] + [" + runData[1] + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override SingleLL RunStep(SingleLL[] runData)
+        protected override SingleLL RunTest(SingleLL[] runData)
         {
             return Sum (runData[0], runData[1]);
         }
@@ -78,13 +85,7 @@ namespace _05_Questions_LinkedLists
             result.AddFirst (sum % 10);
             return sum > 9;
         }
-
-
-        // Shorthand for the verbose AddDataPair()
-        private void ConciseAddDataPair(int numOne, int numTwo)
-        {
-            AddDataPair (new SingleLL[] { MakeNum (numOne), MakeNum (numTwo) }, MakeNum (numOne + numTwo));
-        }
+        
 
         private static SingleLL MakeNum(int number)
         {

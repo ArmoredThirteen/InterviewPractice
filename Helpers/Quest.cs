@@ -5,32 +5,72 @@ using System.Text;
 
 namespace Helpers
 {
+    // Logic and data to run various kinds of questions in a standard format.
+    // Each TestRun consists of the data to run the quest once and verify the results.
     public abstract class Quest<RunData, ResultData>
     {
-        public abstract string Header { get; }
-        public abstract string Description { get; }
-
-        protected List<RunData>    runDatas    = new List<RunData> ();
-        protected List<ResultData> resultDatas = new List<ResultData> ();
-
-
-        // Add values to runDatas and resultDatas for use in RunQuest().
-        protected abstract void BuildDatas();
-        
-        // Use runData to perform desired operation and return the result.
-        protected abstract ResultData RunStep (RunData runData);
-
-
-        // Add values to runDatas and resultDatas at same time, since that's how it has to be anyway.
-        protected void AddDataPair(RunData runData, ResultData expectedResult)
+        private class TestRun
         {
-            runDatas.Add (runData);
-            resultDatas.Add (expectedResult);
+            public RunData runData;
+            public ResultData expectedResult;
+
+            public TestRun(RunData theRunData, ResultData theExpectedResult)
+            {
+                runData = theRunData;
+                expectedResult = theExpectedResult;
+            }
         }
 
 
+        // All test run datas and their results.
+        private List<TestRun> testRuns = new List<TestRun> ();
+
+        // Add values to runDatas and resultDatas at same time, since that's how it has to be anyway.
+        protected void AddTestRun(RunData runData, ResultData expectedResult)
+        {
+            testRuns.Add (new TestRun (runData, expectedResult));
+        }
+
+        // Main method that controls the when and why of each question's process.
+        // Iterate through all the runDatas to put them through RunStep.
+        // Verifies results are as expected and runs AdmitFailure() when they don't.
+        public void BuildAndRunTests()
+        {
+            Console.WriteLine (StringTools.MakeHeader (Header));
+            Console.WriteLine (Description);
+            Console.WriteLine ();
+
+            BuildTestRuns ();
+
+            for (int i = 0; i < testRuns.Count; i++)
+            {
+                StateTest (testRuns[i].runData);
+
+                ResultData result = RunTest (testRuns[i].runData);
+                StateResult (result);
+
+                if (!VerifyResult (result, testRuns[i].expectedResult))
+                    AdmitFailure (testRuns[i].expectedResult);
+
+                Console.WriteLine ();
+            }
+            
+            Console.WriteLine ();
+        }
+
+
+        // Both are used in opening header when triggering all testRuns.
+        public abstract string Header { get; }
+        public abstract string Description { get; }
+
+        // Add values to runDatas and resultDatas for use in RunQuest().
+        protected abstract void BuildTestRuns();
+        
+        // Use runData to perform desired operation and return the result.
+        protected abstract ResultData RunTest (RunData runData);
+
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected virtual void StateGoals(RunData runData)
+        protected virtual void StateTest(RunData runData)
         {
             Console.WriteLine ("- Processing: [" + runData + "]");
         }
@@ -57,41 +97,6 @@ namespace Helpers
         protected virtual void AdmitFailure(ResultData expectedResult)
         {
             Console.WriteLine (" !!! -> Result should have been [" + expectedResult + "]");
-        }
-
-
-        // Main method that controls the when and why of each question's process.
-        // Iterate through all the runDatas to put them through RunStep.
-        // Verifies results are as expected and runs AdmitFailure() when they don't.
-        public void RunQuest()
-        {
-            Console.WriteLine (StringTools.MakeHeader (Header));
-            Console.WriteLine (Description);
-            Console.WriteLine ();
-
-            if (runDatas.Count != resultDatas.Count)
-            {
-                Console.WriteLine ("!!!!! -> Failure: runDatas and resultDatas are not the same Length.");
-                Console.WriteLine ();
-                return;
-            }
-
-            BuildDatas ();
-
-            for (int i = 0; i < runDatas.Count; i++)
-            {
-                StateGoals (runDatas[i]);
-
-                ResultData result = RunStep (runDatas[i]);
-                StateResult (result);
-
-                if (!VerifyResult (result, resultDatas[i]))
-                    AdmitFailure (resultDatas[i]);
-
-                Console.WriteLine ();
-            }
-            
-            Console.WriteLine ();
         }
         
     }

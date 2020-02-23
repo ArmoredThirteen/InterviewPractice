@@ -15,19 +15,26 @@ namespace _05_Questions_LinkedLists
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair (new SingleLL (), false);
+            AddTestRun (new SingleLL (), false);
+        }
+        
+        // Shorthand for the verbose AddDataPair()
+        private void ConciseAddDataPair(int[] valsStart, int[] valsLoop, bool expectedResult)
+        {
+            
         }
 
+
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(SingleLL runData)
+        protected override void StateTest(SingleLL runData)
         {
             Console.WriteLine ("- Finding if loop exists in: [" + runData + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override bool RunStep(SingleLL runData)
+        protected override bool RunTest(SingleLL runData)
         {
             return HasLoop (runData);
         }

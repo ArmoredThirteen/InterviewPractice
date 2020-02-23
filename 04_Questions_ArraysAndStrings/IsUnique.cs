@@ -15,16 +15,16 @@ namespace _04_Questions_ArraysAndStrings
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair ("Fu-Bar".ToCharArray (),   true);
-            AddDataPair ("Foo-Bar".ToCharArray (),  false);
-            AddDataPair ("Fu-Barr".ToCharArray (),  false);
-            AddDataPair ("FFu-Barr".ToCharArray (), false);
+            AddTestRun ("Fu-Bar".ToCharArray (),   true);
+            AddTestRun ("Foo-Bar".ToCharArray (),  false);
+            AddTestRun ("Fu-Barr".ToCharArray (),  false);
+            AddTestRun ("FFu-Barr".ToCharArray (), false);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(char[] runData)
+        protected override void StateTest(char[] runData)
         {
             StringBuilder builder = new StringBuilder ();
             builder.Append ("                             [");
@@ -37,7 +37,7 @@ namespace _04_Questions_ArraysAndStrings
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override bool RunStep(char[] runData)
+        protected override bool RunTest(char[] runData)
         {
             return IsStrUnique (runData);
             //return IsCharAraUniqueUsingSort (runData);

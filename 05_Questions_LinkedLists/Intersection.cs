@@ -16,7 +16,7 @@ namespace _05_Questions_LinkedLists
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
             ConciseAddDataPair (new int[] { },         new int[] { },            new int[] { });
             ConciseAddDataPair (new int[] { 1 },       new int[] { 10 },         new int[] { });
@@ -26,14 +26,28 @@ namespace _05_Questions_LinkedLists
             ConciseAddDataPair (new int[] { 1, 2 },    new int[] { 10, 11, 12 }, new int[] { 50 });
         }
 
+        // Shorthand for the verbose AddDataPair()
+        private void ConciseAddDataPair(int[] valsOne, int[] valsTwo, int[] endVals)
+        {
+            // Add the endVals list to the end of both valsOne and valsTwo
+            SingleLL endList = new SingleLL (endVals);
+            SingleLL listOne = new SingleLL (valsOne).AddLast (endList);
+            SingleLL listTwo = new SingleLL (valsTwo).AddLast (endList);
+
+            // The intersection point is the expected return value
+            // If endVals was empty then endList.root will be null, for the case of having no intersection
+            AddTestRun (new SingleLL[] { listOne, listTwo }, endList.root);
+        }
+
+
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(SingleLL[] runData)
+        protected override void StateTest(SingleLL[] runData)
         {
             Console.WriteLine ("- Check for intersection between: [" + runData[0] + "] and [" + runData[1] + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override SingleLL.Node RunStep(SingleLL[] runData)
+        protected override SingleLL.Node RunTest(SingleLL[] runData)
         {
             return FindIntersection (runData[0], runData[1]);
         }
@@ -76,17 +90,6 @@ namespace _05_Questions_LinkedLists
 
             // No intersection found
             return null;
-        }
-
-
-        // Shorthand for the verbose AddDataPair()
-        private void ConciseAddDataPair(int[] valsOne, int[] valsTwo, int[] endVals)
-        {
-            SingleLL endList = new SingleLL (endVals);
-            SingleLL listOne = new SingleLL (valsOne).AddLast (endList);
-            SingleLL listTwo = new SingleLL (valsTwo).AddLast (endList);
-
-            AddDataPair (new SingleLL[] { listOne, listTwo }, endList.root);
         }
 
     }

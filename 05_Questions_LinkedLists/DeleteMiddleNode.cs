@@ -16,21 +16,21 @@ namespace _05_Questions_LinkedLists
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair (new SingleLL (1, 2, 3), new SingleLL (1, 3));
-            AddDataPair (new SingleLL (1, 2, 3, 4), new SingleLL (1, 2, 4));
-            AddDataPair (new SingleLL (1, 2, 3, 4, 5), new SingleLL (1, 2, 4, 5));
+            AddTestRun (new SingleLL (1, 2, 3), new SingleLL (1, 3));
+            AddTestRun (new SingleLL (1, 2, 3, 4), new SingleLL (1, 2, 4));
+            AddTestRun (new SingleLL (1, 2, 3, 4, 5), new SingleLL (1, 2, 4, 5));
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(SingleLL runData)
+        protected override void StateTest(SingleLL runData)
         {
             Console.WriteLine ("- Delete middle node from: [" + runData + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override SingleLL RunStep(SingleLL runData)
+        protected override SingleLL RunTest(SingleLL runData)
         {
             if (runData.GetLength () < 3)
             {

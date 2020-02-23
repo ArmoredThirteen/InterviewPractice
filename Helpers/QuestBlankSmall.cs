@@ -12,19 +12,19 @@ namespace Helpers
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair (null, null);
+            AddTestRun (null, null);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(object runData)
+        protected override void StateTest(object runData)
         {
             Console.WriteLine ("- Processing: [" + runData + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override object RunStep(object runData)
+        protected override object RunTest(object runData)
         {
             return null;
         }

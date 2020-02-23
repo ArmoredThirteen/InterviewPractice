@@ -16,24 +16,24 @@ namespace _05_Questions_LinkedLists
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair (new SingleLL (), new SingleLL ());
-            AddDataPair (new SingleLL (1, 2, 3, 4, 5), new SingleLL (1, 2, 3, 4, 5));
-            AddDataPair (new SingleLL (1, 2, 1, 4, 5), new SingleLL (1, 2, 4, 5));
-            AddDataPair (new SingleLL (1, 1, 1, 1), new SingleLL (1));
-            AddDataPair (new SingleLL (1, 2, 3, 1, 2, 3), new SingleLL (1, 2, 3));
-            AddDataPair (new SingleLL (5, 4, 3, 3, 3, 1, 2, 5, 5), new SingleLL (5, 4, 3, 1, 2));
+            AddTestRun (new SingleLL (), new SingleLL ());
+            AddTestRun (new SingleLL (1, 2, 3, 4, 5), new SingleLL (1, 2, 3, 4, 5));
+            AddTestRun (new SingleLL (1, 2, 1, 4, 5), new SingleLL (1, 2, 4, 5));
+            AddTestRun (new SingleLL (1, 1, 1, 1), new SingleLL (1));
+            AddTestRun (new SingleLL (1, 2, 3, 1, 2, 3), new SingleLL (1, 2, 3));
+            AddTestRun (new SingleLL (5, 4, 3, 3, 3, 1, 2, 5, 5), new SingleLL (5, 4, 3, 1, 2));
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(SingleLL runData)
+        protected override void StateTest(SingleLL runData)
         {
             Console.WriteLine ("- Removing duplicate values from: [" + runData + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override SingleLL RunStep(SingleLL runData)
+        protected override SingleLL RunTest(SingleLL runData)
         {
             RemoveDuplicatesWithBuffer (runData);
             return runData;
