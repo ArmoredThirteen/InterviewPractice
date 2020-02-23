@@ -26,7 +26,7 @@ namespace _05_Questions_LinkedLists
             NewTestRun (new int[] { 1, 2 },    new int[] { 10, 11, 12 }, new int[] { 50 });
         }
 
-        // Shorthand for more complex uses of AddTestRun()
+        // Shorthand for more complex uses of AddTestRun().
         private void NewTestRun(int[] valsOne, int[] valsTwo, int[] endVals)
         {
             // Add the endVals list to the end of both valsOne and valsTwo

@@ -24,7 +24,7 @@ namespace _05_Questions_LinkedLists
             NewTestRun (503, 29);
         }
 
-        // Shorthand for more complex uses of AddTestRun()
+        // Shorthand for more complex uses of AddTestRun().
         private void NewTestRun(int numOne, int numTwo)
         {
             AddTestRun (new SingleLL[] { MakeNum (numOne), MakeNum (numTwo) }, MakeNum (numOne + numTwo));

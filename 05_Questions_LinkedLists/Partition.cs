@@ -43,7 +43,7 @@ namespace _05_Questions_LinkedLists
             NewTestRun (5);
         }
 
-        // Shorthand for more complex uses of AddTestRun()
+        // Shorthand for more complex uses of AddTestRun().
         private void NewTestRun(int partVal, params int[] theVals)
         {
             AddTestRun (new PartitionData (partVal, new SingleLL (theVals)), null);
