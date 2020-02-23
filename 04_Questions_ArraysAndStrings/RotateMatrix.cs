@@ -15,15 +15,15 @@ namespace _04_Questions_ArraysAndStrings
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair (MakeThreeMatrix (), MakeThreeMatrixResult ());
-            AddDataPair (MakeFourMatrix (),  MakeFourMatrixResult ());
-            AddDataPair (MakeFiveMatrix (),  MakeFiveMatrixResult ());
+            AddTestRun (MakeThreeMatrix (), MakeThreeMatrixResult ());
+            AddTestRun (MakeFourMatrix (),  MakeFourMatrixResult ());
+            AddTestRun (MakeFiveMatrix (),  MakeFiveMatrixResult ());
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(int[][] runData)
+        protected override void StateTest(int[][] runData)
         {
             Console.WriteLine ("- Processing matrix:");
             Console.Write (ArrayTools.Stringify<int> (runData, "  "));
@@ -31,7 +31,7 @@ namespace _04_Questions_ArraysAndStrings
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override int[][] RunStep(int[][] runData)
+        protected override int[][] RunTest(int[][] runData)
         {
             Rotate (runData, true);
             return runData;

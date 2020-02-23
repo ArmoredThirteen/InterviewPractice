@@ -15,20 +15,20 @@ namespace _04_Questions_ArraysAndStrings
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair ("hello",  false);
-            AddDataPair ("aabbcd", false);
-            AddDataPair ("abc",    false);
-            AddDataPair ("l",      true);
-            AddDataPair ("tacocat",      true);
-            AddDataPair ("$$##@@@@@",    true);
-            AddDataPair ("$$####@@@@@",  true);
-            AddDataPair ("$$#####@@@@@", false);
+            AddTestRun ("hello",  false);
+            AddTestRun ("aabbcd", false);
+            AddTestRun ("abc",    false);
+            AddTestRun ("l",      true);
+            AddTestRun ("tacocat",      true);
+            AddTestRun ("$$##@@@@@",    true);
+            AddTestRun ("$$####@@@@@",  true);
+            AddTestRun ("$$#####@@@@@", false);
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override bool RunStep(string runData)
+        protected override bool RunTest(string runData)
         {
             return IsPalindromePermutation (runData.ToCharArray ());
         }

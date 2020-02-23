@@ -13,15 +13,15 @@ namespace _04_Questions_ArraysAndStrings
         {
             ProgramTools.SizeConsoleWindow ();
 
-            new IsUnique ().RunQuest ();
-            new CheckPermutation ().RunQuest ();
-            new URLify ().RunQuest ();
-            new PalindromePermutation ().RunQuest ();
-            new OneAway ().RunQuest ();
-            new StringCompression ().RunQuest ();
-            new RotateMatrix ().RunQuest ();
-            new ZeroMatrix ().RunQuest ();
-            new StringRotation ().RunQuest ();
+            new IsUnique ().BuildAndRunTests ();
+            new CheckPermutation ().BuildAndRunTests ();
+            new URLify ().BuildAndRunTests ();
+            new PalindromePermutation ().BuildAndRunTests ();
+            new OneAway ().BuildAndRunTests ();
+            new StringCompression ().BuildAndRunTests ();
+            new RotateMatrix ().BuildAndRunTests ();
+            new ZeroMatrix ().BuildAndRunTests ();
+            new StringRotation ().BuildAndRunTests ();
 
             ProgramTools.PauseForAnyKey ("Press any key to exit");
         }

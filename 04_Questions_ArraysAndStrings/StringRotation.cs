@@ -16,27 +16,27 @@ namespace _04_Questions_ArraysAndStrings
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair (new string[] { "", "" }, true);
-            AddDataPair (new string[] { "HelloWorld", "lloWorldHe" }, true);
-            AddDataPair (new string[] { "hahahaha",   "hahahaha" },   true);
-            AddDataPair (new string[] { "Blah",       "ahBl" },       true);
+            AddTestRun (new string[] { "", "" }, true);
+            AddTestRun (new string[] { "HelloWorld", "lloWorldHe" }, true);
+            AddTestRun (new string[] { "hahahaha",   "hahahaha" },   true);
+            AddTestRun (new string[] { "Blah",       "ahBl" },       true);
 
-            AddDataPair (new string[] { "",  "a" }, false);
-            AddDataPair (new string[] { "a", "" },  false);
-            AddDataPair (new string[] { "hahaha",      "hahaah" },      false);
-            AddDataPair (new string[] { "HelloWorlds", "SHelloWorld" }, false);
+            AddTestRun (new string[] { "",  "a" }, false);
+            AddTestRun (new string[] { "a", "" },  false);
+            AddTestRun (new string[] { "hahaha",      "hahaah" },      false);
+            AddTestRun (new string[] { "HelloWorlds", "SHelloWorld" }, false);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(string[] runData)
+        protected override void StateTest(string[] runData)
         {
             Console.WriteLine ("- Are [" + runData[0] + "] and [" + runData[1] + "] single rotations of each other");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override bool RunStep(string[] runData)
+        protected override bool RunTest(string[] runData)
         {
             return IsRotation (runData[0], runData[1]);
         }

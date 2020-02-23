@@ -14,25 +14,25 @@ namespace _04_Questions_ArraysAndStrings
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair (new string[] { "",       "" },       true);
-            AddDataPair (new string[] { "a",      "1" },      false);
-            AddDataPair (new string[] { "apple",  "apple" },  true);
-            AddDataPair (new string[] { "apple",  "zapple" }, false);
-            AddDataPair (new string[] { "apples", "zapple" }, false);
-            AddDataPair (new string[] { "haa",    "aha" },    true);
-            AddDataPair (new string[] { "haa",    "aah" },    true);
+            AddTestRun (new string[] { "",       "" },       true);
+            AddTestRun (new string[] { "a",      "1" },      false);
+            AddTestRun (new string[] { "apple",  "apple" },  true);
+            AddTestRun (new string[] { "apple",  "zapple" }, false);
+            AddTestRun (new string[] { "apples", "zapple" }, false);
+            AddTestRun (new string[] { "haa",    "aha" },    true);
+            AddTestRun (new string[] { "haa",    "aah" },    true);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(string[] runData)
+        protected override void StateTest(string[] runData)
         {
             Console.WriteLine ("- Are chars of [" + runData[0] + "] a permutation of [" + runData[1] + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override bool RunStep(string[] runData)
+        protected override bool RunTest(string[] runData)
         {
             return IsPermutation (runData[0], runData[1]);
         }

@@ -34,7 +34,7 @@ namespace _05_Questions_LinkedLists
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
             ConciseAddDataPair (5, ArrayTools.RandomInt (10, 0, 10));
             ConciseAddDataPair (5, ArrayTools.RandomInt (10, 5, 10));
@@ -43,14 +43,21 @@ namespace _05_Questions_LinkedLists
             ConciseAddDataPair (5);
         }
 
+        // Shorthand for the verbose AddDataPair()
+        private void ConciseAddDataPair(int partVal, params int[] theVals)
+        {
+            AddTestRun (new PartitionData (partVal, new SingleLL (theVals)), null);
+        }
+
+
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(PartitionData runData)
+        protected override void StateTest(PartitionData runData)
         {
             Console.WriteLine ("- Patrition on value " + runData.partValue + " for set: [" + runData.list + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override PartitionData RunStep(PartitionData runData)
+        protected override PartitionData RunTest(PartitionData runData)
         {
             PartitionList (runData.partValue, runData.list);
             return new PartitionData (runData.partValue, runData.list);
@@ -120,13 +127,6 @@ namespace _05_Questions_LinkedLists
                 lowLead.next = highRoot;
             else
                 list.root = highRoot;
-        }
-
-
-        // Shorthand for the verbose AddDataPair()
-        private void ConciseAddDataPair(int partVal, params int[] theVals)
-        {
-            AddDataPair (new PartitionData (partVal, new SingleLL (theVals)), null);
         }
 
     }

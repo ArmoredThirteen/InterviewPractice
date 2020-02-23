@@ -15,21 +15,21 @@ namespace _04_Questions_ArraysAndStrings
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair ("Hello World",   "Hello%20World");
-            AddDataPair (" HelloWorld  ", "%20HelloWorld%20%20");
-            AddDataPair ("Hello to the entire World", "Hello%20to%20the%20entire%20World");
+            AddTestRun ("Hello World",   "Hello%20World");
+            AddTestRun (" HelloWorld  ", "%20HelloWorld%20%20");
+            AddTestRun ("Hello to the entire World", "Hello%20to%20the%20entire%20World");
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(string runData)
+        protected override void StateTest(string runData)
         {
             Console.WriteLine ("- Encoding spaces to '%20' in string [" + runData + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override string RunStep(string runData)
+        protected override string RunTest(string runData)
         {
             // Set up character array with additional space at the end
             char[] chara = new char[runData.Length * 2];

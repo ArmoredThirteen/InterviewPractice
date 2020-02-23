@@ -14,28 +14,28 @@ namespace _05_Questions_LinkedLists
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair (new SingleLL (1),             true);
-            AddDataPair (new SingleLL (1, 2, 1),       true);
-            AddDataPair (new SingleLL (1, 2, 2, 1),    true);
-            AddDataPair (new SingleLL (1, 2, 1, 2, 1), true);
+            AddTestRun (new SingleLL (1),             true);
+            AddTestRun (new SingleLL (1, 2, 1),       true);
+            AddTestRun (new SingleLL (1, 2, 2, 1),    true);
+            AddTestRun (new SingleLL (1, 2, 1, 2, 1), true);
 
-            AddDataPair (new SingleLL (),                 false);
-            AddDataPair (new SingleLL (1, 2),             false);
-            AddDataPair (new SingleLL (1, 2, 2),          false);
-            AddDataPair (new SingleLL (2, 2, 2, 1),       false);
-            AddDataPair (new SingleLL (1, 2, 1, 2, 1, 2), false);
+            AddTestRun (new SingleLL (),                 false);
+            AddTestRun (new SingleLL (1, 2),             false);
+            AddTestRun (new SingleLL (1, 2, 2),          false);
+            AddTestRun (new SingleLL (2, 2, 2, 1),       false);
+            AddTestRun (new SingleLL (1, 2, 1, 2, 1, 2), false);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(SingleLL runData)
+        protected override void StateTest(SingleLL runData)
         {
             Console.WriteLine ("- Is palindrome: [" + runData + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override bool RunStep(SingleLL runData)
+        protected override bool RunTest(SingleLL runData)
         {
             return IsPalindrome (runData);
         }

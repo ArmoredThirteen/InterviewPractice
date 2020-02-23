@@ -15,21 +15,21 @@ namespace _05_Questions_LinkedLists
 
 
         // Build lists that determine RunStep() data and each of their expected results.
-        protected override void BuildDatas()
+        protected override void BuildTestRuns()
         {
-            AddDataPair (new SingleLL (0, 1, 2, 3), 0);
-            AddDataPair (new SingleLL (0, 1, 2, 3, 4, 5), 2);
-            AddDataPair (new SingleLL (0, 1, 2), -1);
+            AddTestRun (new SingleLL (0, 1, 2, 3), 0);
+            AddTestRun (new SingleLL (0, 1, 2, 3, 4, 5), 2);
+            AddTestRun (new SingleLL (0, 1, 2), -1);
         }
 
         // Write description of this particular RunStep(), namely to identify the current runData.
-        protected override void StateGoals(SingleLL runData)
+        protected override void StateTest(SingleLL runData)
         {
             Console.WriteLine ("- Find 3rd from last value in: [" + runData + "]");
         }
 
         // Use runData to perform desired operation and return the result.
-        protected override int RunStep(SingleLL runData)
+        protected override int RunTest(SingleLL runData)
         {
             try
             {

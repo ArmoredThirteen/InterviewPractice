@@ -12,14 +12,14 @@ namespace _05_Questions_LinkedLists
         {
             ProgramTools.SizeConsoleWindow ();
 
-            //new RemoveDupes ().RunQuest ();
-            //new ReturnKthToLast ().RunQuest ();
-            //new DeleteMiddleNode ().RunQuest ();
-            //new Partition ().RunQuest ();
-            //new SumListsReverse ().RunQuest ();
-            //new SumLists ().RunQuest ();
-            //new Palindrome ().RunQuest ();
-            new Intersection ().RunQuest ();
+            new RemoveDupes ().BuildAndRunTests ();
+            new ReturnKthToLast ().BuildAndRunTests ();
+            new DeleteMiddleNode ().BuildAndRunTests ();
+            new Partition ().BuildAndRunTests ();
+            new SumListsReverse ().BuildAndRunTests ();
+            new SumLists ().BuildAndRunTests ();
+            new Palindrome ().BuildAndRunTests ();
+            new Intersection ().BuildAndRunTests ();
             //new LoopDetection ().RunQuest ();
 
             ProgramTools.PauseForAnyKey ("Press any key to exit");
