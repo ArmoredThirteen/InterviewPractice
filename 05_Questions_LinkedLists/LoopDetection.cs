@@ -17,7 +17,7 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildTestRuns()
         {
-            
+            AddTestRun (ArrayTools.SequentialInts (5), ArrayTools.SequentialInts (5, 10), true);
         }
         
         // Shorthand for more complex uses of AddTestRun().
@@ -29,14 +29,30 @@ namespace _05_Questions_LinkedLists
 
             SingleLL listStart = new SingleLL (valsStart);
             SingleLL listLoop = new SingleLL (valsLoop);
-            base.AddTestRun (listStart.AddLast (listLoop), expectedResult);
+            SingleLL.Node loopRoot = listLoop.root;
+
+            listStart.AddLast (listLoop);
+            listLoop.GetLast ().next = loopRoot;
+
+            base.AddTestRun (listStart, expectedResult);
         }
 
 
         // Write description of this particular RunStep(), namely to identify the current runData.
         protected override void StateTest(SingleLL runData)
         {
-            Console.WriteLine ("- Finding if loop exists in: [" + runData + "]");
+            // TODO: Hacky hacky hard-coded 10 :(
+            StringBuilder builder = new StringBuilder ();
+            SingleLL.Node currNode = runData.root;
+            for (int i = 0; i < 10; i++)
+            {
+                builder.Append (currNode);
+                if (i < 9)
+                    builder.Append (", ");
+                currNode = currNode.next;
+            }
+
+            Console.WriteLine ("- Finding if loop exists in: [" + builder + "]");
         }
 
         // Use runData to perform desired operation and return the result.

@@ -124,7 +124,7 @@ namespace _05_Questions_LinkedLists
         public Node GetLast()
         {
             Node currNode = root;
-            while (currNode != null)
+            while (currNode != null && currNode.next != null)
                 currNode = currNode.next;
             return currNode;
         }
