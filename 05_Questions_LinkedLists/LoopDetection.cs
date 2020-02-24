@@ -17,20 +17,42 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildTestRuns()
         {
-            AddTestRun (new SingleLL (), false);
+            AddTestRun (ArrayTools.SequentialInts (5), ArrayTools.SequentialInts (4, 10), true);
         }
         
-        // Shorthand for the verbose AddDataPair()
-        private void ConciseAddDataPair(int[] valsStart, int[] valsLoop, bool expectedResult)
+        // Shorthand for more complex uses of AddTestRun().
+        protected override void AddTestRun(params object[] args)
         {
-            
+            int[] valsStart = (int[])args[0];
+            int[] valsLoop = (int[])args[1];
+            bool expectedResult = (bool)args[2];
+
+            SingleLL listStart = new SingleLL (valsStart);
+            SingleLL listLoop = new SingleLL (valsLoop);
+            SingleLL.Node loopRoot = listLoop.root;
+
+            listStart.AddLast (listLoop);
+            listLoop.GetLast ().next = loopRoot;
+
+            base.AddTestRun (listStart, expectedResult);
         }
 
 
         // Write description of this particular RunStep(), namely to identify the current runData.
         protected override void StateTest(SingleLL runData)
         {
-            Console.WriteLine ("- Finding if loop exists in: [" + runData + "]");
+            // TODO: Hacky hacky hard-coded 10 :(
+            StringBuilder builder = new StringBuilder ();
+            SingleLL.Node currNode = runData.root;
+            for (int i = 0; i < 10; i++)
+            {
+                builder.Append (currNode);
+                if (i < 9)
+                    builder.Append (", ");
+                currNode = currNode.next;
+            }
+
+            Console.WriteLine ("- Finding if loop exists in: [" + builder + "]");
         }
 
         // Use runData to perform desired operation and return the result.
@@ -42,6 +64,21 @@ namespace _05_Questions_LinkedLists
 
         public static bool HasLoop(SingleLL list)
         {
+            /*if (SingleLL.IsNullOrEmpty (list))
+                return false;*/
+
+            while (!SingleLL.IsNullOrEmpty (list))
+            {
+                if (Object.ReferenceEquals (list.root, list.root.next))
+                    return true;
+                if (Object.ReferenceEquals (list.root.next, list.root.next.next))
+                    return true;
+
+                SingleLL.Node rootNext = list.root.next;
+                list.root.next = list.root.next.next;
+                rootNext.next = null;
+            }
+
             return false;
         }
 

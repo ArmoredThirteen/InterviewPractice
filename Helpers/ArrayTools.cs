@@ -9,11 +9,16 @@ namespace Helpers
     {
         public static int[] SequentialInts(int length)
         {
+            return SequentialInts (length, 0);
+        }
+
+        public static int[] SequentialInts(int length, int offset)
+        {
             int[] newArray = new int[length];
 
             for (int i = 0; i < length; i++)
             {
-                newArray[i] = i;
+                newArray[i] = i + offset;
             }
 
             return newArray;

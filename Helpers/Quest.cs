@@ -25,10 +25,12 @@ namespace Helpers
         // All test run datas and their results.
         private List<TestRun> testRuns = new List<TestRun> ();
 
-        // Add values to runDatas and resultDatas at same time, since that's how it has to be anyway.
-        protected void AddTestRun(RunData runData, ResultData expectedResult)
+        // Add a value to testRuns, default base case takes a RunData and a ResultData.
+        // Overloads are useful if building one of the datas is more involved.
+        // Children should call base.AddTestRun() to add to the actual testRuns list.
+        protected virtual void AddTestRun(params object[] args)
         {
-            testRuns.Add (new TestRun (runData, expectedResult));
+            testRuns.Add (new TestRun((RunData)args[0], (ResultData)args[1]));
         }
 
         // Main method that controls the when and why of each question's process.
@@ -62,6 +64,7 @@ namespace Helpers
         // Both are used in opening header when triggering all testRuns.
         public abstract string Header { get; }
         public abstract string Description { get; }
+
 
         // Add values to runDatas and resultDatas for use in RunQuest().
         protected abstract void BuildTestRuns();
