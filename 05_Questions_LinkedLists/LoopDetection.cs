@@ -17,7 +17,7 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildTestRuns()
         {
-            AddTestRun (ArrayTools.SequentialInts (5), ArrayTools.SequentialInts (5, 10), true);
+            AddTestRun (ArrayTools.SequentialInts (5), ArrayTools.SequentialInts (4, 10), true);
         }
         
         // Shorthand for more complex uses of AddTestRun().
@@ -64,6 +64,21 @@ namespace _05_Questions_LinkedLists
 
         public static bool HasLoop(SingleLL list)
         {
+            /*if (SingleLL.IsNullOrEmpty (list))
+                return false;*/
+
+            while (!SingleLL.IsNullOrEmpty (list))
+            {
+                if (Object.ReferenceEquals (list.root, list.root.next))
+                    return true;
+                if (Object.ReferenceEquals (list.root.next, list.root.next.next))
+                    return true;
+
+                SingleLL.Node rootNext = list.root.next;
+                list.root.next = list.root.next.next;
+                rootNext.next = null;
+            }
+
             return false;
         }
 

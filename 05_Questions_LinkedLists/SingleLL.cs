@@ -85,6 +85,13 @@ namespace _05_Questions_LinkedLists
             return this;
         }
 
+        public void RemoveFirst()
+        {
+            if (root == null)
+                return;
+            root = root.next;
+        }
+
 
         public SingleLL AddLast(int theVal)
         {
@@ -118,6 +125,25 @@ namespace _05_Questions_LinkedLists
 
             currNode.next = newNode;
             return this;
+        }
+
+        public void RemoveLast()
+        {
+            if (root == null || root.next == null)
+            {
+                root = null;
+                return;
+            }
+
+            Node prevNode = root;
+            Node currNode = root.next;
+            while (currNode != null && currNode.next != null)
+            {
+                prevNode = currNode;
+                currNode = currNode.next;
+            }
+
+            prevNode.next = null;
         }
 
 
