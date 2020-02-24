@@ -36,17 +36,20 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildTestRuns()
         {
-            NewTestRun (5, ArrayTools.RandomInt (10, 0, 10));
-            NewTestRun (5, ArrayTools.RandomInt (10, 5, 10));
-            NewTestRun (5, ArrayTools.RandomInt (10, 0, 4));
-            NewTestRun (2, 1, 2);
-            NewTestRun (5);
+            AddTestRun (5, ArrayTools.RandomInt (10, 0, 10));
+            AddTestRun (5, ArrayTools.RandomInt (10, 5, 10));
+            AddTestRun (5, ArrayTools.RandomInt (10, 0, 4));
+            AddTestRun (2, new int[] { 1, 2 });
+            AddTestRun (5, new int[] { });
         }
 
         // Shorthand for more complex uses of AddTestRun().
-        private void NewTestRun(int partVal, params int[] theVals)
+        protected override void AddTestRun(params object[] args)
         {
-            AddTestRun (new PartitionData (partVal, new SingleLL (theVals)), null);
+            int partVal = (int)args[0];
+            int[] theVals = (int[])args[1];
+
+            base.AddTestRun (new PartitionData (partVal, new SingleLL (theVals)), null);
         }
 
 

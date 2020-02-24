@@ -121,6 +121,15 @@ namespace _05_Questions_LinkedLists
         }
 
 
+        public Node GetLast()
+        {
+            Node currNode = root;
+            while (currNode != null)
+                currNode = currNode.next;
+            return currNode;
+        }
+
+
         public override bool Equals(object obj)
         {
             SingleLL that = (SingleLL)obj;

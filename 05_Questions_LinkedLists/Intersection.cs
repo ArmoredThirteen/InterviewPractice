@@ -18,17 +18,21 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildTestRuns()
         {
-            NewTestRun (new int[] { },         new int[] { },            new int[] { });
-            NewTestRun (new int[] { 1 },       new int[] { 10 },         new int[] { });
-            NewTestRun (new int[] { 1 },       new int[] { 10 },         new int[] { 50, 60 });
-            NewTestRun (new int[] { },         new int[] { 10 },         new int[] { 50, 60 });
-            NewTestRun (new int[] { 1, 2, 3 }, new int[] { 10 },         new int[] { 50, 60 });
-            NewTestRun (new int[] { 1, 2 },    new int[] { 10, 11, 12 }, new int[] { 50 });
+            AddTestRun (new int[] { },         new int[] { },            new int[] { });
+            AddTestRun (new int[] { 1 },       new int[] { 10 },         new int[] { });
+            AddTestRun (new int[] { 1 },       new int[] { 10 },         new int[] { 50, 60 });
+            AddTestRun (new int[] { },         new int[] { 10 },         new int[] { 50, 60 });
+            AddTestRun (new int[] { 1, 2, 3 }, new int[] { 10 },         new int[] { 50, 60 });
+            AddTestRun (new int[] { 1, 2 },    new int[] { 10, 11, 12 }, new int[] { 50 });
         }
 
         // Shorthand for more complex uses of AddTestRun().
-        private void NewTestRun(int[] valsOne, int[] valsTwo, int[] endVals)
+        protected override void AddTestRun(params object[] args)
         {
+            int[] valsOne = (int[])args[0];
+            int[] valsTwo = (int[])args[1];
+            int[] endVals = (int[])args[2];
+            
             // Add the endVals list to the end of both valsOne and valsTwo
             SingleLL endList = new SingleLL (endVals);
             SingleLL listOne = new SingleLL (valsOne).AddLast (endList);
@@ -36,7 +40,7 @@ namespace _05_Questions_LinkedLists
 
             // The intersection point is the expected return value
             // If endVals was empty then endList.root will be null, for the case of having no intersection
-            AddTestRun (new SingleLL[] { listOne, listTwo }, endList.root);
+            base.AddTestRun (new SingleLL[] { listOne, listTwo }, endList.root);
         }
 
 

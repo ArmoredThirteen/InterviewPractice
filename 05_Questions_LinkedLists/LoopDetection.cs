@@ -17,13 +17,19 @@ namespace _05_Questions_LinkedLists
         // Build lists that determine RunStep() data and each of their expected results.
         protected override void BuildTestRuns()
         {
-            AddTestRun (new SingleLL (), false);
+            
         }
         
         // Shorthand for more complex uses of AddTestRun().
-        private void NewTestRun(int[] valsStart, int[] valsLoop, bool expectedResult)
+        protected override void AddTestRun(params object[] args)
         {
-            
+            int[] valsStart = (int[])args[0];
+            int[] valsLoop = (int[])args[1];
+            bool expectedResult = (bool)args[2];
+
+            SingleLL listStart = new SingleLL (valsStart);
+            SingleLL listLoop = new SingleLL (valsLoop);
+            base.AddTestRun (listStart.AddLast (listLoop), expectedResult);
         }
 
 
